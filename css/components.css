@@ -1,0 +1,224 @@
+/* ================================================= */
+/* BUTTONS */
+/* ================================================= */
+
+.btn-primary{
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:8px;
+
+    width:fit-content;
+
+    padding:14px 28px;
+
+    background:var(--primary);
+
+    color:#fff;
+
+    border:none;
+
+    border-radius:16px;
+
+    font-weight:600;
+
+    transition:var(--transition);
+
+    box-shadow:var(--shadow-sm);
+
+}
+
+.btn-primary:hover{
+
+    background:var(--primary-hover);
+
+    transform:translateY(-2px);
+
+    box-shadow:var(--shadow-md);
+
+}
+
+.btn-primary:active{
+
+    transform:scale(.98);
+
+}
+
+.btn-primary:disabled{
+
+    opacity:.5;
+
+    cursor:not-allowed;
+
+}
+
+.btn-secondary{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:14px 28px;
+
+    border-radius:16px;
+
+    border:1px solid var(--border);
+
+    background:white;
+
+    color:var(--text-primary);
+
+    transition:var(--transition);
+
+}
+
+.btn-secondary:hover{
+
+    background:#f3f4f6;
+
+}
+
+/* ================================================= */
+/* INPUTS */
+/* ================================================= */
+
+.input-group{
+
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+
+}
+
+.input-label{
+
+    font-size:.95rem;
+    font-weight:600;
+
+    color:var(--text-primary);
+
+}
+
+.input{
+
+    width:100%;
+
+    height:52px;
+
+    padding:0 18px;
+
+    background:var(--surface);
+
+    border:1px solid var(--border);
+
+    border-radius:16px;
+
+    color:var(--text-primary);
+
+    transition:var(--transition);
+
+}
+
+.input::placeholder{
+
+    color:var(--text-secondary);
+
+}
+
+.input:focus{
+
+    outline:none;
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 4px rgba(124,92,252,.15);
+
+}
+
+.input-error{
+
+    border-color:var(--danger);
+
+}
+
+.input-success{
+
+    border-color:var(--success);
+
+}
+
+.textarea{
+
+    width:100%;
+
+    min-height:140px;
+
+    padding:16px 18px;
+
+    resize:none;
+
+    background:var(--surface);
+
+    border:1px solid var(--border);
+
+    border-radius:16px;
+
+    transition:var(--transition);
+
+}
+
+.textarea:focus{
+
+    outline:none;
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 4px rgba(124,92,252,.15);
+
+}
+
+/* ================================================= */
+/* CARDS */
+/* ================================================= */
+
+.card{
+
+    background:var(--surface);
+
+    border-radius:24px;
+
+    padding:24px;
+
+    box-shadow:var(--shadow-sm);
+
+    transition:var(--transition);
+
+}
+
+.card:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:var(--shadow-md);
+
+}
+
+.card-title{
+
+    font-size:1.2rem;
+
+    font-weight:700;
+
+    margin-bottom:8px;
+
+}
+
+.card-description{
+
+    color:var(--text-secondary);
+
+}
