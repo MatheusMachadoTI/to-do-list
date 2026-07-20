@@ -1,2 +1,2 @@
 # to-do-list
-Projeto de app de tarefas e organização pessoal.
+Projeto de app para gerenciamento de tarefas e organização pessoal.
