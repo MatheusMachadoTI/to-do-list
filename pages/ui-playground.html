@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>UI Playground</title>
+
+    <!-- Fonte Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+
+</head>
+
+<body>
+
+    <div class="container section">
+
+        <h1>UI Playground</h1>
+
+        <!-- ========================= -->
+        <!-- BOTÕES -->
+        <!-- ========================= -->
+
+        <hr style="margin: 40px 0;">
+
+        <h2>Buttons</h2>
+
+        <br>
+
+        <button class="btn-primary">
+            Botão Primário
+        </button>
+
+        <br><br>
+
+        <button class="btn-secondary">
+            Botão Secundário
+        </button>
+
+
+
+        <!-- ========================= -->
+        <!-- INPUTS -->
+        <!-- ========================= -->
+
+        <hr style="margin: 60px 0;">
+
+        <h2>Inputs</h2>
+
+        <br>
+
+        <div class="input-group">
+
+            <label class="input-label">
+                Nome
+            </label>
+
+            <input
+                class="input"
+                type="text"
+                placeholder="Digite seu nome">
+
+        </div>
+
+        <br>
+
+        <div class="input-group">
+
+            <label class="input-label">
+                Email
+            </label>
+
+            <input
+                class="input"
+                type="email"
+                placeholder="Digite seu email">
+
+        </div>
+
+        <br>
+
+        <div class="input-group">
+
+            <label class="input-label">
+                Descrição
+            </label>
+
+            <textarea
+                class="textarea"
+                placeholder="Escreva aqui..."></textarea>
+
+        </div>
+
+
+
+        <!-- ========================= -->
+        <!-- CARDS -->
+        <!-- ========================= -->
+
+        <hr style="margin: 60px 0;">
+
+        <h2>Cards</h2>
+
+        <br>
+
+        <div class="card">
+
+            <h3 class="card-title">
+                Beber Água
+            </h3>
+
+            <p class="card-description">
+                Lembrar de beber pelo menos 2 litros hoje.
+            </p>
+
+        </div>
+
+
+
+        <!-- ========================= -->
+        <!-- BADGES -->
+        <!-- ========================= -->
+
+        <hr style="margin: 60px 0;">
+
+        <h2>Badges</h2>
+
+        <br>
+
+        <span class="badge badge-low">
+            Baixa
+        </span>
+
+        <span class="badge badge-medium">
+            Média
+        </span>
+
+        <span class="badge badge-high">
+            Alta
+        </span>
+
+        <span class="badge badge-success">
+            Concluída
+        </span>
+
+
+
+        <!-- ========================= -->
+        <!-- PROGRESS -->
+        <!-- ========================= -->
+
+        <hr style="margin: 60px 0;">
+
+        <h2>Progress</h2>
+
+        <br>
+
+        <div class="progress">
+
+            <div class="progress-fill"></div>
+
+        </div>
+
+        <!-- ========================= -->
+<!-- TASK CARD -->
+<!-- ========================= -->
+
+<hr style="margin:60px 0;">
+
+<h2>Task Card</h2>
+
+<br>
+
+<div class="task-card">
+
+    <div class="task-content">
+
+        <span class="task-title">
+            Estudar JavaScript
+        </span>
+
+        <span class="task-category">
+            Estudos
+        </span>
+
+    </div>
+
+    <div style="display:flex; align-items:center; gap:18px;">
+
+        <span class="task-time">
+
+            19:00
+
+        </span>
+
+        <div class="checkbox checked"></div>
+
+    </div>
+
+</div>
+
+<div class="task-card">
+
+    <div class="task-content">
+
+        <span class="task-title">
+            Treino Academia
+        </span>
+
+        <span class="task-category">
+            Saúde
+        </span>
+
+    </div>
+
+    <div style="display:flex; align-items:center; gap:18px;">
+
+        <span class="task-time">
+
+            20:30
+
+        </span>
+
+        <div class="checkbox"></div>
+
+    </div>
+
+</div>
+
+<!-- ========================= -->
+<!-- SEARCH BAR -->
+<!-- ========================= -->
+
+<hr style="margin:60px 0;">
+
+<h2>Search</h2>
+
+<br>
+
+<div class="search-box">
+
+    <span class="search-icon">🔍</span>
+
+    <input
+        class="search-input"
+        type="text"
+        placeholder="Pesquisar tarefas...">
+
+</div>
+
+<!-- ========================= -->
+<!-- FAB -->
+<!-- ========================= -->
+
+<hr style="margin:60px 0;">
+
+<h2>Floating Action Button</h2>
+
+<br>
+
+<button class="fab">
+
+    +
+
+</button>
+
+<!-- ========================= -->
+<!-- FILTER CHIPS -->
+<!-- ========================= -->
+
+<hr style="margin:60px 0;">
+
+<h2>Filter Chips</h2>
+
+<br>
+
+<div class="filter-group">
+
+    <div class="filter-chip active">
+        Todas
+    </div>
+
+    <div class="filter-chip">
+        Hoje
+    </div>
+
+    <div class="filter-chip">
+        Semana
+    </div>
+
+    <div class="filter-chip">
+        Concluídas
+    </div>
+
+</div>
+
+<!-- ========================= -->
+<!-- NAVBAR -->
+<!-- ========================= -->
+
+<hr style="margin:60px 0;">
+
+<h2>Navbar</h2>
+
+<br>
+
+<nav class="navbar">
+
+    <div class="logo">
+        ToDo
+    </div>
+
+    <div class="nav-links">
+
+        <a href="#">Dashboard</a>
+
+        <a href="#">Tarefas</a>
+
+        <a href="#">Perfil</a>
+
+    </div>
+
+</nav>
+
+<!-- ========================= -->
+<!-- AVATAR -->
+<!-- ========================= -->
+
+<hr style="margin:60px 0;">
+
+<h2>Avatar</h2>
+
+<br>
+
+<div class="avatar">
+    M
+</div>
+
+<!-- ========================= -->
+<!-- STATS CARD -->
+<!-- ========================= -->
+
+<hr style="margin:60px 0;">
+
+<h2>Stats Card</h2>
+
+<br>
+
+<div class="stats-card">
+
+    <div class="stats-title">
+
+        Tarefas concluídas
+
+    </div>
+
+    <div class="stats-value">
+
+        18
+
+    </div>
+
+</div>
+
+<!-- ========================= -->
+<!-- TOAST -->
+<!-- ========================= -->
+
+<hr style="margin:60px 0;">
+
+<h2>Toast</h2>
+
+<br>
+
+<div class="toast">
+
+    ✅ Tarefa criada com sucesso!
+
+</div>
+
+<!-- ========================= -->
+<!-- MODAL -->
+<!-- ========================= -->
+
+<hr style="margin:60px 0;">
+
+<h2>Modal</h2>
+
+<br>
+
+<div class="modal">
+
+    <div class="modal-title">
+
+        Excluir tarefa
+
+    </div>
+
+    <div class="modal-text">
+
+        Tem certeza que deseja excluir esta tarefa?
+
+    </div>
+
+    <div class="modal-actions">
+
+        <button class="btn-secondary">
+
+            Cancelar
+
+        </button>
+
+        <button class="btn-primary">
+
+            Excluir
+
+        </button>
+
+    </div>
+
+</div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,233 @@
+/* ================================================= */
+/* HEADER */
+/* ================================================= */
+
+.header{
+
+    width:100%;
+
+    background:var(--surface);
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+    border-bottom:1px solid var(--border);
+
+}
+
+.navbar{
+
+    height:90px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+}
+
+.logo img{
+
+    height:120px;
+
+}
+
+.nav-menu{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:40px;
+
+}
+
+.nav-menu a{
+
+    color:var(--text-primary);
+
+    font-weight:500;
+
+    transition:var(--transition);
+
+}
+
+.nav-menu a:hover{
+
+    color:var(--primary);
+
+}
+
+.nav-buttons{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+}
+
+/* ================================================= */
+/* MAIN (HERO,ETC) */
+/* ================================================= */
+
+/* ========================= */
+/* HERO */
+/* ========================= */
+
+.hero{
+
+    padding: 90px 0;
+
+}
+
+.hero-container{
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 80px;
+
+}
+
+.hero-content{
+
+    flex: 1;
+
+}
+
+.hero-content h1{
+
+    font-size: 58px;
+
+    line-height: 1.1;
+
+    font-weight: 800;
+
+    color: var(--text-primary);
+
+    margin-bottom: 24px;
+
+}
+
+.hero-content span{
+
+    color: var(--primary);
+
+}
+
+.hero-content p{
+
+    font-size: 20px;
+
+    color: var(--text-secondary);
+
+    line-height: 1.8;
+
+    max-width: 550px;
+
+    margin-bottom: 40px;
+
+}
+
+.hero-buttons{
+
+    display: flex;
+
+    gap: 18px;
+
+}
+
+.hero-image{
+
+    flex: 1;
+
+    display: flex;
+
+    justify-content: center;
+
+
+}
+
+.hero-image img{
+
+    width: 100%;
+
+    max-width: 700px;
+
+    animation: float 5s ease-in-out infinite;
+
+    border-radius: 8px;
+
+
+}
+
+@keyframes float{
+
+    0%{
+
+        transform: translateY(0);
+
+    }
+
+    50%{
+
+        transform: translateY(-15px);
+
+    }
+
+    100%{
+
+        transform: translateY(0);
+
+    }
+
+}
+
+.hero-badge{
+
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 8px 18px;
+
+    margin-bottom: 24px;
+
+    background: #F4F1FF;
+
+    color: var(--primary);
+
+    border-radius: 999px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+}
+
+.hero{
+
+    padding: 100px 0;
+
+    background: linear-gradient(
+        180deg,
+        #FFFFFF 0%,
+        #F8F6FF 100%
+    );
+
+}
+
+.hero-image img{
+
+    filter: drop-shadow(0 35px 50px rgba(124,92,252,.18));
+
+}
