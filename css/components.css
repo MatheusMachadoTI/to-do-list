@@ -105,21 +105,21 @@
 
 .input{
 
-    width:100%;
+    width: 100%;
 
-    height:52px;
+    padding: 14px 18px;
 
-    padding:0 18px;
+    border: 1px solid #D1D5DB;
 
-    background:var(--surface);
+    border-radius: 12px;
 
-    border:1px solid var(--border);
+    font-size: 16px;
 
-    border-radius:16px;
+    font-family: inherit;
 
-    color:var(--text-primary);
+    outline: none;
 
-    transition:var(--transition);
+    transition: .25s;
 
 }
 
@@ -131,11 +131,9 @@
 
 .input:focus{
 
-    outline:none;
+    border-color: var(--primary);
 
-    border-color:var(--primary);
-
-    box-shadow:0 0 0 4px rgba(124,92,252,.15);
+    box-shadow: 0 0 0 4px rgba(124,92,252,.15);
 
 }
 
