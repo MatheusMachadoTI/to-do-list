@@ -231,3 +231,263 @@
     filter: drop-shadow(0 35px 50px rgba(124,92,252,.18));
 
 }
+
+/* ========================= */
+/* BENEFÍCIOS */
+/* ========================= */
+
+.benefits{
+
+    padding: 120px 0;
+
+}
+
+.section-header{
+
+    text-align: center;
+
+    max-width: 700px;
+
+    margin: 0 auto 70px;
+
+}
+
+.section-header h2{
+
+    font-size: 42px;
+
+    margin-bottom: 20px;
+
+}
+
+.section-header p{
+
+    font-size: 18px;
+
+    color: #6B7280;
+
+    line-height: 1.7;
+
+}
+
+.benefits-grid{
+
+    display: grid;
+
+    grid-template-columns: repeat(2,1fr);
+
+    gap: 30px;
+
+}
+
+.benefit-card{
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 35px;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,.05);
+
+    transition: .3s;
+
+}
+
+.benefit-card:hover{
+
+    transform: translateY(-8px);
+
+}
+
+.benefit-card i{
+
+    color: #7C5CFC;
+
+    width: 45px;
+
+    height: 45px;
+
+    margin-bottom: 20px;
+
+}
+
+.benefit-card h3{
+
+    margin-bottom: 15px;
+
+}
+
+.benefit-card p{
+
+    color: #6B7280;
+
+    line-height: 1.7;
+
+}
+
+/* ========================= */
+/* COMO FUNCIONA */
+/* ========================= */
+
+.how-it-works{
+
+    padding:120px 0;
+
+    background:#FAFBFC;
+
+}
+
+.steps{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:30px;
+
+    margin-top:70px;
+
+}
+
+.step{
+
+    flex:1;
+
+    text-align:center;
+
+}
+
+.step i{
+
+    width:60px;
+
+    height:60px;
+
+    color:var(--primary);
+
+    margin-bottom:25px;
+
+}
+
+.step h3{
+
+    margin-bottom:15px;
+
+}
+
+.step p{
+
+    color:#6B7280;
+
+    line-height:1.7;
+
+}
+
+/* ========================= */
+/* PREVIEW */
+/* ========================= */
+
+.preview{
+
+    padding:120px 0;
+
+}
+
+.preview-image{
+
+    display:flex;
+
+    justify-content:center;
+
+    margin-top:60px;
+
+}
+
+.preview-image img{
+
+    width:100%;
+
+    max-width:1000px;
+
+    border-radius:24px;
+
+    box-shadow:0 30px 60px rgba(0,0,0,.08);
+
+}
+
+/* ========================= */
+/* CTA */
+/* ========================= */
+
+.cta{
+
+    padding:120px 0;
+
+    text-align:center;
+
+}
+
+.cta h2{
+
+    font-size:48px;
+
+    margin-bottom:20px;
+
+}
+
+.cta p{
+
+    max-width:600px;
+
+    margin:0 auto 40px;
+
+    color:#6B7280;
+
+    line-height:1.7;
+
+}
+
+/* ========================= */
+/* FOOTER */
+/* ========================= */
+
+footer{
+
+    padding:50px 0;
+
+    border-top:1px solid #ECECEC;
+
+}
+
+.footer-container{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+footer nav{
+
+    display:flex;
+
+    gap:30px;
+
+}
+
+footer a{
+
+    color:#6B7280;
+
+    text-decoration:none;
+
+}
+
+footer a:hover{
+
+    color:var(--primary);
+
+}
