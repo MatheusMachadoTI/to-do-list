@@ -1,0 +1,339 @@
+/* ========================= */
+/* DASHBOARD */
+/* ========================= */
+
+.dashboard{
+
+    display: flex;
+
+    min-height: 100vh;
+
+    background: #F8FAFC;
+
+}
+
+/* ========================= */
+/* SIDEBAR */
+/* ========================= */
+
+.sidebar{
+
+    width: 280px;
+
+    background: #FFFFFF;
+
+    border-right: 1px solid #E5E7EB;
+
+    padding: 30px;
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+/* ========================= */
+/* CONTEÚDO */
+/* ========================= */
+
+.content{
+
+    flex: 1;
+
+    padding: 40px;
+
+    overflow-y: auto;
+
+}
+
+/* ========================= */
+/* HEADER */
+/* ========================= */
+
+.dashboard-header{
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 40px;
+
+}
+
+/* ========================= */
+/* CARDS */
+/* ========================= */
+
+.stats{
+
+    display: grid;
+
+    grid-template-columns: repeat(3,1fr);
+
+    gap: 20px;
+
+    margin-bottom: 40px;
+
+}
+
+/* ========================= */
+/* TAREFAS */
+/* ========================= */
+
+.tasks{
+
+    background: #FFFFFF;
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,.05);
+
+    margin-bottom: 30px;
+
+}
+
+/* ========================= */
+/* PRÓXIMAS TAREFAS */
+/* ========================= */
+
+.upcoming{
+
+    background: #FFFFFF;
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,.05);
+
+}
+
+/* ========================= */
+/* RESPONSIVIDADE */
+/* ========================= */
+
+@media(max-width:1100px){
+
+    .stats{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media(max-width:850px){
+
+    .dashboard{
+
+        flex-direction:column;
+
+    }
+
+    .sidebar{
+
+        width:100%;
+
+        border-right:none;
+
+        border-bottom:1px solid #E5E7EB;
+
+    }
+
+    .content{
+
+        padding:25px;
+
+    }
+
+}
+
+/* ========================= */
+/* MENU */
+/* ========================= */
+
+.sidebar-menu{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+    margin-top:50px;
+
+}
+
+.menu-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:14px 18px;
+
+    border-radius:14px;
+
+    text-decoration:none;
+
+    color:#4B5563;
+
+    font-weight:500;
+
+    transition:.25s;
+
+}
+
+.menu-item:hover{
+
+    background:#F3F4F6;
+
+    color:var(--primary);
+
+}
+
+.menu-item.active{
+
+    background:rgba(124,92,252,.12);
+
+    color:var(--primary);
+
+}
+
+.menu-item svg{
+
+    width:20px;
+
+    height:20px;
+
+}
+
+/* ========================= */
+/* STAT CARDS */
+/* ========================= */
+
+.stat-card{
+
+    background:#FFFFFF;
+
+    border-radius:20px;
+
+    padding:24px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
+
+}
+
+.stat-icon{
+
+    width:58px;
+
+    height:58px;
+
+    border-radius:16px;
+
+    background:rgba(124,92,252,.12);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.stat-icon svg{
+
+    width:28px;
+
+    height:28px;
+
+    color:var(--primary);
+
+}
+
+.stat-info h3{
+
+    font-size:15px;
+
+    color:#6B7280;
+
+    margin-bottom:6px;
+
+}
+
+.stat-info p{
+
+    font-size:30px;
+
+    font-weight:700;
+
+    color:var(--text-color);
+
+}
+
+/* ================================================= */
+/* TASKS */
+/* ================================================= */
+
+.tasks{
+
+    background:#FFFFFF;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
+
+    margin-bottom:30px;
+
+}
+
+.tasks-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:30px;
+
+}
+
+.tasks-header h2{
+
+    font-size:24px;
+
+    margin-bottom:6px;
+
+}
+
+.tasks-header p{
+
+    color:#6B7280;
+
+}
+
+.tasks-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}

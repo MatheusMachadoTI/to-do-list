@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | Donee</title>
+
+    <!-- Fonte -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet" href="../css/components.css">
+
+    <link rel="stylesheet" href="../css/dashboard.css">
+
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <!-- ========================= -->
+        <!-- SIDEBAR -->
+        <!-- ========================= -->
+
+        <aside class="sidebar">
+
+            <!-- Logo -->
+
+            <a href="../index.html" class="logo">
+
+                <img src="../assets/images/logo-Donee.png" alt="Logo Donee">
+
+            </a>
+
+            <!-- Navegação -->
+
+            <!-- ========================= -->
+<!-- MENU -->
+<!-- ========================= -->
+
+<nav class="sidebar-menu">
+
+    <a href="dashboard.html" class="menu-item active">
+
+        <i data-lucide="layout-dashboard"></i>
+
+        <span>Dashboard</span>
+
+    </a>
+
+    <a href="tasks.html" class="menu-item">
+
+        <i data-lucide="list-todo"></i>
+
+        <span>Tarefas</span>
+
+    </a>
+
+    <a href="profile.html" class="menu-item">
+
+        <i data-lucide="user"></i>
+
+        <span>Perfil</span>
+
+    </a>
+
+    <a href="#" class="menu-item">
+
+        <i data-lucide="settings"></i>
+
+        <span>Configurações</span>
+
+    </a>
+
+            <!-- Perfil do usuário -->
+
+        </aside>
+
+        <!-- ========================= -->
+        <!-- CONTEÚDO -->
+        <!-- ========================= -->
+
+        <main class="content">
+
+            <!-- Header -->
+             <div class="login-header">
+
+                <h1>Bem-vindo, Matheus!</h1>
+
+                <p>Quinta-feira, 24 de Julho</p>
+
+            </div>
+
+            <header class="dashboard-header">
+
+            </header>
+
+            <!-- Cards de resumo -->
+
+            <section class="stats">
+
+                <div class="stat-card">
+
+    <div class="stat-icon">
+
+        <i data-lucide="clipboard-list"></i>
+
+    </div>
+
+    <div class="stat-info">
+
+        <h3>Total de tarefas</h3>
+
+        <p>12</p>
+
+    </div>
+
+</div>
+
+<div class="stat-card">
+
+    <div class="stat-icon">
+
+        <i data-lucide="calendar-days"></i>
+
+    </div>
+
+    <div class="stat-info">
+
+        <h3>Hoje</h3>
+
+        <p>5</p>
+
+    </div>
+
+</div>
+
+<div class="stat-card">
+
+    <div class="stat-icon">
+
+        <i data-lucide="circle-check-big"></i>
+
+    </div>
+
+    <div class="stat-info">
+
+        <h3>Concluídas</h3>
+
+        <p>8</p>
+
+    </div>
+
+</div>
+        
+
+            </section>
+
+            <!-- Lista de tarefas -->
+
+            <section class="tasks">
+
+                <!-- ========================= -->
+<!-- CABEÇALHO -->
+<!-- ========================= -->
+
+<div class="tasks-header">
+
+    <div>
+
+        <h2>Minhas Tarefas</h2>
+
+        <p>Organize seu dia de forma simples.</p>
+
+    </div>
+
+    <button class="btn-primary">
+
+        + Nova Tarefa
+
+    </button>
+
+</div>
+
+<!-- ========================= -->
+<!-- LISTA -->
+<!-- ========================= -->
+
+    <div class="tasks-list">
+
+        <div class="tasks-list">
+
+    <!-- Task 1 -->
+    <div class="task-card">
+
+        <div class="task-content">
+
+            <h3 class="task-title">Estudar JavaScript</h3>
+
+            <p class="task-category">Estudos</p>
+
+        </div>
+
+        <div class="task-right">
+
+            <span class="task-time">19:00</span>
+
+            <button class="task-status completed">
+
+                <i data-lucide="check"></i>
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- Task 2 -->
+    <div class="task-card">
+
+        <div class="task-content">
+
+            <h3 class="task-title">Treino Academia</h3>
+
+            <p class="task-category">Saúde</p>
+
+        </div>
+
+        <div class="task-right">
+
+            <span class="task-time">20:30</span>
+
+            <button class="task-status"></button>
+
+        </div>
+
+    </div>
+
+    <!-- Task 3 -->
+    <div class="task-card">
+
+        <div class="task-content">
+
+            <h3 class="task-title">Ler 20 páginas</h3>
+
+            <p class="task-category">Leitura</p>
+
+        </div>
+
+        <div class="task-right">
+
+            <span class="task-time">21:00</span>
+
+            <button class="task-status"></button>
+
+        </div>
+
+        </div>
+
+        </div>
+
+</div>
+
+    </div>
+
+            </section>
+
+            <!-- Próximas tarefas -->
+
+            <section class="upcoming">
+
+            </section>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>
