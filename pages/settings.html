@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Configurações | Donee</title>
+
+    <!-- Fonte -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet" href="../css/components.css">
+
+    <link rel="stylesheet" href="../css/dashboard.css">
+
+    <link rel="stylesheet" href="../css/settings.css">
+
+</head>
+
+
+<body>
+
+    <div class="settings-page">
+
+
+        <!-- ========================= -->
+        <!-- SIDEBAR -->
+        <!-- ========================= -->
+
+        <aside class="sidebar">
+
+
+            <!-- LOGO -->
+
+            <div class="sidebar-logo">
+
+                <a href="dashboard.html">
+
+                    <img
+                        src="../assets/images/logo-Donee.png"
+                        alt="Logo Donee"
+                    >
+
+                </a>
+
+            </div>
+
+
+            <!-- MENU -->
+
+            <nav class="sidebar-menu">
+
+
+                <a
+                    href="dashboard.html"
+                    class="menu-item"
+                >
+
+                    <i data-lucide="layout-dashboard"></i>
+
+                    <span>Dashboard</span>
+
+                </a>
+
+
+                <a
+                    href="tasks.html"
+                    class="menu-item"
+                >
+
+                    <i data-lucide="list-todo"></i>
+
+                    <span>Tarefas</span>
+
+                </a>
+
+
+                <a
+                    href="profile.html"
+                    class="menu-item"
+                >
+
+                    <i data-lucide="user"></i>
+
+                    <span>Perfil</span>
+
+                </a>
+
+
+                <a
+                    href="settings.html"
+                    class="menu-item active"
+                >
+
+                    <i data-lucide="settings"></i>
+
+                    <span>Configurações</span>
+
+                </a>
+
+
+            </nav>
+
+
+            <!-- PERFIL -->
+
+            <div class="sidebar-profile">
+
+                <div class="profile-avatar">
+
+                    <i data-lucide="user"></i>
+
+                </div>
+
+
+                <div class="profile-info">
+
+                    <strong>Matheus</strong>
+
+                    <span>Meu perfil</span>
+
+                </div>
+
+            </div>
+
+
+        </aside>
+
+
+
+        <!-- ========================= -->
+        <!-- CONTEÚDO -->
+        <!-- ========================= -->
+
+        <main class="settings-content">
+
+
+            <!-- CABEÇALHO -->
+
+            <header class="settings-header">
+
+                <h1>Configurações</h1>
+
+                <p>
+                    Personalize sua experiência no Donee.
+                </p>
+
+            </header>
+
+
+
+            <!-- ========================= -->
+            <!-- PREFERÊNCIAS -->
+            <!-- ========================= -->
+
+            <section class="settings-card">
+
+
+                <div class="settings-card-header">
+
+                    <div class="settings-icon">
+
+                        <i data-lucide="sliders-horizontal"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h2>Preferências</h2>
+
+                        <p>
+                            Configure como o Donee funciona para você.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- NOTIFICAÇÕES -->
+
+                <div class="settings-option">
+
+
+                    <div class="option-info">
+
+                        <div class="option-icon">
+
+                            <i data-lucide="bell"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>Notificações</h3>
+
+                            <p>
+                                Receber lembretes sobre suas tarefas.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            checked
+                        >
+
+                        <span class="slider"></span>
+
+                    </label>
+
+
+                </div>
+
+
+
+                <!-- TEMA -->
+
+                <div class="settings-option">
+
+
+                    <div class="option-info">
+
+                        <div class="option-icon">
+
+                            <i data-lucide="moon"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>Modo escuro</h3>
+
+                            <p>
+                                Alterar a aparência do Donee.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input type="checkbox">
+
+                        <span class="slider"></span>
+
+                    </label>
+
+
+                </div>
+
+
+
+                <!-- SONS -->
+
+                <div class="settings-option">
+
+
+                    <div class="option-info">
+
+                        <div class="option-icon">
+
+                            <i data-lucide="volume-2"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>Sons</h3>
+
+                            <p>
+                                Reproduzir sons ao concluir tarefas.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            checked
+                        >
+
+                        <span class="slider"></span>
+
+                    </label>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- ========================= -->
+            <!-- CONTA -->
+            <!-- ========================= -->
+
+            <section class="settings-card">
+
+
+                <div class="settings-card-header">
+
+                    <div class="settings-icon">
+
+                        <i data-lucide="user-cog"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h2>Conta</h2>
+
+                        <p>
+                            Gerencie as configurações da sua conta.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ALTERAR SENHA -->
+
+                <button class="settings-action">
+
+
+                    <div class="option-info">
+
+                        <div class="option-icon">
+
+                            <i data-lucide="lock"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>Alterar senha</h3>
+
+                            <p>
+                                Atualize sua senha de acesso.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <i
+                        data-lucide="chevron-right"
+                        class="action-arrow"
+                    ></i>
+
+
+                </button>
+
+
+
+                <!-- PRIVACIDADE -->
+
+                <button class="settings-action">
+
+
+                    <div class="option-info">
+
+                        <div class="option-icon">
+
+                            <i data-lucide="shield"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>Privacidade</h3>
+
+                            <p>
+                                Gerencie suas opções de privacidade.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <i
+                        data-lucide="chevron-right"
+                        class="action-arrow"
+                    ></i>
+
+
+                </button>
+
+
+            </section>
+
+
+
+            <!-- ========================= -->
+            <!-- ZONA DE PERIGO -->
+            <!-- ========================= -->
+
+            <section class="danger-card">
+
+
+                <div>
+
+                    <h2>Excluir conta</h2>
+
+                    <p>
+                        Essa ação removerá permanentemente sua conta e seus dados.
+                    </p>
+
+                </div>
+
+
+                <button class="delete-button">
+
+                    <i data-lucide="trash-2"></i>
+
+                    Excluir conta
+
+                </button>
+
+
+            </section>
+
+
+        </main>
+
+
+    </div>
+
+
+
+    <!-- LUCIDE -->
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+
+        lucide.createIcons();
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,525 @@
+/* ================================================= */
+/* SETTINGS PAGE */
+/* ================================================= */
+
+.settings-page {
+
+    display: flex;
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    background: #F8FAFC;
+
+}
+
+
+/* ================================================= */
+/* CONTEÚDO */
+/* ================================================= */
+
+.settings-content {
+
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 40px;
+
+}
+
+
+/* ================================================= */
+/* CABEÇALHO */
+/* ================================================= */
+
+.settings-header {
+
+    margin-bottom: 30px;
+
+}
+
+
+.settings-header h1 {
+
+    font-size: 28px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.settings-header p {
+
+    color: #6B7280;
+
+    font-size: 15px;
+
+}
+
+
+/* ================================================= */
+/* CARD */
+/* ================================================= */
+
+.settings-card {
+
+    background: #FFFFFF;
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    margin-bottom: 25px;
+
+    box-shadow: var(--shadow-sm);
+
+}
+
+
+/* ================================================= */
+/* CABEÇALHO DO CARD */
+/* ================================================= */
+
+.settings-card-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding-bottom: 25px;
+
+}
+
+
+.settings-icon {
+
+    width: 45px;
+
+    height: 45px;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: rgba(124, 92, 252, 0.12);
+
+    color: var(--primary);
+
+}
+
+
+.settings-icon svg {
+
+    width: 22px;
+
+    height: 22px;
+
+}
+
+
+.settings-card-header h2 {
+
+    font-size: 19px;
+
+    margin-bottom: 5px;
+
+}
+
+
+.settings-card-header p {
+
+    color: #6B7280;
+
+    font-size: 14px;
+
+}
+
+
+/* ================================================= */
+/* OPÇÕES */
+/* ================================================= */
+
+.settings-option {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 20px 0;
+
+    border-top: 1px solid #E5E7EB;
+
+}
+
+
+.option-info {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+}
+
+
+.option-icon {
+
+    width: 40px;
+
+    height: 40px;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #F3F4F6;
+
+    color: #6B7280;
+
+    flex-shrink: 0;
+
+}
+
+
+.option-icon svg {
+
+    width: 19px;
+
+    height: 19px;
+
+}
+
+
+.option-info h3 {
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    margin-bottom: 5px;
+
+}
+
+
+.option-info p {
+
+    color: #6B7280;
+
+    font-size: 13px;
+
+}
+
+
+/* ================================================= */
+/* SWITCH */
+/* ================================================= */
+
+.switch {
+
+    position: relative;
+
+    display: inline-block;
+
+    width: 46px;
+
+    height: 25px;
+
+    flex-shrink: 0;
+
+}
+
+
+.switch input {
+
+    opacity: 0;
+
+    width: 0;
+
+    height: 0;
+
+}
+
+
+.slider {
+
+    position: absolute;
+
+    cursor: pointer;
+
+    inset: 0;
+
+    background: #D1D5DB;
+
+    border-radius: 50px;
+
+    transition: 0.3s;
+
+}
+
+
+.slider::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 19px;
+
+    height: 19px;
+
+    left: 3px;
+
+    top: 3px;
+
+    background: #FFFFFF;
+
+    border-radius: 50%;
+
+    transition: 0.3s;
+
+}
+
+
+.switch input:checked + .slider {
+
+    background: var(--primary);
+
+}
+
+
+.switch input:checked + .slider::before {
+
+    transform: translateX(21px);
+
+}
+
+
+/* ================================================= */
+/* AÇÕES DA CONTA */
+/* ================================================= */
+
+.settings-action {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    border: none;
+
+    border-top: 1px solid #E5E7EB;
+
+    background: transparent;
+
+    padding: 20px 0;
+
+    text-align: left;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+}
+
+
+.settings-action:hover .option-info h3 {
+
+    color: var(--primary);
+
+}
+
+
+.action-arrow {
+
+    color: #9CA3AF;
+
+    width: 18px;
+
+    height: 18px;
+
+}
+
+
+/* ================================================= */
+/* ZONA DE PERIGO */
+/* ================================================= */
+
+.danger-card {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    background: #FFFFFF;
+
+    border: 1px solid #FECACA;
+
+    border-radius: 20px;
+
+    padding: 25px 30px;
+
+    margin-bottom: 30px;
+
+}
+
+
+.danger-card h2 {
+
+    font-size: 18px;
+
+    margin-bottom: 6px;
+
+    color: #DC2626;
+
+}
+
+
+.danger-card p {
+
+    color: #6B7280;
+
+    font-size: 13px;
+
+    max-width: 550px;
+
+}
+
+
+/* ================================================= */
+/* BOTÃO EXCLUIR */
+/* ================================================= */
+
+.delete-button {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 11px 16px;
+
+    border: 1px solid #FCA5A5;
+
+    border-radius: 10px;
+
+    background: #FFFFFF;
+
+    color: #DC2626;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: var(--transition);
+
+    flex-shrink: 0;
+
+}
+
+
+.delete-button:hover {
+
+    background: #FEF2F2;
+
+}
+
+
+.delete-button svg {
+
+    width: 17px;
+
+    height: 17px;
+
+}
+
+
+/* ================================================= */
+/* RESPONSIVIDADE */
+/* ================================================= */
+
+@media (max-width: 750px) {
+
+    .settings-content {
+
+        padding: 25px;
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .settings-content {
+
+        padding: 18px;
+
+    }
+
+
+    .settings-card {
+
+        padding: 20px;
+
+    }
+
+
+    .settings-option {
+
+        align-items: flex-start;
+
+    }
+
+
+    .option-info {
+
+        align-items: flex-start;
+
+    }
+
+
+    .danger-card {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+
+    .delete-button {
+
+        width: 100%;
+
+    }
+
+}
