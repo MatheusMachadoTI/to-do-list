@@ -9,20 +9,24 @@
 
     <title>Tarefas | Donee</title>
 
-    <!-- Fonte -->
+
+    <!-- ================================================= -->
+    <!-- FONTE -->
+    <!-- ================================================= -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
-        rel="stylesheet"
-    >
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+          rel="stylesheet">
 
+
+    <!-- ================================================= -->
     <!-- CSS -->
-
-    <!-- CSS -->
+    <!-- ================================================= -->
 
     <link rel="stylesheet" href="../css/style.css">
 
@@ -38,307 +42,286 @@
 <body>
 
 
-    <div class="tasks-page">
+<!-- ===================================================== -->
+<!-- LAYOUT PRINCIPAL -->
+<!-- ===================================================== -->
+
+<div class="dashboard-layout">
 
 
-        <!-- ========================= -->
-        <!-- SIDEBAR -->
-        <!-- ========================= -->
+    <!-- ================================================= -->
+    <!-- SIDEBAR -->
+    <!-- ================================================= -->
 
-        <aside class="sidebar">
-
-
-            <!-- LOGO -->
-
-            <div class="sidebar-logo">
-
-                <a href="dashboard.html">
-
-                    <img
-                        src="../assets/images/logo-Donee.png"
-                        alt="Logo Donee"
-                    >
-
-                </a>
-
-            </div>
+    <aside class="sidebar">
 
 
-            <!-- MENU -->
+        <!-- LOGO -->
 
-            <nav class="sidebar-menu">
+        <div class="sidebar-logo">
 
-                <a
-                    href="dashboard.html"
-                    class="menu-item"
-                >
+            <img
+                src="../assets/images/logo-Donee.png"
+                alt="Logo Donee"
+            >
 
-                    <i data-lucide="layout-dashboard"></i>
-
-                    <span>Dashboard</span>
-
-                </a>
+        </div>
 
 
-                <a
-                    href="tasks.html"
-                    class="menu-item active"
-                >
+        <!-- MENU -->
 
-                    <i data-lucide="list-todo"></i>
-
-                    <span>Tarefas</span>
-
-                </a>
+        <nav class="sidebar-menu">
 
 
-                <a
-                    href="profile.html"
-                    class="menu-item"
-                >
+            <!-- DASHBOARD -->
 
-                    <i data-lucide="user"></i>
+            <a href="dashboard.html"
+               class="menu-item">
 
-                    <span>Perfil</span>
+                <i data-lucide="layout-dashboard"></i>
 
-                </a>
+                <span>Dashboard</span>
+
+            </a>
 
 
-                <a
-                    href="settings.html"
-                    class="menu-item"
-                >
+            <!-- TAREFAS -->
 
-                    <i data-lucide="settings"></i>
+            <a href="tasks.html"
+               class="menu-item active">
 
-                    <span>Configurações</span>
+                <i data-lucide="list-checks"></i>
 
-                </a>
+                <span>Tarefas</span>
 
-            </nav>
+            </a>
 
 
             <!-- PERFIL -->
 
-            <div class="sidebar-profile">
+            <a href="profile.html"
+               class="menu-item">
 
-                <div class="profile-avatar">
+                <i data-lucide="user"></i>
 
-                    <i data-lucide="user"></i>
+                <span>Perfil</span>
 
-                </div>
+            </a>
 
 
-                <div class="profile-info">
+            <!-- CONFIGURAÇÕES -->
 
-                    <strong>Matheus</strong>
+            <a href="settings.html"
+               class="menu-item">
 
-                    <span>Meu perfil</span>
+                <i data-lucide="settings"></i>
 
-                </div>
+                <span>Configurações</span>
+
+            </a>
+
+        </nav>
+
+
+        <!-- ================================================= -->
+        <!-- PERFIL DA SIDEBAR -->
+        <!-- ================================================= -->
+
+        <div class="sidebar-profile">
+
+
+            <div class="profile-avatar">
+
+                <i data-lucide="user"></i>
 
             </div>
 
 
-        </aside>
+            <div class="profile-info">
+
+                <strong>Matheus</strong>
+
+                <span>Meu perfil</span>
+
+            </div>
+
+
+            <i
+                data-lucide="chevron-right"
+                class="profile-arrow">
+            </i>
+
+
+        </div>
+
+
+    </aside>
 
 
 
-        <!-- ========================= -->
-        <!-- CONTEÚDO -->
-        <!-- ========================= -->
+    <!-- ================================================= -->
+    <!-- CONTEÚDO DA PÁGINA -->
+    <!-- ================================================= -->
 
-        <main class="tasks-content">
+    <main class="tasks-content">
 
 
-            <!-- HEADER -->
+        <!-- ================================================= -->
+        <!-- CABEÇALHO -->
+        <!-- ================================================= -->
 
-            <header class="tasks-page-header">
+        <header class="tasks-header">
+
+
+            <div>
+
+                <span class="tasks-label">
+                    ORGANIZAÇÃO
+                </span>
+
+                <h1>
+                    Minhas tarefas
+                </h1>
+
+                <p>
+                    Gerencie suas tarefas e mantenha sua rotina organizada.
+                </p>
+
+            </div>
+
+
+            <!-- BOTÃO NOVA TAREFA -->
+
+            <button class="new-task-btn">
+
+                <i data-lucide="plus"></i>
+
+                <span>Nova Tarefa</span>
+
+            </button>
+
+
+        </header>
+
+
+
+        <!-- ================================================= -->
+        <!-- FILTROS -->
+        <!-- ================================================= -->
+
+        <div class="tasks-filters">
+
+
+            <button class="filter-btn active">
+                Todas
+            </button>
+
+
+            <button class="filter-btn">
+                Pendentes
+            </button>
+
+
+            <button class="filter-btn">
+                Concluídas
+            </button>
+
+
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- ÁREA DAS TAREFAS -->
+        <!-- ================================================= -->
+
+        <section class="tasks-card">
+
+
+            <!-- CABEÇALHO -->
+
+            <div class="tasks-card-header">
 
 
                 <div>
 
-                    <h1>Minhas Tarefas</h1>
+                    <h2>
+                        Todas as tarefas
+                    </h2>
 
                     <p>
-                        Gerencie suas tarefas e mantenha sua rotina organizada.
+                        3 tarefas cadastradas
                     </p>
 
                 </div>
 
 
-                <button class="btn-primary">
-
-                    <i data-lucide="plus"></i>
-
-                    Nova Tarefa
-
-                </button>
+                <i data-lucide="clipboard-check"></i>
 
 
-            </header>
+            </div>
 
 
 
-            <!-- ========================= -->
-            <!-- FILTROS -->
-            <!-- ========================= -->
-
-            <section class="task-filters">
-
-
-                <button class="filter-button active">
-
-                    Todas
-
-                </button>
-
-
-                <button class="filter-button">
-
-                    Pendentes
-
-                </button>
-
-
-                <button class="filter-button">
-
-                    Concluídas
-
-                </button>
-
-
-            </section>
-
-
-
-            <!-- ========================= -->
+            <!-- ================================================= -->
             <!-- LISTA -->
-            <!-- ========================= -->
+            <!-- ================================================= -->
 
-            <section class="all-tasks">
-
-
-                <div class="all-tasks-header">
-
-                    <h2>Todas as tarefas</h2>
-
-                    <span>3 tarefas</span>
-
-                </div>
+            <div class="tasks-list">
 
 
-                <div class="all-tasks-list">
+                <!-- ================================================= -->
+                <!-- TAREFA 1 -->
+                <!-- ================================================= -->
+
+                <div class="task-card">
 
 
-                    <!-- TAREFA 1 -->
+                    <div class="task-left">
 
-                    <div class="task-card">
+
+                        <!-- BARRA ROXA -->
+
+                        <div class="task-border"></div>
+
+
+                        <!-- INFORMAÇÕES -->
 
                         <div class="task-content">
 
-                            <h3 class="task-title">
+                            <h3>
                                 Estudar JavaScript
                             </h3>
 
-                            <p class="task-category">
+                            <p>
                                 Estudos
                             </p>
 
                         </div>
 
 
-                        <div class="task-right">
-
-                            <span class="task-time">
-                                19:00
-                            </span>
-
-
-                            <button
-                                class="task-status completed"
-                                aria-label="Marcar tarefa como concluída"
-                            >
-
-                                <i data-lucide="check"></i>
-
-                            </button>
-
-                        </div>
-
                     </div>
 
 
 
-                    <!-- TAREFA 2 -->
+                    <!-- LADO DIREITO -->
 
-                    <div class="task-card">
-
-                        <div class="task-content">
-
-                            <h3 class="task-title">
-                                Treino de Academia
-                            </h3>
-
-                            <p class="task-category">
-                                Saúde
-                            </p>
-
-                        </div>
+                    <div class="task-right">
 
 
-                        <div class="task-right">
-
-                            <span class="task-time">
-                                20:30
-                            </span>
+                        <span class="task-time">
+                            19:00
+                        </span>
 
 
-                            <button
-                                class="task-status"
-                                aria-label="Marcar tarefa como concluída"
-                            >
+                        <!-- CONCLUÍDA -->
 
-                            </button>
+                        <button class="task-status completed">
 
-                        </div>
+                            <i data-lucide="check"></i>
 
-                    </div>
+                        </button>
 
-
-
-                    <!-- TAREFA 3 -->
-
-                    <div class="task-card">
-
-                        <div class="task-content">
-
-                            <h3 class="task-title">
-                                Ler 20 páginas
-                            </h3>
-
-                            <p class="task-category">
-                                Leitura
-                            </p>
-
-                        </div>
-
-
-                        <div class="task-right">
-
-                            <span class="task-time">
-                                21:00
-                            </span>
-
-
-                            <button
-                                class="task-status"
-                                aria-label="Marcar tarefa como concluída"
-                            >
-
-                            </button>
-
-                        </div>
 
                     </div>
 
@@ -346,25 +329,163 @@
                 </div>
 
 
-            </section>
+
+                <!-- ================================================= -->
+                <!-- TAREFA 2 -->
+                <!-- ================================================= -->
+
+                <div class="task-card">
 
 
-        </main>
+                    <div class="task-left">
 
 
-    </div>
+                        <div class="task-border"></div>
+
+
+                        <div class="task-content">
+
+                            <h3>
+                                Treino Academia
+                            </h3>
+
+                            <p>
+                                Saúde
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="task-right">
+
+
+                        <span class="task-time">
+                            20:30
+                        </span>
+
+
+                        <!-- PENDENTE -->
+
+                        <button class="task-status">
+
+                        </button>
+
+
+                    </div>
+
+
+                </div>
 
 
 
-    <!-- LUCIDE -->
+                <!-- ================================================= -->
+                <!-- TAREFA 3 -->
+                <!-- ================================================= -->
 
-    <script src="https://unpkg.com/lucide@latest"></script>
+                <div class="task-card">
 
-    <script>
 
-        lucide.createIcons();
+                    <div class="task-left">
 
-    </script>
+
+                        <div class="task-border"></div>
+
+
+                        <div class="task-content">
+
+                            <h3>
+                                Ler 20 páginas
+                            </h3>
+
+                            <p>
+                                Leitura
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="task-right">
+
+
+                        <span class="task-time">
+                            21:30
+                        </span>
+
+
+                        <!-- PENDENTE -->
+
+                        <button class="task-status">
+
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ================================================= -->
+        <!-- CARD INFORMATIVO -->
+        <!-- ================================================= -->
+
+        <section class="task-tip">
+
+
+            <div class="task-tip-icon">
+
+                <i data-lucide="lightbulb"></i>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Mantenha o foco!
+                </h3>
+
+                <p>
+                    Organize suas tarefas por prioridade e conclua uma de cada vez.
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- ===================================================== -->
+<!-- LUCIDE -->
+<!-- ===================================================== -->
+
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<script>
+
+    lucide.createIcons();
+
+</script>
 
 
 </body>

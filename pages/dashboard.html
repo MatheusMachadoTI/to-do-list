@@ -9,6 +9,7 @@
 
     <title>Dashboard | Donee</title>
 
+
     <!-- Fonte -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,6 +20,7 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
         rel="stylesheet"
     >
+
 
     <!-- CSS -->
 
@@ -34,16 +36,12 @@
 <body>
 
 
-    <!-- ========================= -->
-    <!-- DASHBOARD -->
-    <!-- ========================= -->
-
-    <div class="dashboard">
+    <div class="dashboard-layout">
 
 
-        <!-- ========================= -->
+        <!-- ================================================= -->
         <!-- SIDEBAR -->
-        <!-- ========================= -->
+        <!-- ================================================= -->
 
         <aside class="sidebar">
 
@@ -52,7 +50,7 @@
 
             <div class="sidebar-logo">
 
-                <a href="../index.html">
+                <a href="dashboard.html">
 
                     <img
                         src="../assets/images/logo-Donee.png"
@@ -86,7 +84,7 @@
                     class="menu-item"
                 >
 
-                    <i data-lucide="list-todo"></i>
+                    <i data-lucide="list-checks"></i>
 
                     <span>Tarefas</span>
 
@@ -120,7 +118,7 @@
             </nav>
 
 
-            <!-- PERFIL -->
+            <!-- PERFIL DA SIDEBAR -->
 
             <div class="sidebar-profile">
 
@@ -135,9 +133,15 @@
 
                     <strong>Matheus</strong>
 
-                    <span>Meu perfil</span>
+                    <span>Minha conta</span>
 
                 </div>
+
+
+                <i
+                    data-lucide="chevron-right"
+                    class="profile-arrow"
+                ></i>
 
             </div>
 
@@ -146,27 +150,48 @@
 
 
 
-        <!-- ========================= -->
-        <!-- CONTEÚDO -->
-        <!-- ========================= -->
+        <!-- ================================================= -->
+        <!-- CONTEÚDO PRINCIPAL -->
+        <!-- ================================================= -->
 
-        <main class="content">
+        <main class="dashboard-content">
 
 
-            <!-- ========================= -->
-            <!-- HEADER -->
-            <!-- ========================= -->
+            <!-- ================================================= -->
+            <!-- CABEÇALHO -->
+            <!-- ================================================= -->
 
             <header class="dashboard-header">
 
 
                 <div>
 
-                    <h1>Olá, Matheus! 👋</h1>
+                    <span class="welcome-label">
+                        Meu espaço
+                    </span>
+
+                    <h1>
+                        Bem-vindo, Matheus! 👋
+                    </h1>
 
                     <p>
-                        Organize seu dia e alcance seus objetivos.
+                        Organize seu dia e mantenha o foco nas suas tarefas.
                     </p>
+
+                </div>
+
+
+                <div class="header-date">
+
+                    <i data-lucide="calendar-days"></i>
+
+                    <div>
+
+                        <span>Hoje</span>
+
+                        <strong>24 de Julho</strong>
+
+                    </div>
 
                 </div>
 
@@ -175,161 +200,183 @@
 
 
 
-            <!-- ========================= -->
-            <!-- ESTATÍSTICAS -->
-            <!-- ========================= -->
+            <!-- ================================================= -->
+            <!-- CARDS DE RESUMO -->
+            <!-- ================================================= -->
 
-            <section class="stats">
+            <section class="stats-grid">
 
 
-                <!-- CARD -->
+                <!-- TOTAL -->
 
-                <div class="stat-card">
+                <article class="stat-card">
+
 
                     <div class="stat-icon">
 
-                        <i data-lucide="clipboard-list"></i>
+                        <i data-lucide="list-checks"></i>
 
                     </div>
 
 
                     <div class="stat-info">
 
-                        <h3>Total de tarefas</h3>
+                        <span>Total de tarefas</span>
 
-                        <p>12</p>
+                        <strong>12</strong>
+
+                        <small>
+                            tarefas cadastradas
+                        </small>
 
                     </div>
 
-                </div>
+
+                </article>
 
 
 
-                <!-- CARD -->
+                <!-- HOJE -->
 
-                <div class="stat-card">
+                <article class="stat-card">
+
 
                     <div class="stat-icon">
 
-                        <i data-lucide="calendar-days"></i>
+                        <i data-lucide="calendar-check"></i>
 
                     </div>
 
 
                     <div class="stat-info">
 
-                        <h3>Hoje</h3>
+                        <span>Para hoje</span>
 
-                        <p>5</p>
+                        <strong>5</strong>
+
+                        <small>
+                            tarefas programadas
+                        </small>
 
                     </div>
 
-                </div>
+
+                </article>
 
 
 
-                <!-- CARD -->
+                <!-- CONCLUÍDAS -->
 
-                <div class="stat-card">
+                <article class="stat-card">
+
 
                     <div class="stat-icon">
 
-                        <i data-lucide="circle-check-big"></i>
+                        <i data-lucide="circle-check"></i>
 
                     </div>
 
 
                     <div class="stat-info">
 
-                        <h3>Concluídas</h3>
+                        <span>Concluídas</span>
 
-                        <p>8</p>
+                        <strong>8</strong>
+
+                        <small>
+                            tarefas finalizadas
+                        </small>
 
                     </div>
 
-                </div>
+
+                </article>
 
 
             </section>
 
 
 
-            <!-- ========================= -->
-            <!-- MINHAS TAREFAS -->
-            <!-- ========================= -->
+            <!-- ================================================= -->
+            <!-- ÁREA INFERIOR -->
+            <!-- ================================================= -->
 
-            <section class="tasks">
-
-
-                <!-- CABEÇALHO -->
-
-                <div class="tasks-header">
+            <section class="dashboard-grid">
 
 
-                    <div>
+                <!-- ================================================= -->
+                <!-- TAREFAS -->
+                <!-- ================================================= -->
 
-                        <h2>Minhas Tarefas</h2>
+                <article class="dashboard-card tasks-dashboard">
 
-                        <p>
-                            Organize seu dia de forma simples.
-                        </p>
+
+                    <div class="card-header">
+
+
+                        <div>
+
+                            <span class="section-label">
+                                Organização
+                            </span>
+
+                            <h2>
+                                Minhas tarefas
+                            </h2>
+
+                        </div>
+
+
+                        <a
+                            href="tasks.html"
+                            class="card-link"
+                        >
+
+                            Ver todas
+
+                            <i data-lucide="arrow-up-right"></i>
+
+                        </a>
+
 
                     </div>
 
 
-                    <button class="btn-primary">
-
-                        <i data-lucide="plus"></i>
-
-                        Nova Tarefa
-
-                    </button>
-
-
-                </div>
-
-
-
-                <!-- LISTA -->
-
-                <div class="tasks-list">
-
 
                     <!-- TAREFA 1 -->
 
-                    <div class="task-card">
+                    <div class="dashboard-task">
 
 
-                        <div class="task-content">
-
-                            <h3 class="task-title">
-                                Estudar JavaScript
-                            </h3>
-
-                            <p class="task-category">
-                                Estudos
-                            </p>
-
-                        </div>
+                        <div class="task-main">
 
 
-                        <div class="task-right">
-
-                            <span class="task-time">
-                                19:00
-                            </span>
-
-
-                            <button
-                                class="task-status completed"
-                                aria-label="Marcar tarefa como concluída"
-                            >
+                            <div class="task-status completed">
 
                                 <i data-lucide="check"></i>
 
-                            </button>
+                            </div>
+
+
+                            <div>
+
+                                <h3>
+                                    Estudar JavaScript
+                                </h3>
+
+                                <span>
+                                    Estudos
+                                </span>
+
+                            </div>
+
 
                         </div>
+
+
+                        <span class="task-time">
+                            19:00
+                        </span>
 
 
                     </div>
@@ -338,37 +385,36 @@
 
                     <!-- TAREFA 2 -->
 
-                    <div class="task-card">
+                    <div class="dashboard-task">
 
 
-                        <div class="task-content">
+                        <div class="task-main">
 
-                            <h3 class="task-title">
-                                Treino de Academia
-                            </h3>
 
-                            <p class="task-category">
-                                Saúde
-                            </p>
+                            <div class="task-status">
+
+                            </div>
+
+
+                            <div>
+
+                                <h3>
+                                    Treino Academia
+                                </h3>
+
+                                <span>
+                                    Saúde
+                                </span>
+
+                            </div>
+
 
                         </div>
 
 
-                        <div class="task-right">
-
-                            <span class="task-time">
-                                20:30
-                            </span>
-
-
-                            <button
-                                class="task-status"
-                                aria-label="Marcar tarefa como concluída"
-                            >
-
-                            </button>
-
-                        </div>
+                        <span class="task-time">
+                            20:30
+                        </span>
 
 
                     </div>
@@ -377,35 +423,71 @@
 
                     <!-- TAREFA 3 -->
 
-                    <div class="task-card">
+                    <div class="dashboard-task">
 
 
-                        <div class="task-content">
+                        <div class="task-main">
 
-                            <h3 class="task-title">
-                                Ler 20 páginas
-                            </h3>
 
-                            <p class="task-category">
-                                Leitura
-                            </p>
+                            <div class="task-status">
+
+                            </div>
+
+
+                            <div>
+
+                                <h3>
+                                    Ler 20 páginas
+                                </h3>
+
+                                <span>
+                                    Leitura
+                                </span>
+
+                            </div>
+
 
                         </div>
 
 
-                        <div class="task-right">
+                        <span class="task-time">
+                            21:30
+                        </span>
 
-                            <span class="task-time">
-                                21:00
+
+                    </div>
+
+
+                </article>
+
+
+
+                <!-- ================================================= -->
+                <!-- PROGRESSO -->
+                <!-- ================================================= -->
+
+                <article class="dashboard-card progress-dashboard">
+
+
+                    <div class="card-header">
+
+
+                        <div>
+
+                            <span class="section-label">
+                                Seu desempenho
                             </span>
 
+                            <h2>
+                                Progresso
+                            </h2>
 
-                            <button
-                                class="task-status"
-                                aria-label="Marcar tarefa como concluída"
-                            >
+                        </div>
 
-                            </button>
+
+                        <div class="progress-icon">
+
+                            <i data-lucide="trending-up"></i>
 
                         </div>
 
@@ -413,108 +495,80 @@
                     </div>
 
 
-                </div>
+
+                    <div class="progress-content">
+
+
+                        <div class="progress-number">
+
+                            <strong>67%</strong>
+
+                            <span>
+                                das tarefas concluídas
+                            </span>
+
+                        </div>
+
+
+                        <div class="progress-circle">
+
+                            <span>8/12</span>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="progress-bar">
+
+                        <div
+                            class="progress-fill"
+                            style="width: 67%;"
+                        ></div>
+
+                    </div>
+
+
+                    <p class="progress-message">
+
+                        Continue assim! Você está mantendo uma
+                        boa rotina.
+
+                    </p>
+
+
+                </article>
 
 
             </section>
 
 
 
-            <!-- ========================= -->
-            <!-- PRÓXIMAS TAREFAS -->
-            <!-- ========================= -->
+            <!-- ================================================= -->
+            <!-- FRASE -->
+            <!-- ================================================= -->
 
-            <section class="upcoming">
+            <section class="motivation-card">
 
 
-                <div class="upcoming-header">
+                <div class="motivation-icon">
 
-                    <h2>Próximas tarefas</h2>
-
-                    <p>
-                        Veja o que vem pela frente.
-                    </p>
+                    <i data-lucide="sparkles"></i>
 
                 </div>
 
 
+                <div>
 
-                <div class="upcoming-list">
+                    <h2>
+                        Pequenos passos geram grandes conquistas.
+                    </h2>
 
-
-                    <div class="upcoming-item">
-
-
-                        <div>
-
-                            <h3>
-                                Fazer trabalho da escola
-                            </h3>
-
-                            <p>
-                                Amanhã
-                            </p>
-
-                        </div>
-
-
-                        <span>
-                            09:00
-                        </span>
-
-
-                    </div>
-
-
-
-                    <div class="upcoming-item">
-
-
-                        <div>
-
-                            <h3>
-                                Estudar para a prova
-                            </h3>
-
-                            <p>
-                                Sexta-feira
-                            </p>
-
-                        </div>
-
-
-                        <span>
-                            14:00
-                        </span>
-
-
-                    </div>
-
-
-
-                    <div class="upcoming-item">
-
-
-                        <div>
-
-                            <h3>
-                                Organizar projetos
-                            </h3>
-
-                            <p>
-                                Sábado
-                            </p>
-
-                        </div>
-
-
-                        <span>
-                            10:00
-                        </span>
-
-
-                    </div>
-
+                    <p>
+                        Mantenha o foco e continue avançando.
+                    </p>
 
                 </div>
 
@@ -529,12 +583,11 @@
 
 
 
-    <!-- ========================= -->
+    <!-- ================================================= -->
     <!-- LUCIDE -->
-    <!-- ========================= -->
+    <!-- ================================================= -->
 
     <script src="https://unpkg.com/lucide@latest"></script>
-
 
     <script>
 

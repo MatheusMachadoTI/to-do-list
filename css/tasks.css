@@ -2,85 +2,140 @@
 /* TASKS PAGE */
 /* ================================================= */
 
-.tasks-page {
+.tasks-content {
 
-    display: flex;
-
-    width: 100%;
+    width: calc(100% - 260px);
 
     min-height: 100vh;
 
+    margin-left: 260px;
+
+    padding: 50px 55px;
+
     background: #F8FAFC;
 
-}
-
-
-/* ================================================= */
-/* CONTEÚDO */
-/* ================================================= */
-
-.tasks-content {
-
-    flex: 1;
-
-    min-width: 0;
-
-    padding: 40px;
+    box-sizing: border-box;
 
 }
 
 
 /* ================================================= */
-/* HEADER */
+/* CABEÇALHO */
 /* ================================================= */
 
-.tasks-page-header {
+.tasks-header {
 
     display: flex;
 
+    align-items: flex-start;
+
     justify-content: space-between;
 
-    align-items: center;
-
-    gap: 20px;
+    gap: 30px;
 
     margin-bottom: 30px;
 
 }
 
 
-.tasks-page-header h1 {
+.tasks-label {
 
-    font-size: 28px;
+    display: block;
 
     margin-bottom: 8px;
 
+    color: #7C5CFC;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+
 }
 
 
-.tasks-page-header p {
+.tasks-header h1 {
 
-    color: #6B7280;
+    margin: 0 0 8px;
 
-    font-size: 15px;
+    color: #25263A;
+
+    font-size: 32px;
+
+    font-weight: 700;
 
 }
 
 
-.tasks-page-header .btn-primary {
+.tasks-header p {
+
+    margin: 0;
+
+    color: #7B8092;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+}
+
+
+/* ================================================= */
+/* BOTÃO NOVA TAREFA */
+/* ================================================= */
+
+.new-task-btn {
 
     display: flex;
 
     align-items: center;
 
-    gap: 8px;
+    justify-content: center;
 
-    flex-shrink: 0;
+    gap: 9px;
+
+    min-width: 155px;
+
+    height: 50px;
+
+    padding: 0 20px;
+
+    border: none;
+
+    border-radius: 15px;
+
+    background: #7C5CFC;
+
+    color: #FFFFFF;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow: 0 8px 20px rgba(124, 92, 252, 0.20);
+
+    transition: 0.25s ease;
 
 }
 
 
-.tasks-page-header .btn-primary svg {
+.new-task-btn:hover {
+
+    background: #6948F5;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 12px 25px rgba(124, 92, 252, 0.25);
+
+}
+
+
+.new-task-btn svg {
 
     width: 18px;
 
@@ -93,56 +148,131 @@
 /* FILTROS */
 /* ================================================= */
 
-.task-filters {
+.tasks-filters {
 
     display: flex;
 
-    gap: 10px;
+    align-items: center;
 
-    margin-bottom: 25px;
+    gap: 8px;
+
+    margin-bottom: 20px;
 
 }
 
 
-.filter-button {
+.filter-btn {
 
-    border: none;
+    height: 42px;
+
+    padding: 0 20px;
+
+    border: 1px solid #EDEEF4;
+
+    border-radius: 12px;
 
     background: #FFFFFF;
 
-    color: #6B7280;
-
-    padding: 10px 18px;
-
-    border-radius: 10px;
+    color: #777C8E;
 
     font-family: inherit;
 
-    font-size: 14px;
-
-    font-weight: 500;
+    font-size: 13px;
 
     cursor: pointer;
 
-    transition: var(--transition);
+    transition: 0.25s ease;
 
 }
 
 
-.filter-button:hover {
+.filter-btn:hover {
 
-    color: var(--primary);
+    color: #7C5CFC;
 
-    background: rgba(124, 92, 252, 0.08);
+    border-color: #DCD5FF;
 
 }
 
 
-.filter-button.active {
+.filter-btn.active {
 
-    background: var(--primary);
+    background: #7C5CFC;
+
+    border-color: #7C5CFC;
 
     color: #FFFFFF;
+
+    box-shadow: 0 5px 15px rgba(124, 92, 252, 0.18);
+
+}
+
+
+/* ================================================= */
+/* CARD PRINCIPAL */
+/* ================================================= */
+
+.tasks-card {
+
+    padding: 30px;
+
+    background: #FFFFFF;
+
+    border: 1px solid #EEF0F5;
+
+    border-radius: 22px;
+
+    box-shadow: 0 10px 35px rgba(35, 37, 55, 0.05);
+
+}
+
+
+/* ================================================= */
+/* CABEÇALHO DO CARD */
+/* ================================================= */
+
+.tasks-card-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+
+}
+
+
+.tasks-card-header h2 {
+
+    margin: 0 0 5px;
+
+    color: #292A3D;
+
+    font-size: 20px;
+
+}
+
+
+.tasks-card-header p {
+
+    margin: 0;
+
+    color: #8A8E9F;
+
+    font-size: 12px;
+
+}
+
+
+.tasks-card-header > svg {
+
+    width: 22px;
+
+    height: 22px;
+
+    color: #7C5CFC;
 
 }
 
@@ -151,53 +281,316 @@
 /* LISTA DE TAREFAS */
 /* ================================================= */
 
-.all-tasks {
-
-    background: #FFFFFF;
-
-    border-radius: 20px;
-
-    padding: 30px;
-
-    box-shadow: var(--shadow-sm);
-
-}
-
-
-.all-tasks-header {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    margin-bottom: 10px;
-
-}
-
-
-.all-tasks-header h2 {
-
-    font-size: 20px;
-
-}
-
-
-.all-tasks-header span {
-
-    font-size: 14px;
-
-    color: #6B7280;
-
-}
-
-
-.all-tasks-list {
+.tasks-list {
 
     display: flex;
 
     flex-direction: column;
+
+    gap: 14px;
+
+}
+
+
+/* ================================================= */
+/* TASK CARD */
+/* ================================================= */
+
+.task-card {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    min-height: 82px;
+
+    padding: 16px 20px 16px 24px;
+
+    background: #FFFFFF;
+
+    border: 1px solid #F0F1F5;
+
+    border-radius: 17px;
+
+    box-shadow: 0 5px 18px rgba(35, 37, 55, 0.035);
+
+    overflow: hidden;
+
+    transition: 0.25s ease;
+
+}
+
+
+.task-card:hover {
+
+    transform: translateY(-2px);
+
+    border-color: #E5E0FF;
+
+    box-shadow: 0 10px 25px rgba(35, 37, 55, 0.07);
+
+}
+
+
+/* ================================================= */
+/* LADO ESQUERDO */
+/* ================================================= */
+
+.task-left {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    min-width: 0;
+
+}
+
+
+/* ================================================= */
+/* BARRA ROXA CURVADA */
+/* ================================================= */
+
+.task-border {
+
+    width: 5px;
+
+    height: 48px;
+
+    flex-shrink: 0;
+
+    border-radius: 0 10px 10px 0;
+
+    background: #7C5CFC;
+
+}
+
+
+/* ================================================= */
+/* CONTEÚDO */
+/* ================================================= */
+
+.task-content {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+}
+
+
+.task-content h3 {
+
+    margin: 0;
+
+    color: #292A3D;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+}
+
+
+.task-content p {
+
+    margin: 0;
+
+    color: #85899A;
+
+    font-size: 12px;
+
+}
+
+
+/* ================================================= */
+/* LADO DIREITO */
+/* ================================================= */
+
+.task-right {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    flex-shrink: 0;
+
+}
+
+
+.task-time {
+
+    color: #74798A;
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+}
+
+
+/* ================================================= */
+/* BOTÃO DE STATUS */
+/* ================================================= */
+
+.task-status {
+
+    width: 25px;
+
+    height: 25px;
+
+    padding: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: 2px solid #DCDDE5;
+
+    border-radius: 50%;
+
+    background: #FFFFFF;
+
+    color: #FFFFFF;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+
+}
+
+
+.task-status:hover {
+
+    border-color: #7C5CFC;
+
+    background: #F4F1FF;
+
+}
+
+
+.task-status.completed {
+
+    border-color: #20C968;
+
+    background: #20C968;
+
+}
+
+
+.task-status.completed:hover {
+
+    background: #19B85B;
+
+    border-color: #19B85B;
+
+}
+
+
+.task-status svg {
+
+    width: 14px;
+
+    height: 14px;
+
+    stroke-width: 3;
+
+}
+
+
+/* ================================================= */
+/* CARD DE DICA */
+/* ================================================= */
+
+.task-tip {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-top: 22px;
+
+    padding: 20px 24px;
+
+    background: linear-gradient(
+        135deg,
+        #F4F1FF,
+        #FAF9FF
+    );
+
+    border: 1px solid #E9E4FF;
+
+    border-radius: 18px;
+
+}
+
+
+.task-tip-icon {
+
+    width: 42px;
+
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 13px;
+
+    background: #E9E2FF;
+
+    color: #7C5CFC;
+
+}
+
+
+.task-tip-icon svg {
+
+    width: 20px;
+
+    height: 20px;
+
+}
+
+
+.task-tip h3 {
+
+    margin: 0 0 4px;
+
+    color: #303147;
+
+    font-size: 14px;
+
+}
+
+
+.task-tip p {
+
+    margin: 0;
+
+    color: #85899A;
+
+    font-size: 12px;
+
+    line-height: 1.5;
 
 }
 
@@ -206,61 +599,106 @@
 /* RESPONSIVIDADE */
 /* ================================================= */
 
-@media (max-width: 750px) {
+@media (max-width: 900px) {
 
     .tasks-content {
 
-        padding: 25px;
+        width: calc(100% - 220px);
+
+        margin-left: 220px;
+
+        padding: 40px 30px;
 
     }
 
 }
 
 
-@media (max-width: 550px) {
+@media (max-width: 700px) {
 
     .tasks-content {
 
-        padding: 18px;
+        width: calc(100% - 80px);
+
+        margin-left: 80px;
+
+        padding: 30px 20px;
 
     }
 
 
-    .tasks-page-header {
+    .tasks-header {
 
         flex-direction: column;
 
-        align-items: flex-start;
-
     }
 
 
-    .tasks-page-header .btn-primary {
+    .new-task-btn {
 
         width: 100%;
 
-        justify-content: center;
+    }
+
+
+    .tasks-card {
+
+        padding: 20px;
+
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .tasks-header h1 {
+
+        font-size: 26px;
 
     }
 
 
-    .task-filters {
+    .tasks-filters {
+
+        width: 100%;
 
         overflow-x: auto;
 
     }
 
 
-    .filter-button {
+    .filter-btn {
 
         white-space: nowrap;
 
     }
 
 
-    .all-tasks {
+    .task-card {
 
-        padding: 20px;
+        padding: 15px;
+
+    }
+
+
+    .task-left {
+
+        gap: 12px;
+
+    }
+
+
+    .task-right {
+
+        gap: 10px;
+
+    }
+
+
+    .task-time {
+
+        display: none;
 
     }
 

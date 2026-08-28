@@ -2,30 +2,19 @@
 /* SETTINGS PAGE */
 /* ================================================= */
 
-.settings-page {
+.settings-content {
 
-    display: flex;
-
-    width: 100%;
+    width: calc(100% - 260px);
 
     min-height: 100vh;
 
+    margin-left: 260px;
+
+    padding: 50px 55px;
+
     background: #F8FAFC;
 
-}
-
-
-/* ================================================= */
-/* CONTEÚDO */
-/* ================================================= */
-
-.settings-content {
-
-    flex: 1;
-
-    min-width: 0;
-
-    padding: 40px;
+    box-sizing: border-box;
 
 }
 
@@ -41,20 +30,43 @@
 }
 
 
-.settings-header h1 {
+.settings-label {
 
-    font-size: 28px;
+    display: block;
 
     margin-bottom: 8px;
+
+    color: #7C5CFC;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+
+}
+
+
+.settings-header h1 {
+
+    margin: 0 0 8px;
+
+    color: #25263A;
+
+    font-size: 32px;
+
+    font-weight: 700;
 
 }
 
 
 .settings-header p {
 
-    color: #6B7280;
+    margin: 0;
 
-    font-size: 15px;
+    color: #7B8092;
+
+    font-size: 14px;
 
 }
 
@@ -65,15 +77,17 @@
 
 .settings-card {
 
+    margin-bottom: 20px;
+
+    padding: 28px 30px;
+
     background: #FFFFFF;
 
-    border-radius: 20px;
+    border: 1px solid #EEF0F5;
 
-    padding: 30px;
+    border-radius: 22px;
 
-    margin-bottom: 25px;
-
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 10px 35px rgba(35, 37, 55, 0.05);
 
 }
 
@@ -90,8 +104,6 @@
 
     gap: 15px;
 
-    padding-bottom: 25px;
-
 }
 
 
@@ -101,137 +113,204 @@
 
     height: 45px;
 
-    border-radius: 12px;
-
     display: flex;
 
     align-items: center;
 
     justify-content: center;
 
-    background: rgba(124, 92, 252, 0.12);
+    flex-shrink: 0;
 
-    color: var(--primary);
+    border-radius: 14px;
+
+    background: #F0ECFF;
+
+    color: #7C5CFC;
 
 }
 
 
 .settings-icon svg {
 
-    width: 22px;
+    width: 20px;
 
-    height: 22px;
+    height: 20px;
 
 }
 
 
 .settings-card-header h2 {
 
-    font-size: 19px;
+    margin: 0 0 4px;
 
-    margin-bottom: 5px;
+    color: #292A3D;
+
+    font-size: 18px;
 
 }
 
 
 .settings-card-header p {
 
-    color: #6B7280;
+    margin: 0;
 
-    font-size: 14px;
+    color: #8A8E9F;
+
+    font-size: 12px;
 
 }
 
 
 /* ================================================= */
-/* OPÇÕES */
+/* DIVISOR */
 /* ================================================= */
 
-.settings-option {
+.settings-divider {
+
+    width: 100%;
+
+    height: 1px;
+
+    margin: 24px 0 5px;
+
+    background: #F0F1F5;
+
+}
+
+
+/* ================================================= */
+/* LINHA */
+/* ================================================= */
+
+.setting-row {
 
     display: flex;
+
+    align-items: center;
 
     justify-content: space-between;
 
-    align-items: center;
-
-    gap: 20px;
+    gap: 25px;
 
     padding: 20px 0;
 
-    border-top: 1px solid #E5E7EB;
+}
+
+
+.setting-info {
+
+    min-width: 0;
 
 }
 
 
-.option-info {
+.setting-info h3 {
 
-    display: flex;
+    margin: 0 0 5px;
 
-    align-items: center;
+    color: #303147;
 
-    gap: 14px;
-
-}
-
-
-.option-icon {
-
-    width: 40px;
-
-    height: 40px;
-
-    border-radius: 10px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    background: #F3F4F6;
-
-    color: #6B7280;
-
-    flex-shrink: 0;
-
-}
-
-
-.option-icon svg {
-
-    width: 19px;
-
-    height: 19px;
-
-}
-
-
-.option-info h3 {
-
-    font-size: 15px;
+    font-size: 14px;
 
     font-weight: 600;
 
-    margin-bottom: 5px;
-
 }
 
 
-.option-info p {
+.setting-info p {
 
-    color: #6B7280;
+    margin: 0;
 
-    font-size: 13px;
+    color: #8A8E9F;
+
+    font-size: 12px;
+
+    line-height: 1.5;
 
 }
 
 
 /* ================================================= */
-/* SWITCH */
+/* BOTÃO EDITAR */
 /* ================================================= */
 
-.switch {
+.settings-action {
+
+    padding: 9px 17px;
+
+    border: 1px solid #E5E1FF;
+
+    border-radius: 10px;
+
+    background: #F7F5FF;
+
+    color: #7C5CFC;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+
+}
+
+
+.settings-action:hover {
+
+    background: #7C5CFC;
+
+    border-color: #7C5CFC;
+
+    color: #FFFFFF;
+
+}
+
+
+/* ================================================= */
+/* SELECT */
+/* ================================================= */
+
+.settings-select {
+
+    min-width: 130px;
+
+    padding: 10px 13px;
+
+    border: 1px solid #E5E6EC;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    background: #FFFFFF;
+
+    color: #444658;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    cursor: pointer;
+
+}
+
+
+.settings-select:focus {
+
+    border-color: #7C5CFC;
+
+}
+
+
+/* ================================================= */
+/* TOGGLE */
+/* ================================================= */
+
+.toggle {
 
     position: relative;
 
@@ -246,35 +325,35 @@
 }
 
 
-.switch input {
-
-    opacity: 0;
+.toggle input {
 
     width: 0;
 
     height: 0;
 
+    opacity: 0;
+
 }
 
 
-.slider {
+.toggle-slider {
 
     position: absolute;
 
-    cursor: pointer;
-
     inset: 0;
 
-    background: #D1D5DB;
+    border-radius: 30px;
 
-    border-radius: 50px;
+    background: #DCDDE5;
 
-    transition: 0.3s;
+    cursor: pointer;
+
+    transition: 0.25s ease;
 
 }
 
 
-.slider::before {
+.toggle-slider::before {
 
     content: "";
 
@@ -288,74 +367,27 @@
 
     top: 3px;
 
-    background: #FFFFFF;
-
     border-radius: 50%;
 
-    transition: 0.3s;
+    background: #FFFFFF;
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+
+    transition: 0.25s ease;
 
 }
 
 
-.switch input:checked + .slider {
+.toggle input:checked + .toggle-slider {
 
-    background: var(--primary);
+    background: #7C5CFC;
 
 }
 
 
-.switch input:checked + .slider::before {
+.toggle input:checked + .toggle-slider::before {
 
     transform: translateX(21px);
-
-}
-
-
-/* ================================================= */
-/* AÇÕES DA CONTA */
-/* ================================================= */
-
-.settings-action {
-
-    width: 100%;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    border: none;
-
-    border-top: 1px solid #E5E7EB;
-
-    background: transparent;
-
-    padding: 20px 0;
-
-    text-align: left;
-
-    font-family: inherit;
-
-    cursor: pointer;
-
-}
-
-
-.settings-action:hover .option-info h3 {
-
-    color: var(--primary);
-
-}
-
-
-.action-arrow {
-
-    color: #9CA3AF;
-
-    width: 18px;
-
-    height: 18px;
 
 }
 
@@ -366,98 +398,52 @@
 
 .danger-card {
 
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    gap: 20px;
-
-    background: #FFFFFF;
-
-    border: 1px solid #FECACA;
-
-    border-radius: 20px;
-
-    padding: 25px 30px;
-
-    margin-bottom: 30px;
+    border-color: #F2E2E2;
 
 }
 
 
-.danger-card h2 {
+.danger-icon {
 
-    font-size: 18px;
+    background: #FFF0F0;
 
-    margin-bottom: 6px;
-
-    color: #DC2626;
+    color: #E05252;
 
 }
 
 
-.danger-card p {
+.delete-btn {
 
-    color: #6B7280;
+    padding: 10px 17px;
 
-    font-size: 13px;
-
-    max-width: 550px;
-
-}
-
-
-/* ================================================= */
-/* BOTÃO EXCLUIR */
-/* ================================================= */
-
-.delete-button {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 8px;
-
-    padding: 11px 16px;
-
-    border: 1px solid #FCA5A5;
+    border: 1px solid #F0CFCF;
 
     border-radius: 10px;
 
-    background: #FFFFFF;
+    background: #FFF7F7;
 
-    color: #DC2626;
+    color: #D64A4A;
 
     font-family: inherit;
 
-    font-size: 14px;
+    font-size: 12px;
+
+    font-weight: 600;
 
     cursor: pointer;
 
-    transition: var(--transition);
-
-    flex-shrink: 0;
+    transition: 0.25s ease;
 
 }
 
 
-.delete-button:hover {
+.delete-btn:hover {
 
-    background: #FEF2F2;
+    background: #D94C4C;
 
-}
+    border-color: #D94C4C;
 
-
-.delete-button svg {
-
-    width: 17px;
-
-    height: 17px;
+    color: #FFFFFF;
 
 }
 
@@ -466,59 +452,69 @@
 /* RESPONSIVIDADE */
 /* ================================================= */
 
-@media (max-width: 750px) {
+@media (max-width: 900px) {
 
     .settings-content {
 
-        padding: 25px;
+        width: calc(100% - 220px);
+
+        margin-left: 220px;
+
+        padding: 40px 30px;
 
     }
 
 }
 
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
 
     .settings-content {
 
-        padding: 18px;
+        width: calc(100% - 80px);
+
+        margin-left: 80px;
+
+        padding: 30px 20px;
 
     }
 
 
     .settings-card {
 
-        padding: 20px;
+        padding: 22px;
+
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .settings-header h1 {
+
+        font-size: 26px;
 
     }
 
 
-    .settings-option {
+    .setting-row {
 
         align-items: flex-start;
 
     }
 
 
-    .option-info {
+    .setting-info {
 
-        align-items: flex-start;
-
-    }
-
-
-    .danger-card {
-
-        flex-direction: column;
-
-        align-items: flex-start;
+        max-width: 70%;
 
     }
 
 
-    .delete-button {
+    .settings-select {
 
-        width: 100%;
+        min-width: 100px;
 
     }
 
