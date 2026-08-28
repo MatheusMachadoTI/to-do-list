@@ -1,0 +1,410 @@
+/* ================================================= */
+/* PROFILE PAGE */
+/* ================================================= */
+
+.profile-page {
+
+    display: flex;
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    background: #F8FAFC;
+
+}
+
+
+/* ================================================= */
+/* CONTEÚDO */
+/* ================================================= */
+
+.profile-content {
+
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 40px;
+
+}
+
+
+/* ================================================= */
+/* CABEÇALHO */
+/* ================================================= */
+
+.profile-header {
+
+    margin-bottom: 30px;
+
+}
+
+.profile-header h1 {
+
+    font-size: 28px;
+
+    margin-bottom: 8px;
+
+}
+
+.profile-header p {
+
+    color: #6B7280;
+
+    font-size: 15px;
+
+}
+
+
+/* ================================================= */
+/* CARD PRINCIPAL */
+/* ================================================= */
+
+.profile-card {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    background: #FFFFFF;
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    margin-bottom: 25px;
+
+    box-shadow: var(--shadow-sm);
+
+}
+
+
+/* ================================================= */
+/* PERFIL PRINCIPAL */
+/* ================================================= */
+
+.profile-main {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+}
+
+
+.profile-large-avatar {
+
+    width: 75px;
+
+    height: 75px;
+
+    border-radius: 50%;
+
+    background: rgba(124, 92, 252, 0.12);
+
+    color: var(--primary);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.profile-large-avatar svg {
+
+    width: 35px;
+
+    height: 35px;
+
+}
+
+
+.profile-main h2 {
+
+    font-size: 22px;
+
+    margin-bottom: 5px;
+
+}
+
+
+.profile-main p {
+
+    color: #6B7280;
+
+    font-size: 14px;
+
+}
+
+
+/* ================================================= */
+/* INFORMAÇÕES */
+/* ================================================= */
+
+.profile-info-card {
+
+    background: #FFFFFF;
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    margin-bottom: 25px;
+
+    box-shadow: var(--shadow-sm);
+
+}
+
+
+.profile-section-header {
+
+    margin-bottom: 25px;
+
+}
+
+
+.profile-section-header h2 {
+
+    font-size: 20px;
+
+    margin-bottom: 6px;
+
+}
+
+
+.profile-section-header p {
+
+    color: #6B7280;
+
+    font-size: 14px;
+
+}
+
+
+/* ================================================= */
+/* CAMPOS */
+/* ================================================= */
+
+.profile-fields {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 20px;
+
+}
+
+
+.profile-field {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+}
+
+
+.profile-field label {
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    color: #6B7280;
+
+}
+
+
+.field-value {
+
+    padding: 13px 15px;
+
+    border: 1px solid #E5E7EB;
+
+    border-radius: 10px;
+
+    color: #1E1E2F;
+
+    background: #FAFAFC;
+
+    font-size: 14px;
+
+}
+
+
+/* ================================================= */
+/* CONTA */
+/* ================================================= */
+
+.account-card {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    background: #FFFFFF;
+
+    border-radius: 20px;
+
+    padding: 25px 30px;
+
+    box-shadow: var(--shadow-sm);
+
+}
+
+
+.account-card h2 {
+
+    font-size: 19px;
+
+    margin-bottom: 6px;
+
+}
+
+
+.account-card p {
+
+    color: #6B7280;
+
+    font-size: 14px;
+
+}
+
+
+/* ================================================= */
+/* BOTÃO SAIR */
+/* ================================================= */
+
+.logout-button {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    border: 1px solid #E5E7EB;
+
+    background: #FFFFFF;
+
+    color: #6B7280;
+
+    padding: 11px 16px;
+
+    border-radius: 10px;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: var(--transition);
+
+}
+
+
+.logout-button:hover {
+
+    color: #EF4444;
+
+    border-color: #FCA5A5;
+
+    background: #FEF2F2;
+
+}
+
+
+.logout-button svg {
+
+    width: 17px;
+
+    height: 17px;
+
+}
+
+
+/* ================================================= */
+/* RESPONSIVIDADE */
+/* ================================================= */
+
+@media (max-width: 750px) {
+
+    .profile-content {
+
+        padding: 25px;
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .profile-content {
+
+        padding: 18px;
+
+    }
+
+
+    .profile-card {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+
+    .profile-card .btn-primary {
+
+        width: 100%;
+
+        justify-content: center;
+
+    }
+
+
+    .profile-fields {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .account-card {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+
+    .logout-button {
+
+        width: 100%;
+
+        justify-content: center;
+
+    }
+
+}
