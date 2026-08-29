@@ -5,106 +5,255 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <title>Cadastro | Donee</title>
+    <title>Criar Conta | Donee</title>
 
-    <!-- Fonte -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 
+    <!-- ================================================= -->
+    <!-- FONTES -->
+    <!-- ================================================= -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- ================================================= -->
     <!-- CSS -->
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/components.css">
-    <link rel="stylesheet" href="../css/login.css">
-    <link rel="stylesheet" href="../css/responsive.css">
+    <!-- ================================================= -->
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/components.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/login.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/responsive.css"
+    >
 
 </head>
 
+
 <body>
+
+
+    <!-- ================================================= -->
+    <!-- PÁGINA DE CADASTRO -->
+    <!-- ================================================= -->
 
     <main class="login">
 
+
         <section class="login-container">
 
-            <!-- Logo -->
-            <a href="../index.html" class="logo">
 
-                <img src="../assets/images/logo-Donee.png" alt="Logo Donee">
+            <!-- ================================================= -->
+            <!-- LOGO -->
+            <!-- ================================================= -->
+
+            <a
+                href="../index.html"
+                class="logo"
+            >
+
+                <img
+                    src="../assets/images/logo-Donee.png"
+                    alt="Logo Donee"
+                >
 
             </a>
 
-            <!-- Cabeçalho -->
+
+            <!-- ================================================= -->
+            <!-- CABEÇALHO -->
+            <!-- ================================================= -->
+
             <div class="login-header">
 
-                <h1>Crie sua conta</h1>
+                <h1>
+                    Crie sua conta
+                </h1>
 
-                <p>Comece agora a organizar sua rotina com o Donee.</p>
+                <p>
+                    Comece agora a organizar sua rotina com o Donee.
+                </p>
 
             </div>
 
-            <!-- Formulário -->
-            <form class="login-form">
+
+            <!-- ================================================= -->
+            <!-- MENSAGEM -->
+            <!-- ================================================= -->
+
+            <div
+                id="mensagem"
+                class="auth-message"
+                style="display: none;"
+            ></div>
+
+
+            <!-- ================================================= -->
+            <!-- FORMULÁRIO -->
+            <!-- ================================================= -->
+
+            <form
+                class="login-form"
+                id="cadastroForm"
+            >
+
+
+                <!-- ================================================= -->
+                <!-- NOME -->
+                <!-- ================================================= -->
 
                 <div class="input-group">
 
-                    <label class="input-label"> Nome </label>
+                    <label
+                        class="input-label"
+                        for="nome"
+                    >
+                        Nome
+                    </label>
 
                     <input
                         class="input"
                         type="text"
+                        id="nome"
+                        name="nome"
                         placeholder="Digite seu nome"
+                        autocomplete="name"
+                        required
                     >
 
                 </div>
 
+
+                <!-- ================================================= -->
+                <!-- E-MAIL -->
+                <!-- ================================================= -->
+
                 <div class="input-group">
 
-                    <label class="input-label"> Email </label>
+                    <label
+                        class="input-label"
+                        for="email"
+                    >
+                        E-mail
+                    </label>
 
                     <input
                         class="input"
                         type="email"
-                        placeholder="Digite seu email"
+                        id="email"
+                        name="email"
+                        placeholder="Digite seu e-mail"
+                        autocomplete="email"
+                        required
                     >
 
                 </div>
 
+
+                <!-- ================================================= -->
+                <!-- SENHA -->
+                <!-- ================================================= -->
+
                 <div class="input-group">
 
-                    <label class="input-label"> Senha </label>
+                    <label
+                        class="input-label"
+                        for="senha"
+                    >
+                        Senha
+                    </label>
 
                     <input
                         class="input"
                         type="password"
+                        id="senha"
+                        name="senha"
                         placeholder="Digite sua senha"
+                        autocomplete="new-password"
+                        required
                     >
 
                 </div>
 
+
+                <!-- ================================================= -->
+                <!-- CONFIRMAR SENHA -->
+                <!-- ================================================= -->
+
                 <div class="input-group">
 
-                    <label class="input-label"> Confirme sua senha </label>
+                    <label
+                        class="input-label"
+                        for="confirmarSenha"
+                    >
+                        Confirmar senha
+                    </label>
 
                     <input
                         class="input"
                         type="password"
-                        placeholder="Confirme sua senha"
+                        id="confirmarSenha"
+                        name="confirmarSenha"
+                        placeholder="Digite sua senha novamente"
+                        autocomplete="new-password"
+                        required
                     >
 
                 </div>
 
-                <!-- Botão -->
-                <button class="btn-primary" type="submit">
+
+                <!-- ================================================= -->
+                <!-- BOTÃO CADASTRAR -->
+                <!-- ================================================= -->
+
+                <button
+                    class="btn-primary"
+                    type="submit"
+                >
 
                     Criar conta
 
                 </button>
 
+
             </form>
 
-            <!-- Rodapé -->
+
+            <!-- ================================================= -->
+            <!-- RODAPÉ -->
+            <!-- ================================================= -->
+
             <div class="login-footer">
 
                 <p>
@@ -112,24 +261,28 @@
                     Já possui uma conta?
 
                     <a href="login.html">
-
                         Entrar
-                        
                     </a>
 
                 </p>
 
             </div>
 
+
         </section>
+
 
     </main>
 
-    <script src="https://unpkg.com/lucide@latest"></script>
 
-    <script>
-        lucide.createIcons();
-    </script>
+    <!-- ================================================= -->
+    <!-- JAVASCRIPT -->
+    <!-- ================================================= -->
+
+    <script src="../js/auth.js"></script>
+
+    <script src="../js/cadastro.js"></script>
+
 
 </body>
 
