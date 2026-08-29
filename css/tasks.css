@@ -703,3 +703,422 @@
     }
 
 }
+
+/* ================================================= */
+/* MODAL DE TAREFA */
+/* ================================================= */
+
+.task-modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(20, 20, 35, 0.45);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition: 0.25s ease;
+
+    z-index: 2000;
+
+}
+
+
+.task-modal.show {
+
+    opacity: 1;
+
+    visibility: visible;
+
+}
+
+
+.task-modal-content {
+
+    width: 100%;
+
+    max-width: 460px;
+
+    padding: 28px;
+
+    box-sizing: border-box;
+
+    background: #FFFFFF;
+
+    border-radius: 22px;
+
+    box-shadow: 0 20px 60px rgba(20,20,35,0.2);
+
+    transform: translateY(15px);
+
+    transition: 0.25s ease;
+
+}
+
+
+.task-modal.show .task-modal-content {
+
+    transform: translateY(0);
+
+}
+
+
+.task-modal-header {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    margin-bottom: 25px;
+
+}
+
+
+.task-modal-header span {
+
+    color: #7C5CFC;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+
+}
+
+
+.task-modal-header h2 {
+
+    margin: 5px 0 0;
+
+    color: #292A3D;
+
+    font-size: 22px;
+
+}
+
+
+.close-modal-btn {
+
+    width: 38px;
+
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #F5F5F8;
+
+    color: #777C8E;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+}
+
+
+.close-modal-btn:hover {
+
+    background: #EEEAFE;
+
+    color: #7C5CFC;
+
+}
+
+
+.form-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+    margin-bottom: 17px;
+
+}
+
+
+.form-group label {
+
+    color: #44465A;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+}
+
+
+.form-group input {
+
+    width: 100%;
+
+    height: 46px;
+
+    padding: 0 14px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #E4E5EC;
+
+    border-radius: 12px;
+
+    outline: none;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    color: #292A3D;
+
+    transition: 0.2s ease;
+
+}
+
+
+.form-group input:focus {
+
+    border-color: #7C5CFC;
+
+    box-shadow: 0 0 0 3px rgba(124,92,252,0.1);
+
+}
+
+
+.modal-buttons {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 25px;
+
+}
+
+
+.cancel-btn,
+.save-task-btn {
+
+    height: 44px;
+
+    padding: 0 18px;
+
+    border-radius: 12px;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+}
+
+
+.cancel-btn {
+
+    border: 1px solid #E4E5EC;
+
+    background: #FFFFFF;
+
+    color: #777C8E;
+
+}
+
+
+.cancel-btn:hover {
+
+    background: #F7F7FA;
+
+}
+
+
+.save-task-btn {
+
+    border: none;
+
+    background: #7C5CFC;
+
+    color: #FFFFFF;
+
+}
+
+
+.save-task-btn:hover {
+
+    background: #6948F5;
+
+    transform: translateY(-1px);
+
+}
+
+
+/* ================================================= */
+/* EXCLUIR TAREFA */
+/* ================================================= */
+
+.delete-task-btn {
+
+    width: 30px;
+
+    height: 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: transparent;
+
+    color: #A0A3B0;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+}
+
+
+.delete-task-btn:hover {
+
+    background: #FFF0F0;
+
+    color: #E05252;
+
+}
+
+
+.delete-task-btn svg {
+
+    width: 15px;
+
+    height: 15px;
+
+}
+
+
+/* ================================================= */
+/* NENHUMA TAREFA */
+/* ================================================= */
+
+.empty-tasks {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 55px 20px;
+
+    text-align: center;
+
+}
+
+
+.empty-tasks > svg {
+
+    width: 42px;
+
+    height: 42px;
+
+    margin-bottom: 12px;
+
+    color: #7C5CFC;
+
+}
+
+
+.empty-tasks h3 {
+
+    margin: 0 0 5px;
+
+    color: #292A3D;
+
+    font-size: 15px;
+
+}
+
+
+.empty-tasks p {
+
+    margin: 0;
+
+    color: #85899A;
+
+    font-size: 12px;
+
+}
+
+
+/* ================================================= */
+/* MOBILE */
+/* ================================================= */
+
+@media (max-width: 500px) {
+
+    .task-modal-content {
+
+        padding: 22px;
+
+        border-radius: 18px;
+
+    }
+
+
+    .modal-buttons {
+
+        flex-direction: column-reverse;
+
+    }
+
+
+    .cancel-btn,
+    .save-task-btn {
+
+        width: 100%;
+
+    }
+
+
+    .delete-task-btn {
+
+        display: none;
+
+    }
+
+}

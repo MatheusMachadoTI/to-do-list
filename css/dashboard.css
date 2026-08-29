@@ -52,24 +52,6 @@
 }
 
 
-/* Card branco atrás da logo */
-
-.sidebar-logo::before {
-    content: "";
-
-    position: absolute;
-
-    width: 120px;
-    height: 120px;
-
-    background: #FFFFFF;
-
-    border-radius: 22px;
-
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-}
-
-
 /* Logo */
 
 .sidebar-logo img {
@@ -1225,5 +1207,128 @@
         align-items: flex-start;
 
     }
+
+}
+
+/* ================================================= */
+/* DASHBOARD TASKS */
+/* ================================================= */
+
+.dashboard-tasks {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+}
+
+
+.dashboard-task {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    min-height: 68px;
+
+    padding: 12px 15px 12px 20px;
+
+    box-sizing: border-box;
+
+    background: #FAFAFC;
+
+    border: 1px solid #F0F1F5;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    transition: 0.25s ease;
+
+}
+
+
+.dashboard-task::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    top: 0;
+
+    bottom: 0;
+
+    width: 5px;
+
+    background: #7C5CFC;
+
+    border-radius: 15px 0 0 15px;
+
+}
+
+
+.dashboard-task:hover {
+
+    transform: translateX(3px);
+
+}
+
+
+.empty-dashboard-tasks {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 40px 20px;
+
+    text-align: center;
+
+}
+
+
+.empty-dashboard-tasks svg {
+
+    width: 38px;
+
+    height: 38px;
+
+    margin-bottom: 10px;
+
+    color: #7C5CFC;
+
+}
+
+
+.empty-dashboard-tasks h3 {
+
+    margin: 0 0 5px;
+
+    color: #292A3D;
+
+    font-size: 14px;
+
+}
+
+
+.empty-dashboard-tasks p {
+
+    margin: 0;
+
+    color: #85899A;
+
+    font-size: 11px;
 
 }

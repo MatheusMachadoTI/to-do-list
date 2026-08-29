@@ -5,39 +5,64 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Configurações | Donee</title>
 
 
-    <!-- ================================================= -->
-    <!-- FONTE -->
-    <!-- ================================================= -->
+    <!-- FONTES -->
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
 
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
-          rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
 
 
-    <!-- ================================================= -->
     <!-- CSS -->
-    <!-- ================================================= -->
 
-    <link rel="stylesheet" href="../css/style.css">
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
 
-    <link rel="stylesheet" href="../css/components.css">
+    <link
+        rel="stylesheet"
+        href="../css/components.css"
+    >
 
-    <!-- CSS da estrutura/sidebar -->
-    <link rel="stylesheet" href="../css/dashboard.css">
+    <link
+        rel="stylesheet"
+        href="../css/dashboard.css"
+    >
 
-    <!-- CSS específico -->
-    <link rel="stylesheet" href="../css/settings.css">
-    <link rel="stylesheet" href="../css/responsive.css">
+    <link
+        rel="stylesheet"
+        href="../css/settings.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/responsive.css"
+    >
+
+
+    <!-- LUCIDE -->
+
+    <script src="https://unpkg.com/lucide@latest"></script>
 
 </head>
 
@@ -45,11 +70,8 @@
 <body>
 
 
-<div class="dashboard-layout">
-
-
     <!-- ================================================= -->
-    <!-- SIDEBAR -->
+    <!-- MENU LATERAL -->
     <!-- ================================================= -->
 
     <aside class="sidebar">
@@ -59,10 +81,14 @@
 
         <div class="sidebar-logo">
 
-            <img
-                src="../assets/images/logo-Donee.png"
-                alt="Logo Donee"
-            >
+            <a href="dashboard.html">
+
+                <img
+                    src="../assets/images/logo-Donee.png"
+                    alt="Logo Donee"
+                >
+
+            </a>
 
         </div>
 
@@ -72,42 +98,66 @@
         <nav class="sidebar-menu">
 
 
-            <a href="dashboard.html"
-               class="menu-item">
+            <!-- DASHBOARD -->
+
+            <a
+                href="dashboard.html"
+                class="menu-item"
+            >
 
                 <i data-lucide="layout-dashboard"></i>
 
-                <span>Dashboard</span>
+                <span>
+                    Dashboard
+                </span>
 
             </a>
 
 
-            <a href="tasks.html"
-               class="menu-item">
+            <!-- TAREFAS -->
+
+            <a
+                href="tasks.html"
+                class="menu-item"
+            >
 
                 <i data-lucide="list-checks"></i>
 
-                <span>Tarefas</span>
+                <span>
+                    Tarefas
+                </span>
 
             </a>
 
 
-            <a href="profile.html"
-               class="menu-item">
+            <!-- PERFIL -->
+
+            <a
+                href="profile.html"
+                class="menu-item"
+            >
 
                 <i data-lucide="user"></i>
 
-                <span>Perfil</span>
+                <span>
+                    Perfil
+                </span>
 
             </a>
 
 
-            <a href="settings.html"
-               class="menu-item active">
+            <!-- CONFIGURAÇÕES -->
+
+            <a
+                href="settings.html"
+                class="menu-item active"
+            >
 
                 <i data-lucide="settings"></i>
 
-                <span>Configurações</span>
+                <span>
+                    Configurações
+                </span>
 
             </a>
 
@@ -116,11 +166,13 @@
 
 
         <!-- ================================================= -->
-        <!-- PERFIL -->
+        <!-- PERFIL DO MENU -->
         <!-- ================================================= -->
 
-        <div class="sidebar-profile">
-
+        <a
+            href="profile.html"
+            class="sidebar-profile"
+        >
 
             <div class="profile-avatar">
 
@@ -131,20 +183,23 @@
 
             <div class="profile-info">
 
-                <strong>Matheus</strong>
+                <strong>
+                    Matheus
+                </strong>
 
-                <span>Meu perfil</span>
+                <span>
+                    Meu perfil
+                </span>
 
             </div>
 
 
             <i
                 data-lucide="chevron-right"
-                class="profile-arrow">
-            </i>
+                class="profile-arrow"
+            ></i>
 
-
-        </div>
+        </a>
 
 
     </aside>
@@ -152,7 +207,7 @@
 
 
     <!-- ================================================= -->
-    <!-- CONTEÚDO -->
+    <!-- CONTEÚDO PRINCIPAL -->
     <!-- ================================================= -->
 
     <main class="settings-content">
@@ -164,28 +219,24 @@
 
         <header class="settings-header">
 
-            <div>
+            <span class="settings-label">
+                PREFERÊNCIAS
+            </span>
 
-                <span class="settings-label">
-                    PREFERÊNCIAS
-                </span>
+            <h1>
+                Configurações
+            </h1>
 
-                <h1>
-                    Configurações
-                </h1>
-
-                <p>
-                    Personalize sua experiência no Donee.
-                </p>
-
-            </div>
+            <p>
+                Personalize sua experiência no Donee.
+            </p>
 
         </header>
 
 
 
         <!-- ================================================= -->
-        <!-- CONTA -->
+        <!-- PREFERÊNCIAS -->
         <!-- ================================================= -->
 
         <section class="settings-card">
@@ -195,7 +246,7 @@
 
                 <div class="settings-icon">
 
-                    <i data-lucide="user"></i>
+                    <i data-lucide="sliders-horizontal"></i>
 
                 </div>
 
@@ -203,11 +254,11 @@
                 <div>
 
                     <h2>
-                        Conta
+                        Preferências
                     </h2>
 
                     <p>
-                        Gerencie as informações da sua conta.
+                        Configure como o Donee funciona para você.
                     </p>
 
                 </div>
@@ -218,102 +269,48 @@
             <div class="settings-divider"></div>
 
 
-            <!-- NOME -->
+            <!-- IDIOMA -->
 
             <div class="setting-row">
-
 
                 <div class="setting-info">
 
                     <h3>
-                        Nome
+                        Idioma
                     </h3>
 
                     <p>
-                        Matheus
+                        Escolha o idioma utilizado na plataforma.
                     </p>
 
                 </div>
 
 
-                <button class="settings-action">
-                    Editar
-                </button>
+                <select
+                    id="languageSelect"
+                    class="settings-select"
+                >
 
+                    <option value="pt-BR">
+                        Português
+                    </option>
 
-            </div>
+                    <option value="en">
+                        English
+                    </option>
 
+                    <option value="es">
+                        Español
+                    </option>
 
-            <!-- EMAIL -->
-
-            <div class="setting-row">
-
-
-                <div class="setting-info">
-
-                    <h3>
-                        E-mail
-                    </h3>
-
-                    <p>
-                        matheus@email.com
-                    </p>
-
-                </div>
-
-
-                <button class="settings-action">
-                    Editar
-                </button>
-
+                </select>
 
             </div>
-
-
-        </section>
-
-
-
-        <!-- ================================================= -->
-        <!-- APARÊNCIA -->
-        <!-- ================================================= -->
-
-        <section class="settings-card">
-
-
-            <div class="settings-card-header">
-
-
-                <div class="settings-icon">
-
-                    <i data-lucide="palette"></i>
-
-                </div>
-
-
-                <div>
-
-                    <h2>
-                        Aparência
-                    </h2>
-
-                    <p>
-                        Personalize a aparência do sistema.
-                    </p>
-
-                </div>
-
-
-            </div>
-
-
-            <div class="settings-divider"></div>
 
 
             <!-- TEMA -->
 
             <div class="setting-row">
-
 
                 <div class="setting-info">
 
@@ -322,61 +319,26 @@
                     </h3>
 
                     <p>
-                        Escolha como o Donee será exibido.
+                        Escolha o modo de aparência da plataforma.
                     </p>
 
                 </div>
 
 
-                <select class="settings-select">
+                <select
+                    id="themeSelect"
+                    class="settings-select"
+                >
 
-                    <option>
+                    <option value="light">
                         Claro
                     </option>
 
-                    <option>
+                    <option value="dark">
                         Escuro
                     </option>
 
-                    <option>
-                        Sistema
-                    </option>
-
                 </select>
-
-
-            </div>
-
-
-            <!-- ANIMAÇÕES -->
-
-            <div class="setting-row">
-
-
-                <div class="setting-info">
-
-                    <h3>
-                        Animações
-                    </h3>
-
-                    <p>
-                        Ativar efeitos e transições da interface.
-                    </p>
-
-                </div>
-
-
-                <label class="toggle">
-
-                    <input
-                        type="checkbox"
-                        checked
-                    >
-
-                    <span class="toggle-slider"></span>
-
-                </label>
-
 
             </div>
 
@@ -394,7 +356,6 @@
 
             <div class="settings-card-header">
 
-
                 <div class="settings-icon">
 
                     <i data-lucide="bell"></i>
@@ -409,11 +370,10 @@
                     </h2>
 
                     <p>
-                        Controle como deseja receber notificações.
+                        Escolha quais notificações deseja receber.
                     </p>
 
                 </div>
-
 
             </div>
 
@@ -421,8 +381,41 @@
             <div class="settings-divider"></div>
 
 
+            <!-- NOTIFICAÇÕES -->
+
             <div class="setting-row">
 
+                <div class="setting-info">
+
+                    <h3>
+                        Notificações
+                    </h3>
+
+                    <p>
+                        Receba avisos importantes sobre suas tarefas.
+                    </p>
+
+                </div>
+
+
+                <label class="toggle">
+
+                    <input
+                        type="checkbox"
+                        id="notificationsToggle"
+                        checked
+                    >
+
+                    <span class="toggle-slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <!-- LEMBRETES -->
+
+            <div class="setting-row">
 
                 <div class="setting-info">
 
@@ -431,7 +424,7 @@
                     </h3>
 
                     <p>
-                        Receber lembretes sobre tarefas próximas.
+                        Receba lembretes quando uma tarefa estiver próxima.
                     </p>
 
                 </div>
@@ -441,6 +434,7 @@
 
                     <input
                         type="checkbox"
+                        id="remindersToggle"
                         checked
                     >
 
@@ -448,21 +442,21 @@
 
                 </label>
 
-
             </div>
 
 
-            <div class="setting-row">
+            <!-- CONQUISTAS -->
 
+            <div class="setting-row">
 
                 <div class="setting-info">
 
                     <h3>
-                        Resumo diário
+                        Conquistas
                     </h3>
 
                     <p>
-                        Receber um resumo das suas tarefas.
+                        Receba notificações quando desbloquear uma conquista.
                     </p>
 
                 </div>
@@ -472,12 +466,111 @@
 
                     <input
                         type="checkbox"
+                        id="achievementsToggle"
+                        checked
                     >
 
                     <span class="toggle-slider"></span>
 
                 </label>
 
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ================================================= -->
+        <!-- CONTA -->
+        <!-- ================================================= -->
+
+        <section class="settings-card">
+
+
+            <div class="settings-card-header">
+
+                <div class="settings-icon">
+
+                    <i data-lucide="user-cog"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h2>
+                        Conta
+                    </h2>
+
+                    <p>
+                        Gerencie as configurações da sua conta.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="settings-divider"></div>
+
+
+            <!-- EDITAR PERFIL -->
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <h3>
+                        Informações do perfil
+                    </h3>
+
+                    <p>
+                        Altere seu nome, e-mail e outras informações pessoais.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="settings-action"
+                    id="editProfileButton"
+                >
+
+                    Editar perfil
+
+                </button>
+
+            </div>
+
+
+            <!-- ALTERAR SENHA -->
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <h3>
+                        Senha
+                    </h3>
+
+                    <p>
+                        Altere sua senha para manter sua conta segura.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="settings-action"
+                    id="changePasswordButton"
+                >
+
+                    Alterar senha
+
+                </button>
 
             </div>
 
@@ -494,7 +587,6 @@
 
 
             <div class="settings-card-header">
-
 
                 <div class="settings-icon danger-icon">
 
@@ -515,15 +607,15 @@
 
                 </div>
 
-
             </div>
 
 
             <div class="settings-divider"></div>
 
 
-            <div class="setting-row">
+            <!-- EXCLUIR CONTA -->
 
+            <div class="setting-row">
 
                 <div class="setting-info">
 
@@ -532,18 +624,21 @@
                     </h3>
 
                     <p>
-                        Essa ação não poderá ser desfeita.
+                        Esta ação não poderá ser desfeita.
                     </p>
 
                 </div>
 
 
-                <button class="delete-btn">
+                <button
+                    type="button"
+                    class="delete-btn"
+                    id="deleteAccountButton"
+                >
 
                     Excluir conta
 
                 </button>
-
 
             </div>
 
@@ -554,21 +649,19 @@
     </main>
 
 
-</div>
+
+    <!-- ================================================= -->
+    <!-- JAVASCRIPT -->
+    <!-- ================================================= -->
+
+    <script>
+
+        lucide.createIcons();
+
+    </script>
 
 
-
-<!-- ================================================= -->
-<!-- LUCIDE -->
-<!-- ================================================= -->
-
-<script src="https://unpkg.com/lucide@latest"></script>
-
-<script>
-
-    lucide.createIcons();
-
-</script>
+    <script src="../js/settings.js"></script>
 
 
 </body>

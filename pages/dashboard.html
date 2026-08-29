@@ -5,16 +5,26 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Dashboard | Donee</title>
 
 
-    <!-- Fonte -->
+    <!-- FONTE -->
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+        crossorigin
+    >
 
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
@@ -24,12 +34,20 @@
 
     <!-- CSS -->
 
-    <link rel="stylesheet" href="../css/style.css">
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
 
-    <link rel="stylesheet" href="../css/components.css">
+    <link
+        rel="stylesheet"
+        href="../css/components.css"
+    >
 
-    <link rel="stylesheet" href="../css/dashboard.css">
-    <link rel="stylesheet" href="../css/responsive.css">
+    <link
+        rel="stylesheet"
+        href="../css/dashboard.css"
+    >
 
 </head>
 
@@ -37,74 +55,73 @@
 <body>
 
 
-    <div class="dashboard-layout">
+<div class="dashboard-layout">
 
 
-        <!-- ================================================= -->
-        <!-- SIDEBAR -->
-        <!-- ================================================= -->
+    <!-- ================================================= -->
+    <!-- SIDEBAR -->
+    <!-- ================================================= -->
 
-        <aside class="sidebar">
-
-
-            <!-- LOGO -->
-
-            <div class="sidebar-logo">
-
-                <a href="dashboard.html">
-
-                    <img
-                        src="../assets/images/logo-Donee.png"
-                        alt="Logo Donee"
-                    >
-
-                </a>
-
-            </div>
+    <aside class="sidebar">
 
 
-            <!-- MENU -->
+        <!-- LOGO -->
 
-            <nav class="sidebar-menu">
+        <div class="sidebar-logo">
 
+            <a href="dashboard.html">
 
-                <a
-                    href="dashboard.html"
-                    class="menu-item active"
+                <img
+                    src="../assets/images/logo-Donee.png"
+                    alt="Logo Donee"
                 >
 
-                    <i data-lucide="layout-dashboard"></i>
+            </a>
 
-                    <span>Dashboard</span>
-
-                </a>
+        </div>
 
 
-                <a
-                    href="tasks.html"
-                    class="menu-item"
-                >
+        <!-- MENU -->
 
-                    <i data-lucide="list-checks"></i>
-
-                    <span>Tarefas</span>
-
-                </a>
+        <nav class="sidebar-menu">
 
 
-                <a
-                    href="profile.html"
-                    class="menu-item"
-                >
+            <a
+                href="dashboard.html"
+                class="menu-item active"
+            >
 
-                    <i data-lucide="user"></i>
+                <i data-lucide="layout-dashboard"></i>
 
-                    <span>Perfil</span>
+                <span>Dashboard</span>
 
-                </a>
+            </a>
 
 
-                <a
+            <a
+                href="tasks.html"
+                class="menu-item"
+            >
+
+                <i data-lucide="list-checks"></i>
+
+                <span>Tarefas</span>
+
+            </a>
+
+
+            <a
+                href="profile.html"
+                class="menu-item"
+            >
+
+                <i data-lucide="user"></i>
+
+                <span>Perfil</span>
+
+            </a>
+
+            <a
                     href="settings.html"
                     class="menu-item"
                 >
@@ -116,485 +133,391 @@
                 </a>
 
 
-            </nav>
+        </nav>
 
 
-            <!-- PERFIL DA SIDEBAR -->
+        <!-- PERFIL -->
 
-            <div class="sidebar-profile">
+        <a
+            href="profile.html"
+            class="sidebar-profile"
+        >
 
-                <div class="profile-avatar">
+            <div class="profile-avatar">
 
-                    <i data-lucide="user"></i>
-
-                </div>
-
-
-                <div class="profile-info">
-
-                    <strong>Matheus</strong>
-
-                    <span>Minha conta</span>
-
-                </div>
-
-
-                <i
-                    data-lucide="chevron-right"
-                    class="profile-arrow"
-                ></i>
+                <i data-lucide="user"></i>
 
             </div>
 
 
-        </aside>
+            <div class="profile-info">
 
+                <strong>Matheus</strong>
+
+                <span>Meu perfil</span>
+
+            </div>
+
+
+            <i
+                data-lucide="chevron-right"
+                class="profile-arrow"
+            ></i>
+
+        </a>
+
+
+    </aside>
+
+
+
+    <!-- ================================================= -->
+    <!-- CONTEÚDO -->
+    <!-- ================================================= -->
+
+    <main class="dashboard-content">
 
 
         <!-- ================================================= -->
-        <!-- CONTEÚDO PRINCIPAL -->
+        <!-- CABEÇALHO -->
         <!-- ================================================= -->
 
-        <main class="dashboard-content">
+        <header class="dashboard-header">
 
 
-            <!-- ================================================= -->
-            <!-- CABEÇALHO -->
-            <!-- ================================================= -->
+            <div>
 
-            <header class="dashboard-header">
+                <span class="welcome-label">
+                    BEM-VINDO DE VOLTA
+                </span>
 
+                <h1>
+                    Olá, Matheus!
+                </h1>
+
+                <p>
+                    Organize seu dia e mantenha o foco nos seus objetivos.
+                </p>
+
+            </div>
+
+
+            <div class="header-date">
+
+                <i data-lucide="calendar"></i>
 
                 <div>
 
-                    <span class="welcome-label">
-                        Meu espaço
-                    </span>
+                    <span>Hoje</span>
 
-                    <h1>
-                        Bem-vindo, Matheus! 👋
-                    </h1>
+                    <strong id="currentDate">
+                        Carregando...
+                    </strong>
 
-                    <p>
-                        Organize seu dia e mantenha o foco nas suas tarefas.
-                    </p>
+                </div>
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- ================================================= -->
+        <!-- ESTATÍSTICAS -->
+        <!-- ================================================= -->
+
+        <section class="stats-grid">
+
+
+            <!-- CONCLUÍDAS -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+
+                    <i data-lucide="check-circle"></i>
 
                 </div>
 
 
-                <div class="header-date">
+                <div class="stat-info">
 
-                    <i data-lucide="calendar-days"></i>
+                    <span>
+                        Tarefas concluídas
+                    </span>
+
+                    <strong id="completedCount">
+                        0
+                    </strong>
+
+                    <small>
+                        no total
+                    </small>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PENDENTES -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+
+                    <i data-lucide="list-checks"></i>
+
+                </div>
+
+
+                <div class="stat-info">
+
+                    <span>
+                        Tarefas pendentes
+                    </span>
+
+                    <strong id="pendingCount">
+                        0
+                    </strong>
+
+                    <small>
+                        para concluir
+                    </small>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- TOTAL -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+
+                    <i data-lucide="clipboard-list"></i>
+
+                </div>
+
+
+                <div class="stat-info">
+
+                    <span>
+                        Total de tarefas
+                    </span>
+
+                    <strong id="totalCount">
+                        0
+                    </strong>
+
+                    <small>
+                        cadastradas
+                    </small>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ================================================= -->
+        <!-- GRID PRINCIPAL -->
+        <!-- ================================================= -->
+
+        <section class="dashboard-grid">
+
+
+            <!-- ================================================= -->
+            <!-- TAREFAS -->
+            <!-- ================================================= -->
+
+            <div class="dashboard-card">
+
+
+                <div class="card-header">
 
                     <div>
 
-                        <span>Hoje</span>
+                        <span class="section-label">
+                            ORGANIZAÇÃO
+                        </span>
 
-                        <strong>24 de Julho</strong>
+                        <h2>
+                            Suas tarefas
+                        </h2>
+
+                    </div>
+
+
+                    <a
+                        href="tasks.html"
+                        class="card-link"
+                    >
+
+                        Ver todas
+
+                        <i data-lucide="arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+
+
+                <!-- LISTA -->
+
+                <div
+                    class="dashboard-tasks"
+                    id="dashboardTasks"
+                >
+
+                    <!-- JavaScript adicionará as tarefas aqui -->
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ================================================= -->
+            <!-- PROGRESSO -->
+            <!-- ================================================= -->
+
+            <div class="dashboard-card">
+
+
+                <div class="card-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            DESEMPENHO
+                        </span>
+
+                        <h2>
+                            Seu progresso
+                        </h2>
 
                     </div>
 
                 </div>
 
 
-            </header>
 
+                <div class="progress-content">
 
 
-            <!-- ================================================= -->
-            <!-- CARDS DE RESUMO -->
-            <!-- ================================================= -->
+                    <div class="progress-number">
 
-            <section class="stats-grid">
+                        <strong id="progressPercentage">
+                            0%
+                        </strong>
 
-
-                <!-- TOTAL -->
-
-                <article class="stat-card">
-
-
-                    <div class="stat-icon">
-
-                        <i data-lucide="list-checks"></i>
-
-                    </div>
-
-
-                    <div class="stat-info">
-
-                        <span>Total de tarefas</span>
-
-                        <strong>12</strong>
-
-                        <small>
-                            tarefas cadastradas
-                        </small>
-
-                    </div>
-
-
-                </article>
-
-
-
-                <!-- HOJE -->
-
-                <article class="stat-card">
-
-
-                    <div class="stat-icon">
-
-                        <i data-lucide="calendar-check"></i>
-
-                    </div>
-
-
-                    <div class="stat-info">
-
-                        <span>Para hoje</span>
-
-                        <strong>5</strong>
-
-                        <small>
-                            tarefas programadas
-                        </small>
-
-                    </div>
-
-
-                </article>
-
-
-
-                <!-- CONCLUÍDAS -->
-
-                <article class="stat-card">
-
-
-                    <div class="stat-icon">
-
-                        <i data-lucide="circle-check"></i>
-
-                    </div>
-
-
-                    <div class="stat-info">
-
-                        <span>Concluídas</span>
-
-                        <strong>8</strong>
-
-                        <small>
-                            tarefas finalizadas
-                        </small>
-
-                    </div>
-
-
-                </article>
-
-
-            </section>
-
-
-
-            <!-- ================================================= -->
-            <!-- ÁREA INFERIOR -->
-            <!-- ================================================= -->
-
-            <section class="dashboard-grid">
-
-
-                <!-- ================================================= -->
-                <!-- TAREFAS -->
-                <!-- ================================================= -->
-
-                <article class="dashboard-card tasks-dashboard">
-
-
-                    <div class="card-header">
-
-
-                        <div>
-
-                            <span class="section-label">
-                                Organização
-                            </span>
-
-                            <h2>
-                                Minhas tarefas
-                            </h2>
-
-                        </div>
-
-
-                        <a
-                            href="tasks.html"
-                            class="card-link"
-                        >
-
-                            Ver todas
-
-                            <i data-lucide="arrow-up-right"></i>
-
-                        </a>
-
-
-                    </div>
-
-
-
-                    <!-- TAREFA 1 -->
-
-                    <div class="dashboard-task">
-
-
-                        <div class="task-main">
-
-
-                            <div class="task-status completed">
-
-                                <i data-lucide="check"></i>
-
-                            </div>
-
-
-                            <div>
-
-                                <h3>
-                                    Estudar JavaScript
-                                </h3>
-
-                                <span>
-                                    Estudos
-                                </span>
-
-                            </div>
-
-
-                        </div>
-
-
-                        <span class="task-time">
-                            19:00
+                        <span>
+                            tarefas concluídas
                         </span>
 
-
                     </div>
 
 
+                    <div
+                        class="progress-circle"
+                        id="progressCircle"
+                    >
 
-                    <!-- TAREFA 2 -->
-
-                    <div class="dashboard-task">
-
-
-                        <div class="task-main">
-
-
-                            <div class="task-status">
-
-                            </div>
-
-
-                            <div>
-
-                                <h3>
-                                    Treino Academia
-                                </h3>
-
-                                <span>
-                                    Saúde
-                                </span>
-
-                            </div>
-
-
-                        </div>
-
-
-                        <span class="task-time">
-                            20:30
+                        <span id="progressCircleText">
+                            0%
                         </span>
 
-
                     </div>
 
-
-
-                    <!-- TAREFA 3 -->
-
-                    <div class="dashboard-task">
-
-
-                        <div class="task-main">
-
-
-                            <div class="task-status">
-
-                            </div>
-
-
-                            <div>
-
-                                <h3>
-                                    Ler 20 páginas
-                                </h3>
-
-                                <span>
-                                    Leitura
-                                </span>
-
-                            </div>
-
-
-                        </div>
-
-
-                        <span class="task-time">
-                            21:30
-                        </span>
-
-
-                    </div>
-
-
-                </article>
-
-
-
-                <!-- ================================================= -->
-                <!-- PROGRESSO -->
-                <!-- ================================================= -->
-
-                <article class="dashboard-card progress-dashboard">
-
-
-                    <div class="card-header">
-
-
-                        <div>
-
-                            <span class="section-label">
-                                Seu desempenho
-                            </span>
-
-                            <h2>
-                                Progresso
-                            </h2>
-
-                        </div>
-
-
-                        <div class="progress-icon">
-
-                            <i data-lucide="trending-up"></i>
-
-                        </div>
-
-
-                    </div>
-
-
-
-                    <div class="progress-content">
-
-
-                        <div class="progress-number">
-
-                            <strong>67%</strong>
-
-                            <span>
-                                das tarefas concluídas
-                            </span>
-
-                        </div>
-
-
-                        <div class="progress-circle">
-
-                            <span>8/12</span>
-
-                        </div>
-
-
-                    </div>
-
-
-
-                    <div class="progress-bar">
-
-                        <div
-                            class="progress-fill"
-                            style="width: 67%;"
-                        ></div>
-
-                    </div>
-
-
-                    <p class="progress-message">
-
-                        Continue assim! Você está mantendo uma
-                        boa rotina.
-
-                    </p>
-
-
-                </article>
-
-
-            </section>
-
-
-
-            <!-- ================================================= -->
-            <!-- FRASE -->
-            <!-- ================================================= -->
-
-            <section class="motivation-card">
-
-
-                <div class="motivation-icon">
-
-                    <i data-lucide="sparkles"></i>
 
                 </div>
 
 
-                <div>
+                <div class="progress-bar">
 
-                    <h2>
-                        Pequenos passos geram grandes conquistas.
-                    </h2>
-
-                    <p>
-                        Mantenha o foco e continue avançando.
-                    </p>
+                    <div
+                        class="progress-fill"
+                        id="progressFill"
+                        style="width: 0%;"
+                    ></div>
 
                 </div>
 
 
-            </section>
+                <p
+                    class="progress-message"
+                    id="progressMessage"
+                >
+                    Comece concluindo uma tarefa!
+                </p>
 
 
-        </main>
+            </div>
 
 
-    </div>
+        </section>
 
 
 
-    <!-- ================================================= -->
-    <!-- LUCIDE -->
-    <!-- ================================================= -->
+        <!-- ================================================= -->
+        <!-- MOTIVAÇÃO -->
+        <!-- ================================================= -->
 
-    <script src="https://unpkg.com/lucide@latest"></script>
+        <section class="motivation-card">
 
-    <script>
 
-        lucide.createIcons();
+            <div class="motivation-icon">
 
-    </script>
+                <i data-lucide="sparkles"></i>
+
+            </div>
+
+
+            <div>
+
+                <h2>
+                    Continue assim!
+                </h2>
+
+                <p>
+                    Cada tarefa concluída é mais um passo
+                    em direção aos seus objetivos.
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- LUCIDE -->
+<!-- ================================================= -->
+
+<script src="https://unpkg.com/lucide@latest"></script>
+
+
+<!-- ================================================= -->
+<!-- JAVASCRIPT -->
+<!-- ================================================= -->
+
+<script src="../js/dashboard.js"></script>
 
 
 </body>

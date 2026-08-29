@@ -40,6 +40,48 @@
 }
 
 @media (max-width: 800px) {
+    .sidebar {
+        width: 80px;
+        min-width: 80px;
+        height: 100vh;
+        padding: 0;
+        border-radius: 0;
+    }
+
+    .sidebar-logo {
+        width: auto;
+        height: 130px;
+        margin: 0;
+        padding: 20px 10px;
+        background: transparent;
+        border-radius: 0;
+    }
+
+    .sidebar-logo img {
+        width: 55px;
+        height: auto;
+    }
+
+    .sidebar-menu {
+        width: auto;
+        padding-left: 10px;
+    }
+
+    .menu-item,
+    .menu-item.active {
+        width: 100%;
+        min-width: 0;
+        margin-right: 0;
+        justify-content: center;
+        padding: 0;
+        border-radius: 14px 0 0 14px;
+    }
+
+    .menu-item.active::before,
+    .menu-item.active::after {
+        display: none;
+    }
+
     .dashboard-content,
     .tasks-content,
     .profile-content,
@@ -92,14 +134,79 @@
         flex-direction: column;
         align-items: stretch;
     }
+
+    footer nav {
+        flex-wrap: wrap;
+        gap: 16px;
+    }
 }
 
 @media (max-width: 576px) {
+    .sidebar {
+        position: fixed;
+        left: 0;
+        width: 100%;
+        min-width: 0;
+        height: 68px;
+        top: auto;
+        bottom: 0;
+        flex-direction: row;
+        align-items: center;
+        padding: 0 8px;
+    }
+
+    .sidebar-logo {
+        width: 52px;
+        height: 52px;
+        margin: 0;
+        padding: 5px;
+        background: transparent;
+        border-radius: 0;
+        flex-shrink: 0;
+    }
+
+    .sidebar-logo img {
+        width: 42px;
+    }
+
+    .sidebar-menu {
+        flex: 1;
+        width: auto;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        gap: 2px;
+        padding: 0;
+    }
+
+    .menu-item {
+        width: 52px;
+        min-width: 0;
+        height: 52px;
+        margin-right: 0;
+        justify-content: center;
+        padding: 0;
+        border-radius: 14px;
+    }
+
+    .menu-item span,
+    .sidebar-profile {
+        display: none;
+    }
+
+    .menu-item.active::before,
+    .menu-item.active::after {
+        display: none;
+    }
+
     .dashboard-content,
     .tasks-content,
     .profile-content,
     .settings-content {
-        padding: 22px 16px;
+        width: 100%;
+        margin-left: 0;
+        min-height: calc(100vh - 68px);
+        padding: 24px 16px 92px;
     }
 
     .dashboard-header h1,
@@ -182,6 +289,15 @@
         padding: 10px 0;
     }
 
+    .header .logo {
+        flex-shrink: 0;
+    }
+
+    .header .logo img {
+        width: auto;
+        height: 68px;
+    }
+
     .nav-menu {
         order: 3;
         width: 100%;
@@ -191,6 +307,9 @@
     }
 
     .nav-buttons {
+        flex: 1;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 8px;
     }
 
@@ -199,6 +318,9 @@
     .hero-buttons .btn-primary,
     .hero-buttons .btn-secondary {
         width: 100%;
+        min-width: 0;
+        padding: 10px 8px;
+        font-size: 12px;
     }
 
     .hero-buttons {
@@ -215,49 +337,38 @@
     .section-header {
         margin-bottom: 42px;
     }
+
+    .section-header h2,
+    .cta h2 {
+        font-size: 32px;
+    }
 }
 
 @media (max-width: 400px) {
-    .sidebar {
-        width: 68px;
-        min-width: 68px;
+    .navbar {
+        gap: 6px;
     }
 
-    .sidebar-logo {
-        height: 110px;
-        padding: 16px 8px;
+    .nav-buttons {
+        gap: 4px;
     }
 
-    .sidebar-logo::before {
-        width: 52px;
-        height: 52px;
-        border-radius: 14px;
-    }
-
-    .sidebar-logo img {
-        width: 52px;
-    }
-
-    .sidebar-menu {
-        padding-left: 6px;
+    .nav-buttons .btn-primary,
+    .nav-buttons .btn-secondary {
+        padding: 8px 4px;
+        font-size: 11px;
     }
 
     .menu-item {
+        width: 46px;
         height: 50px;
-    }
-
-    .sidebar-profile {
-        margin-left: 6px;
-        margin-right: 6px;
     }
 
     .dashboard-content,
     .tasks-content,
     .profile-content,
     .settings-content {
-        width: calc(100% - 68px);
-        margin-left: 68px;
-        padding: 18px 12px;
+        padding: 20px 12px 88px;
     }
 
     .dashboard-card,
@@ -278,5 +389,15 @@
 
     .login-container {
         padding: 24px 16px;
+    }
+
+    .header .logo img {
+        height: 58px;
+    }
+
+    .nav-buttons .btn-primary,
+    .nav-buttons .btn-secondary {
+        padding: 9px 6px;
+        font-size: 11px;
     }
 }

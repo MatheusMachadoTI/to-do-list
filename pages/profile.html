@@ -5,39 +5,40 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Perfil | Donee</title>
 
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
 
-    <!-- ================================================= -->
-    <!-- FONTE -->
-    <!-- ================================================= -->
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
-          rel="stylesheet">
-
-
-    <!-- ================================================= -->
-    <!-- CSS -->
-    <!-- ================================================= -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
 
     <link rel="stylesheet" href="../css/style.css">
 
     <link rel="stylesheet" href="../css/components.css">
 
-    <!-- Estrutura da sidebar -->
+    <link rel="stylesheet" href="../css/profile.css">
+
     <link rel="stylesheet" href="../css/dashboard.css">
 
-    <!-- CSS específico do perfil -->
-    <link rel="stylesheet" href="../css/profile.css">
     <link rel="stylesheet" href="../css/responsive.css">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
 
 </head>
 
@@ -45,11 +46,8 @@
 <body>
 
 
-<div class="dashboard-layout">
-
-
     <!-- ================================================= -->
-    <!-- SIDEBAR -->
+    <!-- MENU LATERAL -->
     <!-- ================================================= -->
 
     <aside class="sidebar">
@@ -59,10 +57,14 @@
 
         <div class="sidebar-logo">
 
-            <img
-                src="../assets/images/logo-Donee.png"
-                alt="Logo Donee"
-            >
+            <a href="dashboard.html">
+
+                <img
+                    src="../assets/images/logo-Donee.png"
+                    alt="Logo Donee"
+                >
+
+            </a>
 
         </div>
 
@@ -74,61 +76,73 @@
 
             <!-- DASHBOARD -->
 
-            <a href="dashboard.html"
-               class="menu-item">
+            <a
+                href="dashboard.html"
+                class="menu-item"
+            >
 
                 <i data-lucide="layout-dashboard"></i>
 
-                <span>Dashboard</span>
+                <span>
+                    Dashboard
+                </span>
 
             </a>
 
 
             <!-- TAREFAS -->
 
-            <a href="tasks.html"
-               class="menu-item">
+            <a
+                href="tasks.html"
+                class="menu-item"
+            >
 
                 <i data-lucide="list-checks"></i>
 
-                <span>Tarefas</span>
+                <span>
+                    Tarefas
+                </span>
 
             </a>
 
 
             <!-- PERFIL -->
 
-            <a href="profile.html"
-               class="menu-item active">
+            <a
+                href="profile.html"
+                class="menu-item active"
+            >
 
                 <i data-lucide="user"></i>
 
-                <span>Perfil</span>
+                <span>
+                    Perfil
+                </span>
 
             </a>
 
+            <a
+                    href="settings.html"
+                    class="menu-item"
+                >
 
-            <!-- CONFIGURAÇÕES -->
+                    <i data-lucide="settings"></i>
 
-            <a href="settings.html"
-               class="menu-item">
+                    <span>Configurações</span>
 
-                <i data-lucide="settings"></i>
-
-                <span>Configurações</span>
-
-            </a>
-
+                </a>
 
         </nav>
 
 
         <!-- ================================================= -->
-        <!-- PERFIL DA SIDEBAR -->
+        <!-- USUÁRIO -->
         <!-- ================================================= -->
 
-        <div class="sidebar-profile">
-
+        <a
+            href="profile.html"
+            class="sidebar-profile"
+        >
 
             <div class="profile-avatar">
 
@@ -139,20 +153,23 @@
 
             <div class="profile-info">
 
-                <strong>Matheus</strong>
+                <strong>
+                    Matheus
+                </strong>
 
-                <span>Meu perfil</span>
+                <span>
+                    Meu perfil
+                </span>
 
             </div>
 
 
             <i
                 data-lucide="chevron-right"
-                class="profile-arrow">
-            </i>
+                class="profile-arrow"
+            ></i>
 
-
-        </div>
+        </a>
 
 
     </aside>
@@ -160,69 +177,52 @@
 
 
     <!-- ================================================= -->
-    <!-- CONTEÚDO DO PERFIL -->
+    <!-- CONTEÚDO PRINCIPAL -->
     <!-- ================================================= -->
 
     <main class="profile-content">
 
 
-        <!-- ================================================= -->
         <!-- CABEÇALHO -->
-        <!-- ================================================= -->
 
-        <header class="profile-header">
+        <header class="page-header">
 
+            <span class="page-label">
+                CONTA
+            </span>
 
-            <div>
+            <h1>
+                Meu perfil
+            </h1>
 
-                <span class="profile-label">
-                    MINHA CONTA
-                </span>
-
-                <h1>
-                    Meu perfil
-                </h1>
-
-                <p>
-                    Gerencie suas informações pessoais.
-                </p>
-
-            </div>
-
-
-            <!-- BOTÃO EDITAR -->
-
-            <button class="edit-profile-btn">
-
-                <i data-lucide="pencil"></i>
-
-                <span>Editar perfil</span>
-
-            </button>
-
+            <p>
+                Gerencie suas informações pessoais.
+            </p>
 
         </header>
 
 
 
         <!-- ================================================= -->
-        <!-- CARD PRINCIPAL DO PERFIL -->
+        <!-- CARD DO PERFIL -->
         <!-- ================================================= -->
 
         <section class="profile-card">
 
 
-            <!-- CABEÇALHO -->
-
-            <div class="profile-card-top">
+            <div class="profile-header">
 
 
-                <div class="large-avatar">
+                <!-- AVATAR -->
+
+                <div class="profile-main-avatar">
 
                     <i data-lucide="user"></i>
 
                 </div>
 
+
+                <!-- INFORMAÇÕES -->
 
                 <div class="profile-main-info">
 
@@ -234,92 +234,156 @@
                         matheus@email.com
                     </p>
 
-                    <span class="profile-badge">
-                        Usuário
+                    <span>
+                        Membro do Donee
                     </span>
 
                 </div>
 
 
+                <!-- EDITAR -->
+
+                <button
+                    type="button"
+                    class="edit-profile-btn"
+                >
+
+                    <i data-lucide="pen"></i>
+
+                    <span>
+                        Editar perfil
+                    </span>
+
+                </button>
+
+
             </div>
 
 
-            <div class="profile-divider"></div>
+        </section>
 
 
-            <!-- ================================================= -->
-            <!-- INFORMAÇÕES -->
-            <!-- ================================================= -->
 
-            <div class="profile-info-grid">
+        <!-- ================================================= -->
+        <!-- INFORMAÇÕES PESSOAIS -->
+        <!-- ================================================= -->
+
+        <section class="profile-section">
+
+
+            <!-- TÍTULO -->
+
+            <div class="section-title">
+
+                <div>
+
+                    <span>
+                        INFORMAÇÕES PESSOAIS
+                    </span>
+
+                    <h2>
+                        Seus dados
+                    </h2>
+
+                </div>
+
+
+                <i data-lucide="user"></i>
+
+            </div>
+
+
+
+            <!-- FORMULÁRIO -->
+
+            <form class="profile-form">
 
 
                 <!-- NOME -->
 
-                <div class="profile-field">
+                <div class="form-group">
 
-                    <label>
-                        Nome completo
+                    <label for="nome">
+                        Nome
                     </label>
 
-                    <div class="profile-input">
-
-                        Matheus
-
-                    </div>
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        value="Matheus"
+                    >
 
                 </div>
 
 
                 <!-- EMAIL -->
 
-                <div class="profile-field">
+                <div class="form-group">
 
-                    <label>
-                        Email
+                    <label for="email">
+                        E-mail
                     </label>
 
-                    <div class="profile-input">
-
-                        matheus@email.com
-
-                    </div>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value="matheus@email.com"
+                    >
 
                 </div>
 
 
                 <!-- TELEFONE -->
 
-                <div class="profile-field">
+                <div class="form-group">
 
-                    <label>
+                    <label for="telefone">
                         Telefone
                     </label>
 
-                    <div class="profile-input">
-
-                        (18) 99999-9999
-
-                    </div>
-
-                </div>
-
-
-                <!-- DATA -->
-
-                <div class="profile-field">
-
-                    <label>
-                        Data de nascimento
-                    </label>
-
-                    <div class="profile-input">
-
-                        01/01/2008
-
-                    </div>
+                    <input
+                        type="tel"
+                        id="telefone"
+                        name="telefone"
+                        placeholder="(00) 00000-0000"
+                    >
 
                 </div>
+
+
+            </form>
+
+
+
+            <!-- BOTÕES -->
+
+            <div class="form-actions">
+
+
+                <button
+                    type="button"
+                    class="cancel-btn"
+                >
+
+                    Cancelar
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="save-btn"
+                >
+
+                    <i data-lucide="save"></i>
+
+                    <span>
+                        Salvar alterações
+                    </span>
+
+                </button>
 
 
             </div>
@@ -330,118 +394,59 @@
 
 
         <!-- ================================================= -->
-        <!-- SOBRE -->
+        <!-- SEGURANÇA -->
         <!-- ================================================= -->
 
-        <section class="profile-card">
+        <section class="security-card">
 
 
-            <div class="profile-section-title">
+            <div class="section-title">
 
+                <div>
 
-                <div class="section-icon">
+                    <span>
+                        SEGURANÇA
+                    </span>
 
-                    <i data-lucide="user-round"></i>
+                    <h2>
+                        Senha e segurança
+                    </h2>
 
                 </div>
 
 
+                <i data-lucide="shield-check"></i>
+
+            </div>
+
+
+
+            <div class="security-content">
+
+
                 <div>
 
-                    <h2>
-                        Sobre você
-                    </h2>
+                    <h3>
+                        Senha
+                    </h3>
 
                     <p>
-                        Conte um pouco sobre você.
+                        Altere sua senha para manter sua conta protegida.
                     </p>
 
                 </div>
 
 
-            </div>
+                <button
+                    type="button"
+                    class="security-btn"
+                >
 
+                    Alterar senha
 
-            <div class="profile-divider"></div>
+                    <i data-lucide="arrow-right"></i>
 
-
-            <div class="profile-about">
-
-                <p>
-                    Este espaço poderá ser utilizado para adicionar
-                    uma breve descrição sobre você.
-                </p>
-
-            </div>
-
-
-        </section>
-
-
-
-        <!-- ================================================= -->
-        <!-- CONTA -->
-        <!-- ================================================= -->
-
-        <section class="profile-card">
-
-
-            <div class="profile-section-title">
-
-
-                <div class="section-icon">
-
-                    <i data-lucide="calendar-days"></i>
-
-                </div>
-
-
-                <div>
-
-                    <h2>
-                        Informações da conta
-                    </h2>
-
-                    <p>
-                        Informações relacionadas ao seu cadastro.
-                    </p>
-
-                </div>
-
-
-            </div>
-
-
-            <div class="profile-divider"></div>
-
-
-            <div class="account-info">
-
-
-                <div>
-
-                    <span>
-                        Conta criada em
-                    </span>
-
-                    <strong>
-                        28 de Agosto de 2026
-                    </strong>
-
-                </div>
-
-
-                <div>
-
-                    <span>
-                        Status
-                    </span>
-
-                    <strong class="account-status">
-                        Ativa
-                    </strong>
-
-                </div>
+                </button>
 
 
             </div>
@@ -453,21 +458,18 @@
     </main>
 
 
-</div>
 
+    <!-- ================================================= -->
+    <!-- LUCIDE -->
+    <!-- ================================================= -->
 
+    <script>
 
-<!-- ================================================= -->
-<!-- LUCIDE -->
-<!-- ================================================= -->
+        lucide.createIcons();
 
-<script src="https://unpkg.com/lucide@latest"></script>
+    </script>
 
-<script>
-
-    lucide.createIcons();
-
-</script>
+    <script src="../js/profile.js"></script>
 
 
 </body>
