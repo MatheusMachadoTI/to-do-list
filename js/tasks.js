@@ -3,16 +3,16 @@
 // =====================================================
 
 
-/* ================================================= */
-/* PROTEGER PÁGINA */
-/* ================================================= */
+// =====================================================
+// PROTEGER PÁGINA
+// =====================================================
 
 protegerPagina();
 
 
-/* ================================================= */
-/* ELEMENTOS */
-/* ================================================= */
+// =====================================================
+// ELEMENTOS
+// =====================================================
 
 const tasksList =
     document.getElementById("tasksList");
@@ -41,32 +41,92 @@ const taskTitle =
 const taskCategory =
     document.getElementById("taskCategory");
 
+const taskDate =
+    document.getElementById("taskDate");
+
 const taskTime =
     document.getElementById("taskTime");
+
+const taskPriority =
+    document.getElementById("taskPriority");
+
+const taskSearch =
+    document.getElementById("taskSearch");
+
+const taskSort =
+    document.getElementById("taskSort");
+
+const modalTitle =
+    document.getElementById("modalTitle");
+
+const modalLabel =
+    document.getElementById("modalLabel");
+
+const saveTaskBtn =
+    document.getElementById("saveTaskBtn");
+
+const sidebarUserName =
+    document.getElementById("sidebarUserName");
 
 const filterButtons =
     document.querySelectorAll(".filter-btn");
 
 
-/* ================================================= */
-/* TAREFAS */
-/* ================================================= */
+// =====================================================
+// USUÁRIO
+// =====================================================
+
+const usuario =
+    obterUsuarioLogado();
+
+
+if (!usuario) {
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+// =====================================================
+// TAREFAS
+// =====================================================
 
 let tasks =
     obterTarefasUsuario();
 
 
-/* ================================================= */
-/* FILTRO ATUAL */
-/* ================================================= */
+// =====================================================
+// FILTRO
+// =====================================================
 
 let currentFilter =
     "all";
 
 
-/* ================================================= */
-/* SALVAR TAREFAS */
-/* ================================================= */
+// =====================================================
+// TAREFA SENDO EDITADA
+// =====================================================
+
+let editingTaskId =
+    null;
+
+
+// =====================================================
+// INFORMAÇÃO DO USUÁRIO
+// =====================================================
+
+if (usuario && sidebarUserName) {
+
+    sidebarUserName.textContent =
+        usuario.nome;
+
+}
+
+
+// =====================================================
+// SALVAR TAREFAS
+// =====================================================
 
 function saveTasks() {
 
@@ -77,9 +137,591 @@ function saveTasks() {
 }
 
 
-/* ================================================= */
-/* RENDERIZAR TAREFAS */
-/* ================================================= */
+// =====================================================
+// DATA DE HOJE
+// =====================================================
+
+function getTodayString() {
+
+    const hoje =
+        new Date();
+
+
+    const ano =
+        hoje.getFullYear();
+
+
+    const mes =
+        String(
+            hoje.getMonth() + 1
+        ).padStart(2, "0");
+
+
+    const dia =
+        String(
+            hoje.getDate()
+        ).padStart(2, "0");
+
+
+    return `${ano}-${mes}-${dia}`;
+
+}
+
+
+// =====================================================
+// VERIFICAR SE TAREFA ESTÁ ATRASADA
+// =====================================================
+
+function isTaskOverdue(task) {
+
+    if (
+        task.completed ||
+        !task.date
+    ) {
+
+        return false;
+
+    }
+
+
+    const hoje =
+        getTodayString();
+
+
+    return task.date <
+        hoje;
+
+}
+
+
+// =====================================================
+// VERIFICAR SE É HOJE
+// =====================================================
+
+function isTaskToday(task) {
+
+    if (!task.date) {
+
+        return false;
+
+    }
+
+
+    return task.date ===
+        getTodayString();
+
+}
+
+
+// =====================================================
+// PRIORIDADE NUMÉRICA
+// =====================================================
+
+function getPriorityValue(
+    priority
+) {
+
+    if (
+        priority ===
+        "high"
+    ) {
+
+        return 3;
+
+    }
+
+
+    if (
+        priority ===
+        "medium"
+    ) {
+
+        return 2;
+
+    }
+
+
+    return 1;
+
+}
+
+
+// =====================================================
+// TEXTO DA PRIORIDADE
+// =====================================================
+
+function getPriorityText(
+    priority
+) {
+
+    if (
+        priority ===
+        "high"
+    ) {
+
+        return "Alta";
+
+    }
+
+
+    if (
+        priority ===
+        "medium"
+    ) {
+
+        return "Média";
+
+    }
+
+
+    return "Baixa";
+
+}
+
+
+// =====================================================
+// CLASSE DA PRIORIDADE
+// =====================================================
+
+function getPriorityClass(
+    priority
+) {
+
+    if (
+        priority ===
+        "high"
+    ) {
+
+        return "priority-high";
+
+    }
+
+
+    if (
+        priority ===
+        "medium"
+    ) {
+
+        return "priority-medium";
+
+    }
+
+
+    return "priority-low";
+
+}
+
+
+// =====================================================
+// FORMATAR DATA
+// =====================================================
+
+function formatDate(dateString) {
+
+    if (!dateString) {
+
+        return "Sem data";
+
+    }
+
+
+    const partes =
+        dateString.split("-");
+
+
+    if (
+        partes.length !==
+        3
+    ) {
+
+        return "Sem data";
+
+    }
+
+
+    return `${partes[2]}/${partes[1]}/${partes[0]}`;
+
+}
+
+
+// =====================================================
+// ESCAPAR HTML
+// =====================================================
+
+function escaparHTML(texto) {
+
+    const div =
+        document.createElement("div");
+
+
+    div.textContent =
+        texto || "";
+
+
+    return div.innerHTML;
+
+}
+
+
+// =====================================================
+// ORDENAR TAREFAS
+// =====================================================
+
+function sortTasks(lista) {
+
+    const sorted =
+        [...lista];
+
+
+    const criterio =
+        taskSort
+            ? taskSort.value
+            : "date-asc";
+
+
+    if (
+        criterio ===
+        "date-asc"
+    ) {
+
+        sorted.sort(
+            function (a, b) {
+
+                if (!a.date && !b.date) {
+
+                    return compareTime(
+                        a,
+                        b
+                    );
+
+                }
+
+
+                if (!a.date) {
+
+                    return 1;
+
+                }
+
+
+                if (!b.date) {
+
+                    return -1;
+
+                }
+
+
+                if (
+                    a.date !==
+                    b.date
+                ) {
+
+                    return a.date.localeCompare(
+                        b.date
+                    );
+
+                }
+
+
+                return compareTime(
+                    a,
+                    b
+                );
+
+            }
+        );
+
+    }
+
+
+    if (
+        criterio ===
+        "date-desc"
+    ) {
+
+        sorted.sort(
+            function (a, b) {
+
+                if (!a.date && !b.date) {
+
+                    return compareTime(
+                        b,
+                        a
+                    );
+
+                }
+
+
+                if (!a.date) {
+
+                    return 1;
+
+                }
+
+
+                if (!b.date) {
+
+                    return -1;
+
+                }
+
+
+                if (
+                    a.date !==
+                    b.date
+                ) {
+
+                    return b.date.localeCompare(
+                        a.date
+                    );
+
+                }
+
+
+                return compareTime(
+                    b,
+                    a
+                );
+
+            }
+        );
+
+    }
+
+
+    if (
+        criterio ===
+        "priority"
+    ) {
+
+        sorted.sort(
+            function (a, b) {
+
+                return (
+                    getPriorityValue(
+                        b.priority
+                    ) -
+                    getPriorityValue(
+                        a.priority
+                    )
+                );
+
+            }
+        );
+
+    }
+
+
+    if (
+        criterio ===
+        "time"
+    ) {
+
+        sorted.sort(
+            function (a, b) {
+
+                return compareTime(
+                    a,
+                    b
+                );
+
+            }
+        );
+
+    }
+
+
+    if (
+        criterio ===
+        "created"
+    ) {
+
+        sorted.sort(
+            function (a, b) {
+
+                return (
+                    Number(b.id) -
+                    Number(a.id)
+                );
+
+            }
+        );
+
+    }
+
+
+    return sorted;
+
+}
+
+
+// =====================================================
+// COMPARAR HORÁRIOS
+// =====================================================
+
+function compareTime(a, b) {
+
+    const timeA =
+        a.time || "99:99";
+
+    const timeB =
+        b.time || "99:99";
+
+
+    return timeA.localeCompare(
+        timeB
+    );
+
+}
+
+
+// =====================================================
+// PEGAR TAREFAS FILTRADAS
+// =====================================================
+
+function getFilteredTasks() {
+
+    const pesquisa =
+        taskSearch
+            ? taskSearch.value
+                .trim()
+                .toLowerCase()
+            : "";
+
+
+    let filtered =
+        [...tasks];
+
+
+    // -------------------------------------------------
+    // FILTRO
+    // -------------------------------------------------
+
+    if (
+        currentFilter ===
+        "pending"
+    ) {
+
+        filtered =
+            filtered.filter(
+                function (task) {
+
+                    return !task.completed;
+
+                }
+            );
+
+    }
+
+
+    if (
+        currentFilter ===
+        "completed"
+    ) {
+
+        filtered =
+            filtered.filter(
+                function (task) {
+
+                    return task.completed;
+
+                }
+            );
+
+    }
+
+
+    if (
+        currentFilter ===
+        "today"
+    ) {
+
+        filtered =
+            filtered.filter(
+                function (task) {
+
+                    return isTaskToday(
+                        task
+                    );
+
+                }
+            );
+
+    }
+
+
+    if (
+        currentFilter ===
+        "overdue"
+    ) {
+
+        filtered =
+            filtered.filter(
+                function (task) {
+
+                    return isTaskOverdue(
+                        task
+                    );
+
+                }
+            );
+
+    }
+
+
+    // -------------------------------------------------
+    // PESQUISA
+    // -------------------------------------------------
+
+    if (pesquisa !== "") {
+
+        filtered =
+            filtered.filter(
+                function (task) {
+
+                    const titulo =
+                        (
+                            task.title ||
+                            ""
+                        ).toLowerCase();
+
+
+                    const categoria =
+                        (
+                            task.category ||
+                            ""
+                        ).toLowerCase();
+
+
+                    return (
+                        titulo.includes(
+                            pesquisa
+                        ) ||
+                        categoria.includes(
+                            pesquisa
+                        )
+                    );
+
+                }
+            );
+
+    }
+
+
+    // -------------------------------------------------
+    // ORDENAR
+    // -------------------------------------------------
+
+    return sortTasks(
+        filtered
+    );
+
+}
+
+
+// =====================================================
+// RENDERIZAR TAREFAS
+// =====================================================
 
 function renderTasks() {
 
@@ -94,51 +736,13 @@ function renderTasks() {
         "";
 
 
-    let filteredTasks =
-        tasks;
+    const filteredTasks =
+        getFilteredTasks();
 
 
-    /* ================================================= */
-    /* FILTRO PENDENTES */
-    /* ================================================= */
-
-    if (
-        currentFilter ===
-        "pending"
-    ) {
-
-        filteredTasks =
-            tasks.filter(function (task) {
-
-                return !task.completed;
-
-            });
-
-    }
-
-
-    /* ================================================= */
-    /* FILTRO CONCLUÍDAS */
-    /* ================================================= */
-
-    if (
-        currentFilter ===
-        "completed"
-    ) {
-
-        filteredTasks =
-            tasks.filter(function (task) {
-
-                return task.completed;
-
-            });
-
-    }
-
-
-    /* ================================================= */
-    /* CONTADOR */
-    /* ================================================= */
+    // -------------------------------------------------
+    // CONTADOR
+    // -------------------------------------------------
 
     if (
         filteredTasks.length ===
@@ -156,14 +760,50 @@ function renderTasks() {
     }
 
 
-    /* ================================================= */
-    /* NENHUMA TAREFA */
-    /* ================================================= */
+    // -------------------------------------------------
+    // NENHUMA TAREFA
+    // -------------------------------------------------
 
     if (
         filteredTasks.length ===
         0
     ) {
+
+        let titulo =
+            "Nenhuma tarefa encontrada";
+
+
+        let texto =
+            "Não há tarefas nesta categoria.";
+
+
+        if (
+            tasks.length ===
+            0
+        ) {
+
+            titulo =
+                "Você ainda não tem tarefas";
+
+            texto =
+                "Clique em \"Nova tarefa\" para começar.";
+
+        }
+
+
+        if (
+            taskSearch &&
+            taskSearch.value.trim() !== ""
+        ) {
+
+            titulo =
+                "Nenhuma tarefa encontrada";
+
+            texto =
+                "Tente pesquisar por outro termo.";
+
+        }
+
 
         tasksList.innerHTML = `
 
@@ -172,11 +812,11 @@ function renderTasks() {
                 <i data-lucide="clipboard-check"></i>
 
                 <h3>
-                    Nenhuma tarefa encontrada
+                    ${titulo}
                 </h3>
 
                 <p>
-                    Não há tarefas nesta categoria.
+                    ${texto}
                 </p>
 
             </div>
@@ -184,110 +824,243 @@ function renderTasks() {
         `;
 
 
-        if (
-            typeof lucide !==
-            "undefined"
-        ) {
-
-            lucide.createIcons();
-
-        }
-
+        ativarIcones();
 
         return;
 
     }
 
 
-    /* ================================================= */
-    /* CRIAR CARDS */
-    /* ================================================= */
+    // -------------------------------------------------
+    // CRIAR CARDS
+    // -------------------------------------------------
 
-    filteredTasks.forEach(function (task) {
+    filteredTasks.forEach(
+        function (task) {
 
-        const taskCard =
-            document.createElement("div");
-
-
-        taskCard.className =
-            "task-card";
-
-
-        taskCard.innerHTML = `
-
-            <div class="task-border"></div>
+            const taskCard =
+                document.createElement(
+                    "div"
+                );
 
 
-            <div class="task-left">
+            const atrasada =
+                isTaskOverdue(
+                    task
+                );
 
-                <div class="task-content">
 
-                    <h3>
-                        ${escaparHTML(task.title)}
-                    </h3>
+            const prioridade =
+                task.priority ||
+                "medium";
 
-                    <p>
-                        ${escaparHTML(task.category)}
-                    </p>
+
+            taskCard.className =
+                "task-card";
+
+
+            if (task.completed) {
+
+                taskCard.classList.add(
+                    "task-completed"
+                );
+
+            }
+
+
+            if (atrasada) {
+
+                taskCard.classList.add(
+                    "task-overdue"
+                );
+
+            }
+
+
+            const dataHTML =
+                task.date
+                    ? `
+                        <span class="task-date">
+                            <i data-lucide="calendar"></i>
+                            ${formatDate(task.date)}
+                        </span>
+                    `
+                    : `
+                        <span class="task-date no-date">
+                            <i data-lucide="calendar-off"></i>
+                            Sem data
+                        </span>
+                    `;
+
+
+            const statusHTML =
+                task.completed
+                    ? `
+                        <i data-lucide="check"></i>
+                    `
+                    : "";
+
+
+            const prioridadeHTML = `
+
+                <span
+                    class="task-priority ${getPriorityClass(
+                        prioridade
+                    )}"
+                >
+
+                    <span class="priority-dot"></span>
+
+                    ${getPriorityText(
+                        prioridade
+                    )}
+
+                </span>
+
+            `;
+
+
+            let atrasoHTML =
+                "";
+
+
+            if (atrasada) {
+
+                atrasoHTML = `
+
+                    <span class="overdue-label">
+
+                        <i data-lucide="triangle-alert"></i>
+
+                        Atrasada
+
+                    </span>
+
+                `;
+
+            }
+
+
+            taskCard.innerHTML = `
+
+                <div class="task-border"></div>
+
+
+                <div class="task-left">
+
+
+                    <div class="task-content">
+
+
+                        <div class="task-title-row">
+
+                            <h3>
+                                ${escaparHTML(
+                                    task.title
+                                )}
+                            </h3>
+
+                            ${prioridadeHTML}
+
+                        </div>
+
+
+                        <div class="task-meta">
+
+                            <span class="task-category">
+                                ${escaparHTML(
+                                    task.category
+                                )}
+                            </span>
+
+                            ${dataHTML}
+
+                            ${atrasoHTML}
+
+                        </div>
+
+
+                    </div>
+
 
                 </div>
 
-            </div>
+
+                <div class="task-right">
 
 
-            <div class="task-right">
-
-                <span class="task-time">
-                    ${task.time}
-                </span>
+                    <span class="task-time">
+                        ${task.time || "--:--"}
+                    </span>
 
 
-                <button
-                    class="task-status ${
-                        task.completed
-                            ? "completed"
-                            : ""
-                    }"
-                    data-id="${task.id}"
-                    type="button"
-                    aria-label="${
-                        task.completed
-                            ? "Desmarcar tarefa"
-                            : "Marcar tarefa como concluída"
-                    }"
-                >
+                    <button
+                        class="edit-task-btn"
+                        data-edit="${task.id}"
+                        type="button"
+                        aria-label="Editar tarefa"
+                    >
 
-                    ${
-                        task.completed
-                            ? '<i data-lucide="check"></i>'
-                            : ""
-                    }
+                        <i data-lucide="pencil"></i>
 
-                </button>
+                    </button>
 
 
-                <button
-                    class="delete-task-btn"
-                    data-delete="${task.id}"
-                    type="button"
-                    aria-label="Excluir tarefa"
-                >
+                    <button
+                        class="task-status ${
+                            task.completed
+                                ? "completed"
+                                : ""
+                        }"
+                        data-id="${task.id}"
+                        type="button"
+                        aria-label="${
+                            task.completed
+                                ? "Desmarcar tarefa"
+                                : "Marcar tarefa como concluída"
+                        }"
+                    >
 
-                    <i data-lucide="trash-2"></i>
+                        ${statusHTML}
 
-                </button>
-
-            </div>
-
-        `;
+                    </button>
 
 
-        tasksList.appendChild(
-            taskCard
-        );
+                    <button
+                        class="delete-task-btn"
+                        data-delete="${task.id}"
+                        type="button"
+                        aria-label="Excluir tarefa"
+                    >
 
-    });
+                        <i data-lucide="trash-2"></i>
 
+                    </button>
+
+
+                </div>
+
+            `;
+
+
+            tasksList.appendChild(
+                taskCard
+            );
+
+        }
+    );
+
+
+    ativarIcones();
+
+}
+
+
+// =====================================================
+// ATIVAR LUCIDE
+// =====================================================
+
+function ativarIcones() {
 
     if (
         typeof lucide !==
@@ -301,54 +1074,37 @@ function renderTasks() {
 }
 
 
-/* ================================================= */
-/* ESCAPAR HTML */
-/* ================================================= */
-
-function escaparHTML(texto) {
-
-    const div =
-        document.createElement("div");
-
-
-    div.textContent =
-        texto;
-
-
-    return div.innerHTML;
-
-}
-
-
-/* ================================================= */
-/* CONCLUIR TAREFA */
-/* ================================================= */
+// =====================================================
+// CONCLUIR / DESCONCLUIR
+// =====================================================
 
 function toggleTask(taskId) {
 
     tasks =
-        tasks.map(function (task) {
+        tasks.map(
+            function (task) {
 
-            if (
-                task.id ===
-                taskId
-            ) {
+                if (
+                    Number(task.id) ===
+                    Number(taskId)
+                ) {
 
-                return {
+                    return {
 
-                    ...task,
+                        ...task,
 
-                    completed:
-                        !task.completed
+                        completed:
+                            !task.completed
 
-                };
+                    };
+
+                }
+
+
+                return task;
 
             }
-
-
-            return task;
-
-        });
+        );
 
 
     saveTasks();
@@ -358,9 +1114,9 @@ function toggleTask(taskId) {
 }
 
 
-/* ================================================= */
-/* EXCLUIR TAREFA */
-/* ================================================= */
+// =====================================================
+// EXCLUIR
+// =====================================================
 
 function deleteTask(taskId) {
 
@@ -378,12 +1134,16 @@ function deleteTask(taskId) {
 
 
     tasks =
-        tasks.filter(function (task) {
+        tasks.filter(
+            function (task) {
 
-            return task.id !==
-                taskId;
+                return (
+                    Number(task.id) !==
+                    Number(taskId)
+                );
 
-        });
+            }
+        );
 
 
     saveTasks();
@@ -393,9 +1153,71 @@ function deleteTask(taskId) {
 }
 
 
-/* ================================================= */
-/* ABRIR MODAL */
-/* ================================================= */
+// =====================================================
+// ABRIR MODAL PARA NOVA TAREFA
+// =====================================================
+
+function openNewTaskModal() {
+
+    editingTaskId =
+        null;
+
+
+    if (taskForm) {
+
+        taskForm.reset();
+
+    }
+
+
+    if (modalLabel) {
+
+        modalLabel.textContent =
+            "NOVA TAREFA";
+
+    }
+
+
+    if (modalTitle) {
+
+        modalTitle.textContent =
+            "Criar tarefa";
+
+    }
+
+
+    if (saveTaskBtn) {
+
+        saveTaskBtn.textContent =
+            "Criar tarefa";
+
+    }
+
+
+    if (taskPriority) {
+
+        taskPriority.value =
+            "medium";
+
+    }
+
+
+    if (taskDate) {
+
+        taskDate.value =
+            getTodayString();
+
+    }
+
+
+    openModal();
+
+}
+
+
+// =====================================================
+// ABRIR MODAL
+// =====================================================
 
 function openModal() {
 
@@ -411,18 +1233,130 @@ function openModal() {
     );
 
 
-    if (taskTitle) {
+    document.body.classList.add(
+        "modal-open"
+    );
 
-        taskTitle.focus();
 
-    }
+    setTimeout(
+        function () {
+
+            if (taskTitle) {
+
+                taskTitle.focus();
+
+            }
+
+        },
+        100
+    );
 
 }
 
 
-/* ================================================= */
-/* FECHAR MODAL */
-/* ================================================= */
+// =====================================================
+// ABRIR MODAL DE EDIÇÃO
+// =====================================================
+
+function editTask(taskId) {
+
+    const task =
+        tasks.find(
+            function (item) {
+
+                return (
+                    Number(item.id) ===
+                    Number(taskId)
+                );
+
+            }
+        );
+
+
+    if (!task) {
+
+        return;
+
+    }
+
+
+    editingTaskId =
+        Number(task.id);
+
+
+    if (modalLabel) {
+
+        modalLabel.textContent =
+            "EDITAR TAREFA";
+
+    }
+
+
+    if (modalTitle) {
+
+        modalTitle.textContent =
+            "Editar tarefa";
+
+    }
+
+
+    if (saveTaskBtn) {
+
+        saveTaskBtn.textContent =
+            "Salvar alterações";
+
+    }
+
+
+    if (taskTitle) {
+
+        taskTitle.value =
+            task.title || "";
+
+    }
+
+
+    if (taskCategory) {
+
+        taskCategory.value =
+            task.category || "";
+
+    }
+
+
+    if (taskDate) {
+
+        taskDate.value =
+            task.date || "";
+
+    }
+
+
+    if (taskTime) {
+
+        taskTime.value =
+            task.time || "";
+
+    }
+
+
+    if (taskPriority) {
+
+        taskPriority.value =
+            task.priority ||
+            "medium";
+
+    }
+
+
+    openModal();
+
+}
+
+
+// =====================================================
+// FECHAR MODAL
+// =====================================================
 
 function closeModal() {
 
@@ -438,20 +1372,53 @@ function closeModal() {
     );
 
 
+    document.body.classList.remove(
+        "modal-open"
+    );
+
+
+    editingTaskId =
+        null;
+
+
     if (taskForm) {
 
         taskForm.reset();
 
     }
 
+
+    if (modalLabel) {
+
+        modalLabel.textContent =
+            "NOVA TAREFA";
+
+    }
+
+
+    if (modalTitle) {
+
+        modalTitle.textContent =
+            "Criar tarefa";
+
+    }
+
+
+    if (saveTaskBtn) {
+
+        saveTaskBtn.textContent =
+            "Criar tarefa";
+
+    }
+
 }
 
 
-/* ================================================= */
-/* CRIAR TAREFA */
-/* ================================================= */
+// =====================================================
+// SALVAR FORMULÁRIO
+// =====================================================
 
-function createTask(event) {
+function saveTask(event) {
 
     event.preventDefault();
 
@@ -464,32 +1431,160 @@ function createTask(event) {
         taskCategory.value.trim();
 
 
+    const date =
+        taskDate.value;
+
+
     const time =
         taskTime.value;
 
 
+    const priority =
+        taskPriority.value;
+
+
+    // -------------------------------------------------
+    // VALIDAÇÕES
+    // -------------------------------------------------
+
     if (
-        !title ||
-        !category ||
-        !time
+        title === "" ||
+        category === "" ||
+        time === ""
     ) {
+
+        alert(
+            "Preencha todos os campos obrigatórios."
+        );
 
         return;
 
     }
 
 
+    if (
+        title.length <
+        2
+    ) {
+
+        alert(
+            "Digite um título válido."
+        );
+
+        taskTitle.focus();
+
+        return;
+
+    }
+
+
+    if (
+        category.length <
+        2
+    ) {
+
+        alert(
+            "Digite uma categoria válida."
+        );
+
+        taskCategory.focus();
+
+        return;
+
+    }
+
+
+    // -------------------------------------------------
+    // EDITAR
+    // -------------------------------------------------
+
+    if (
+        editingTaskId !==
+        null
+    ) {
+
+        tasks =
+            tasks.map(
+                function (task) {
+
+                    if (
+                        Number(task.id) ===
+                        Number(editingTaskId)
+                    ) {
+
+                        return {
+
+                            ...task,
+
+                            title:
+                                title,
+
+                            category:
+                                category,
+
+                            date:
+                                date,
+
+                            time:
+                                time,
+
+                            priority:
+                                priority
+
+                        };
+
+                    }
+
+
+                    return task;
+
+                }
+            );
+
+
+        saveTasks();
+
+        renderTasks();
+
+        closeModal();
+
+
+        mostrarMensagem(
+            "Tarefa atualizada com sucesso!"
+        );
+
+
+        return;
+
+    }
+
+
+    // -------------------------------------------------
+    // NOVA TAREFA
+    // -------------------------------------------------
+
     const newTask = {
 
-        id: Date.now(),
+        id:
+            Date.now(),
 
-        title: title,
+        title:
+            title,
 
-        category: category,
+        category:
+            category,
 
-        time: time,
+        date:
+            date,
 
-        completed: false
+        time:
+            time,
+
+        priority:
+            priority,
+
+        completed:
+            false
 
     };
 
@@ -505,12 +1600,91 @@ function createTask(event) {
 
     closeModal();
 
+
+    mostrarMensagem(
+        "Tarefa criada com sucesso!"
+    );
+
 }
 
 
-/* ================================================= */
-/* EVENTOS DA LISTA */
-/* ================================================= */
+// =====================================================
+// MENSAGEM
+// =====================================================
+
+function mostrarMensagem(
+    texto
+) {
+
+    const antiga =
+        document.querySelector(
+            ".task-toast"
+        );
+
+
+    if (antiga) {
+
+        antiga.remove();
+
+    }
+
+
+    const toast =
+        document.createElement(
+            "div"
+        );
+
+
+    toast.className =
+        "task-toast";
+
+
+    toast.innerHTML = `
+
+        <i data-lucide="circle-check"></i>
+
+        <span>
+            ${texto}
+        </span>
+
+    `;
+
+
+    document.body.appendChild(
+        toast
+    );
+
+
+    ativarIcones();
+
+
+    setTimeout(
+        function () {
+
+            toast.classList.add(
+                "hide"
+            );
+
+
+            setTimeout(
+                function () {
+
+                    toast.remove();
+
+                },
+                250
+            );
+
+        },
+        2500
+    );
+
+}
+
+
+// =====================================================
+// EVENTOS DA LISTA
+// =====================================================
 
 if (tasksList) {
 
@@ -527,6 +1701,12 @@ if (tasksList) {
             const deleteButton =
                 event.target.closest(
                     ".delete-task-btn"
+                );
+
+
+            const editButton =
+                event.target.closest(
+                    ".edit-task-btn"
                 );
 
 
@@ -560,6 +1740,24 @@ if (tasksList) {
                     taskId
                 );
 
+
+                return;
+
+            }
+
+
+            if (editButton) {
+
+                const taskId =
+                    Number(
+                        editButton.dataset.edit
+                    );
+
+
+                editTask(
+                    taskId
+                );
+
             }
 
         }
@@ -568,9 +1766,9 @@ if (tasksList) {
 }
 
 
-/* ================================================= */
-/* FILTROS */
-/* ================================================= */
+// =====================================================
+// FILTROS
+// =====================================================
 
 filterButtons.forEach(
     function (button) {
@@ -608,23 +1806,59 @@ filterButtons.forEach(
 );
 
 
-/* ================================================= */
-/* NOVA TAREFA */
-/* ================================================= */
+// =====================================================
+// PESQUISA
+// =====================================================
 
-if (newTaskBtn) {
+if (taskSearch) {
 
-    newTaskBtn.addEventListener(
-        "click",
-        openModal
+    taskSearch.addEventListener(
+        "input",
+        function () {
+
+            renderTasks();
+
+        }
     );
 
 }
 
 
-/* ================================================= */
-/* FECHAR MODAL */
-/* ================================================= */
+// =====================================================
+// ORDENAÇÃO
+// =====================================================
+
+if (taskSort) {
+
+    taskSort.addEventListener(
+        "change",
+        function () {
+
+            renderTasks();
+
+        }
+    );
+
+}
+
+
+// =====================================================
+// NOVA TAREFA
+// =====================================================
+
+if (newTaskBtn) {
+
+    newTaskBtn.addEventListener(
+        "click",
+        openNewTaskModal
+    );
+
+}
+
+
+// =====================================================
+// FECHAR MODAL
+// =====================================================
 
 if (closeModalBtn) {
 
@@ -646,23 +1880,23 @@ if (cancelTaskBtn) {
 }
 
 
-/* ================================================= */
-/* FORMULÁRIO */
-/* ================================================= */
+// =====================================================
+// FORMULÁRIO
+// =====================================================
 
 if (taskForm) {
 
     taskForm.addEventListener(
         "submit",
-        createTask
+        saveTask
     );
 
 }
 
 
-/* ================================================= */
-/* CLICAR FORA DO MODAL */
-/* ================================================= */
+// =====================================================
+// CLICAR FORA
+// =====================================================
 
 if (taskModal) {
 
@@ -685,18 +1919,40 @@ if (taskModal) {
 }
 
 
-/* ================================================= */
-/* INICIALIZAÇÃO */
-/* ================================================= */
+// =====================================================
+// ESC
+// =====================================================
+
+document.addEventListener(
+    "keydown",
+    function (event) {
+
+        if (
+            event.key ===
+            "Escape"
+        ) {
+
+            if (
+                taskModal &&
+                taskModal.classList.contains(
+                    "show"
+                )
+            ) {
+
+                closeModal();
+
+            }
+
+        }
+
+    }
+);
+
+
+// =====================================================
+// INICIALIZAÇÃO
+// =====================================================
 
 renderTasks();
 
-
-if (
-    typeof lucide !==
-    "undefined"
-) {
-
-    lucide.createIcons();
-
-}
+ativarIcones();

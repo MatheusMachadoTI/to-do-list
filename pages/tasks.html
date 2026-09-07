@@ -12,7 +12,11 @@
 
     <title>Tarefas | Donee</title>
 
+
+    <!-- ================================================= -->
     <!-- FONTE -->
+    <!-- ================================================= -->
+
     <link
         rel="preconnect"
         href="https://fonts.googleapis.com"
@@ -29,7 +33,11 @@
         rel="stylesheet"
     >
 
+
+    <!-- ================================================= -->
     <!-- CSS -->
+    <!-- ================================================= -->
+
     <link
         rel="stylesheet"
         href="../css/style.css"
@@ -122,16 +130,17 @@
 
             </a>
 
+
             <a
-                    href="settings.html"
-                    class="menu-item"
-                >
+                href="settings.html"
+                class="menu-item"
+            >
 
-                    <i data-lucide="settings"></i>
+                <i data-lucide="settings"></i>
 
-                    <span>Configurações</span>
+                <span>Configurações</span>
 
-                </a>
+            </a>
 
 
         </nav>
@@ -153,9 +162,13 @@
 
             <div class="profile-info">
 
-                <strong>Matheus</strong>
+                <strong id="sidebarUserName">
+                    Usuário
+                </strong>
 
-                <span>Meu perfil</span>
+                <span>
+                    Meu perfil
+                </span>
 
             </div>
 
@@ -179,7 +192,9 @@
     <main class="tasks-content">
 
 
+        <!-- ================================================= -->
         <!-- CABEÇALHO -->
+        <!-- ================================================= -->
 
         <header class="tasks-header">
 
@@ -219,10 +234,70 @@
 
 
         <!-- ================================================= -->
+        <!-- PESQUISA -->
+        <!-- ================================================= -->
+
+        <div class="tasks-tools">
+
+
+            <div class="task-search">
+
+                <i data-lucide="search"></i>
+
+                <input
+                    type="search"
+                    id="taskSearch"
+                    placeholder="Pesquisar tarefas..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <div class="task-sort">
+
+                <label for="taskSort">
+                    Ordenar:
+                </label>
+
+
+                <select id="taskSort">
+
+                    <option value="date-asc">
+                        Data mais próxima
+                    </option>
+
+                    <option value="date-desc">
+                        Data mais distante
+                    </option>
+
+                    <option value="priority">
+                        Prioridade
+                    </option>
+
+                    <option value="time">
+                        Horário
+                    </option>
+
+                    <option value="created">
+                        Mais recentes
+                    </option>
+
+                </select>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ================================================= -->
         <!-- FILTROS -->
         <!-- ================================================= -->
 
         <div class="tasks-filters">
+
 
             <button
                 class="filter-btn active"
@@ -250,6 +325,25 @@
                 Concluídas
             </button>
 
+
+            <button
+                class="filter-btn"
+                data-filter="today"
+                type="button"
+            >
+                Hoje
+            </button>
+
+
+            <button
+                class="filter-btn"
+                data-filter="overdue"
+                type="button"
+            >
+                Atrasadas
+            </button>
+
+
         </div>
 
 
@@ -262,6 +356,7 @@
 
 
             <div class="tasks-card-header">
+
 
                 <div>
 
@@ -278,12 +373,13 @@
 
                 <i data-lucide="list-checks"></i>
 
+
             </div>
 
 
 
             <!-- ================================================= -->
-            <!-- LISTA DE TAREFAS -->
+            <!-- LISTA -->
             <!-- ================================================= -->
 
             <div
@@ -337,7 +433,7 @@
 
 
 <!-- ================================================= -->
-<!-- MODAL NOVA TAREFA -->
+<!-- MODAL DE TAREFA -->
 <!-- ================================================= -->
 
 <div
@@ -349,15 +445,18 @@
     <div class="task-modal-content">
 
 
+        <!-- CABEÇALHO -->
+
         <div class="task-modal-header">
+
 
             <div>
 
-                <span>
+                <span id="modalLabel">
                     NOVA TAREFA
                 </span>
 
-                <h2>
+                <h2 id="modalTitle">
                     Criar tarefa
                 </h2>
 
@@ -368,11 +467,13 @@
                 type="button"
                 id="closeModalBtn"
                 class="close-modal-btn"
+                aria-label="Fechar"
             >
 
                 <i data-lucide="x"></i>
 
             </button>
+
 
         </div>
 
@@ -382,6 +483,8 @@
 
         <form id="taskForm">
 
+
+            <!-- TÍTULO -->
 
             <div class="form-group">
 
@@ -393,12 +496,15 @@
                     type="text"
                     id="taskTitle"
                     placeholder="Ex: Estudar JavaScript"
+                    maxlength="100"
                     required
                 >
 
             </div>
 
 
+
+            <!-- CATEGORIA -->
 
             <div class="form-group">
 
@@ -410,30 +516,93 @@
                     type="text"
                     id="taskCategory"
                     placeholder="Ex: Estudos"
+                    maxlength="50"
                     required
                 >
 
             </div>
 
 
+
+            <!-- DATA -->
+
+            <div class="form-row">
+
+
+                <div class="form-group">
+
+                    <label for="taskDate">
+                        Data
+                    </label>
+
+                    <input
+                        type="date"
+                        id="taskDate"
+                    >
+
+                </div>
+
+
+
+                <!-- HORÁRIO -->
+
+                <div class="form-group">
+
+                    <label for="taskTime">
+                        Horário
+                    </label>
+
+                    <input
+                        type="time"
+                        id="taskTime"
+                        required
+                    >
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- PRIORIDADE -->
 
             <div class="form-group">
 
-                <label for="taskTime">
-                    Horário
+                <label for="taskPriority">
+                    Prioridade
                 </label>
 
-                <input
-                    type="time"
-                    id="taskTime"
-                    required
+
+                <select
+                    id="taskPriority"
                 >
+
+                    <option value="low">
+                        Baixa
+                    </option>
+
+                    <option
+                        value="medium"
+                        selected
+                    >
+                        Média
+                    </option>
+
+                    <option value="high">
+                        Alta
+                    </option>
+
+                </select>
 
             </div>
 
 
 
+            <!-- BOTÕES -->
+
             <div class="modal-buttons">
+
 
                 <button
                     type="button"
@@ -447,9 +616,11 @@
                 <button
                     type="submit"
                     class="save-task-btn"
+                    id="saveTaskBtn"
                 >
                     Criar tarefa
                 </button>
+
 
             </div>
 
@@ -464,14 +635,19 @@
 
 
 
+<!-- ================================================= -->
 <!-- LUCIDE -->
+<!-- ================================================= -->
 
 <script src="https://unpkg.com/lucide@latest"></script>
 
 
+<!-- ================================================= -->
 <!-- JAVASCRIPT -->
+<!-- ================================================= -->
 
 <script src="../js/auth.js"></script>
+
 <script src="../js/tasks.js"></script>
 
 

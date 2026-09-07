@@ -3,16 +3,16 @@
 // =====================================================
 
 
-/* ================================================= */
-/* PROTEGER PÁGINA */
-/* ================================================= */
+// =====================================================
+// PROTEGER PÁGINA
+// =====================================================
 
 protegerPagina();
 
 
-/* ================================================= */
-/* ELEMENTOS */
-/* ================================================= */
+// =====================================================
+// ELEMENTOS
+// =====================================================
 
 const completedCount =
     document.getElementById(
@@ -60,15 +60,125 @@ const currentDate =
     );
 
 
-/* ================================================= */
-/* USUÁRIO */
-/* ================================================= */
+// =====================================================
+// USUÁRIO
+// =====================================================
 
-function carregarUsuarioDashboard() {
+const usuario =
+    obterUsuarioLogado();
 
-    const usuario =
-        obterUsuarioLogado();
 
+if (!usuario) {
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+// =====================================================
+// TAREFAS
+// =====================================================
+
+function getTasks() {
+
+    return obterTarefasUsuario();
+
+}
+
+
+// =====================================================
+// DATA DE HOJE
+// =====================================================
+
+function getTodayString() {
+
+    const hoje =
+        new Date();
+
+
+    const ano =
+        hoje.getFullYear();
+
+
+    const mes =
+        String(
+            hoje.getMonth() + 1
+        ).padStart(2, "0");
+
+
+    const dia =
+        String(
+            hoje.getDate()
+        ).padStart(2, "0");
+
+
+    return `${ano}-${mes}-${dia}`;
+
+}
+
+
+// =====================================================
+// VERIFICAR ATRASADA
+// =====================================================
+
+function isTaskOverdue(task) {
+
+    if (
+        task.completed ||
+        !task.date
+    ) {
+
+        return false;
+
+    }
+
+
+    return (
+        task.date <
+        getTodayString()
+    );
+
+}
+
+
+// =====================================================
+// DATA FORMATADA
+// =====================================================
+
+function formatDate(dateString) {
+
+    if (!dateString) {
+
+        return "";
+
+    }
+
+
+    const partes =
+        dateString.split("-");
+
+
+    if (
+        partes.length !==
+        3
+    ) {
+
+        return "";
+
+    }
+
+
+    return `${partes[2]}/${partes[1]}`;
+
+}
+
+
+// =====================================================
+// CARREGAR NOME
+// =====================================================
+
+function carregarNomeUsuario() {
 
     if (!usuario) {
 
@@ -76,6 +186,15 @@ function carregarUsuarioDashboard() {
 
     }
 
+
+    const nome =
+        usuario.nome ||
+        "Usuário";
+
+
+    // ---------------------------------------------
+    // TÍTULO
+    // ---------------------------------------------
 
     const titulo =
         document.querySelector(
@@ -86,22 +205,26 @@ function carregarUsuarioDashboard() {
     if (titulo) {
 
         titulo.textContent =
-            `Olá, ${usuario.nome}!`;
+            `Olá, ${nome}!`;
 
     }
 
 
-    const nomesSidebar =
+    // ---------------------------------------------
+    // SIDEBAR
+    // ---------------------------------------------
+
+    const nomes =
         document.querySelectorAll(
             ".profile-info strong"
         );
 
 
-    nomesSidebar.forEach(
+    nomes.forEach(
         function (elemento) {
 
             elemento.textContent =
-                usuario.nome;
+                nome;
 
         }
     );
@@ -109,20 +232,9 @@ function carregarUsuarioDashboard() {
 }
 
 
-/* ================================================= */
-/* PEGAR TAREFAS */
-/* ================================================= */
-
-function getTasks() {
-
-    return obterTarefasUsuario();
-
-}
-
-
-/* ================================================= */
-/* ESTATÍSTICAS */
-/* ================================================= */
+// =====================================================
+// ATUALIZAR ESTATÍSTICAS
+// =====================================================
 
 function updateStatistics() {
 
@@ -157,16 +269,18 @@ function updateStatistics() {
 
         percentage =
             Math.round(
-                (completed / total) *
-                100
+                (
+                    completed /
+                    total
+                ) * 100
             );
 
     }
 
 
-    /* ================================================= */
-    /* NÚMEROS */
-    /* ================================================= */
+    // ---------------------------------------------
+    // NÚMEROS
+    // ---------------------------------------------
 
     if (totalCount) {
 
@@ -192,9 +306,9 @@ function updateStatistics() {
     }
 
 
-    /* ================================================= */
-    /* PORCENTAGEM */
-    /* ================================================= */
+    // ---------------------------------------------
+    // PROGRESSO
+    // ---------------------------------------------
 
     if (progressPercentage) {
 
@@ -220,9 +334,9 @@ function updateStatistics() {
     }
 
 
-    /* ================================================= */
-    /* MENSAGEM */
-    /* ================================================= */
+    // ---------------------------------------------
+    // MENSAGEM
+    // ---------------------------------------------
 
     if (!progressMessage) {
 
@@ -269,9 +383,9 @@ function updateStatistics() {
 }
 
 
-/* ================================================= */
-/* MOSTRAR TAREFAS */
-/* ================================================= */
+// =====================================================
+// RENDERIZAR TAREFAS
+// =====================================================
 
 function renderDashboardTasks() {
 
@@ -289,6 +403,10 @@ function renderDashboardTasks() {
     dashboardTasks.innerHTML =
         "";
 
+
+    // ---------------------------------------------
+    // NENHUMA TAREFA
+    // ---------------------------------------------
 
     if (tasks.length === 0) {
 
@@ -311,23 +429,78 @@ function renderDashboardTasks() {
         `;
 
 
-        if (
-            typeof lucide !==
-            "undefined"
-        ) {
-
-            lucide.createIcons();
-
-        }
-
+        ativarIcones();
 
         return;
 
     }
 
 
+    // ---------------------------------------------
+    // ORDENAÇÃO
+    // ---------------------------------------------
+
+    const tarefasOrdenadas =
+        [...tasks].sort(
+            function (a, b) {
+
+                // Primeiro tarefas de hoje
+                // e próximas
+
+                if (
+                    a.date &&
+                    b.date &&
+                    a.date !==
+                    b.date
+                ) {
+
+                    return a.date.localeCompare(
+                        b.date
+                    );
+
+                }
+
+
+                if (
+                    a.date &&
+                    !b.date
+                ) {
+
+                    return -1;
+
+                }
+
+
+                if (
+                    !a.date &&
+                    b.date
+                ) {
+
+                    return 1;
+
+                }
+
+
+                return (
+                    (a.time || "")
+                    .localeCompare(
+                        b.time || ""
+                    )
+                );
+
+            }
+        );
+
+
+    // ---------------------------------------------
+    // MÁXIMO 4
+    // ---------------------------------------------
+
     const visibleTasks =
-        tasks.slice(0, 4);
+        tarefasOrdenadas.slice(
+            0,
+            4
+        );
 
 
     visibleTasks.forEach(
@@ -343,9 +516,31 @@ function renderDashboardTasks() {
                 "dashboard-task";
 
 
+            if (isTaskOverdue(task)) {
+
+                taskElement.classList.add(
+                    "dashboard-task-overdue"
+                );
+
+            }
+
+
+            const data =
+                formatDate(
+                    task.date
+                );
+
+
+            const dataHTML =
+                data
+                    ? `<span>${data}</span>`
+                    : "";
+
+
             taskElement.innerHTML = `
 
                 <div class="task-main">
+
 
                     <div
                         class="task-status ${
@@ -367,20 +562,34 @@ function renderDashboardTasks() {
                     <div>
 
                         <h3>
-                            ${escaparHTML(task.title)}
+                            ${escaparHTML(
+                                task.title
+                            )}
                         </h3>
 
+
                         <span>
-                            ${escaparHTML(task.category)}
+
+                            ${escaparHTML(
+                                task.category
+                            )}
+
+                            ${
+                                dataHTML
+                            }
+
                         </span>
 
                     </div>
+
 
                 </div>
 
 
                 <span class="task-time">
-                    ${task.time}
+
+                    ${task.time || "--:--"}
+
                 </span>
 
             `;
@@ -394,6 +603,38 @@ function renderDashboardTasks() {
     );
 
 
+    ativarIcones();
+
+}
+
+
+// =====================================================
+// ESCAPAR HTML
+// =====================================================
+
+function escaparHTML(texto) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        texto || "";
+
+
+    return div.innerHTML;
+
+}
+
+
+// =====================================================
+// LUCIDE
+// =====================================================
+
+function ativarIcones() {
+
     if (
         typeof lucide !==
         "undefined"
@@ -406,28 +647,9 @@ function renderDashboardTasks() {
 }
 
 
-/* ================================================= */
-/* ESCAPAR HTML */
-/* ================================================= */
-
-function escaparHTML(texto) {
-
-    const div =
-        document.createElement("div");
-
-
-    div.textContent =
-        texto;
-
-
-    return div.innerHTML;
-
-}
-
-
-/* ================================================= */
-/* DATA ATUAL */
-/* ================================================= */
+// =====================================================
+// DATA ATUAL
+// =====================================================
 
 function updateDate() {
 
@@ -444,11 +666,14 @@ function updateDate() {
 
     const options = {
 
-        day: "numeric",
+        day:
+            "numeric",
 
-        month: "long",
+        month:
+            "long",
 
-        year: "numeric"
+        year:
+            "numeric"
 
     };
 
@@ -462,13 +687,13 @@ function updateDate() {
 }
 
 
-/* ================================================= */
-/* DASHBOARD */
-/* ================================================= */
+// =====================================================
+// ATUALIZAR DASHBOARD
+// =====================================================
 
 function updateDashboard() {
 
-    carregarUsuarioDashboard();
+    carregarNomeUsuario();
 
     updateStatistics();
 
@@ -479,18 +704,10 @@ function updateDashboard() {
 }
 
 
-/* ================================================= */
-/* INICIALIZAÇÃO */
-/* ================================================= */
+// =====================================================
+// INICIALIZAÇÃO
+// =====================================================
 
 updateDashboard();
 
-
-if (
-    typeof lucide !==
-    "undefined"
-) {
-
-    lucide.createIcons();
-
-}
+ativarIcones();
