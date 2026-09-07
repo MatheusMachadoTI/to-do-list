@@ -8,62 +8,118 @@ document.addEventListener(
 
 
         /* ================================================= */
-        /* ELEMENTOS */
+        /* FORMULÁRIO */
         /* ================================================= */
 
-        const cadastroForm =
+        let cadastroForm =
             document.getElementById(
                 "cadastroForm"
             );
 
 
-        const nomeInput =
-            document.getElementById(
-                "nome"
+        /*
+            Caso o formulário ainda não tenha
+            id="cadastroForm", procuramos pelo
+            formulário da página.
+        */
+
+        if (!cadastroForm) {
+
+            cadastroForm =
+                document.querySelector(
+                    ".login-form"
+                );
+        }
+
+
+        if (!cadastroForm) {
+
+            console.error(
+                "Erro: formulário de cadastro não encontrado."
             );
 
-
-        const emailInput =
-            document.getElementById(
-                "email"
-            );
+            return;
+        }
 
 
-        const senhaInput =
-            document.getElementById(
-                "senha"
-            );
+        /* ================================================= */
+        /* INPUTS */
+        /* ================================================= */
+
+        let nomeInput =
+            document.getElementById("nome");
 
 
-        const confirmarSenhaInput =
+        let emailInput =
+            document.getElementById("email");
+
+
+        let senhaInput =
+            document.getElementById("senha");
+
+
+        let confirmarSenhaInput =
             document.getElementById(
                 "confirmarSenha"
             );
 
 
-        const mensagem =
+        /*
+            Compatibilidade com o HTML antigo.
+
+            Se os inputs não tiverem IDs,
+            buscamos os inputs pela posição.
+        */
+
+        const inputs =
+            cadastroForm.querySelectorAll(
+                "input"
+            );
+
+
+        if (!nomeInput && inputs[0]) {
+
+            nomeInput =
+                inputs[0];
+        }
+
+
+        if (!emailInput && inputs[1]) {
+
+            emailInput =
+                inputs[1];
+        }
+
+
+        if (!senhaInput && inputs[2]) {
+
+            senhaInput =
+                inputs[2];
+        }
+
+
+        if (
+            !confirmarSenhaInput &&
+            inputs[3]
+        ) {
+
+            confirmarSenhaInput =
+                inputs[3];
+        }
+
+
+        /* ================================================= */
+        /* MENSAGEM */
+        /* ================================================= */
+
+        let mensagem =
             document.getElementById(
                 "mensagem"
             );
 
 
         /* ================================================= */
-        /* VERIFICA FORMULÁRIO */
-        /* ================================================= */
-
-        if (!cadastroForm) {
-
-            console.error(
-                "Erro: #cadastroForm não encontrado."
-            );
-
-            return;
-
-        }
-
-
-        /* ================================================= */
-        /* CADASTRO */
+        /* SUBMIT */
         /* ================================================= */
 
         cadastroForm.addEventListener(
@@ -74,7 +130,31 @@ document.addEventListener(
 
 
                 /* ========================================= */
-                /* VALORES */
+                /* VERIFICAR INPUTS */
+                /* ========================================= */
+
+                if (
+                    !nomeInput ||
+                    !emailInput ||
+                    !senhaInput ||
+                    !confirmarSenhaInput
+                ) {
+
+                    console.error(
+                        "Erro: não foi possível encontrar todos os campos do cadastro."
+                    );
+
+                    mostrarMensagem(
+                        "Erro no formulário. Verifique os campos.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                /* ========================================= */
+                /* PEGAR VALORES */
                 /* ========================================= */
 
                 const nome =
@@ -94,7 +174,7 @@ document.addEventListener(
 
 
                 /* ========================================= */
-                /* NOME */
+                /* VALIDAR NOME */
                 /* ========================================= */
 
                 if (nome === "") {
@@ -107,7 +187,6 @@ document.addEventListener(
                     nomeInput.focus();
 
                     return;
-
                 }
 
 
@@ -121,12 +200,11 @@ document.addEventListener(
                     nomeInput.focus();
 
                     return;
-
                 }
 
 
                 /* ========================================= */
-                /* EMAIL */
+                /* VALIDAR E-MAIL */
                 /* ========================================= */
 
                 if (email === "") {
@@ -139,7 +217,6 @@ document.addEventListener(
                     emailInput.focus();
 
                     return;
-
                 }
 
 
@@ -153,12 +230,11 @@ document.addEventListener(
                     emailInput.focus();
 
                     return;
-
                 }
 
 
                 /* ========================================= */
-                /* SENHA */
+                /* VALIDAR SENHA */
                 /* ========================================= */
 
                 if (senha === "") {
@@ -171,7 +247,6 @@ document.addEventListener(
                     senhaInput.focus();
 
                     return;
-
                 }
 
 
@@ -185,15 +260,16 @@ document.addEventListener(
                     senhaInput.focus();
 
                     return;
-
                 }
 
 
                 /* ========================================= */
-                /* CONFIRMAÇÃO */
+                /* CONFIRMAR SENHA */
                 /* ========================================= */
 
-                if (confirmarSenha === "") {
+                if (
+                    confirmarSenha === ""
+                ) {
 
                     mostrarMensagem(
                         "Confirme sua senha.",
@@ -203,11 +279,13 @@ document.addEventListener(
                     confirmarSenhaInput.focus();
 
                     return;
-
                 }
 
 
-                if (senha !== confirmarSenha) {
+                if (
+                    senha !==
+                    confirmarSenha
+                ) {
 
                     mostrarMensagem(
                         "As senhas não coincidem.",
@@ -217,7 +295,6 @@ document.addEventListener(
                     confirmarSenhaInput.focus();
 
                     return;
-
                 }
 
 
@@ -245,7 +322,6 @@ document.addEventListener(
                     );
 
                     return;
-
                 }
 
 
@@ -254,23 +330,28 @@ document.addEventListener(
                 /* ========================================= */
 
                 mostrarMensagem(
-                    "Conta criada com sucesso!",
+                    "Conta criada com sucesso! Redirecionando para o login...",
                     "success"
                 );
 
 
-                /* ========================================= */
-                /* REDIRECIONA */
-                /* ========================================= */
+                /*
+                    IMPORTANTE:
+
+                    A conta foi criada, mas o usuário
+                    ainda NÃO está logado.
+
+                    Agora ele vai para a tela de login.
+                */
 
                 setTimeout(
                     function () {
 
                         window.location.href =
-                            "dashboard.html";
+                            "login.html";
 
                     },
-                    1000
+                    1200
                 );
 
             }
@@ -278,7 +359,7 @@ document.addEventListener(
 
 
         /* ================================================= */
-        /* MENSAGEM */
+        /* MOSTRAR MENSAGEM */
         /* ================================================= */
 
         function mostrarMensagem(
@@ -291,7 +372,6 @@ document.addEventListener(
                 alert(texto);
 
                 return;
-
             }
 
 
@@ -305,12 +385,11 @@ document.addEventListener(
 
             mensagem.style.display =
                 "block";
-
         }
 
 
         /* ================================================= */
-        /* VALIDAR EMAIL */
+        /* VALIDAR E-MAIL */
         /* ================================================= */
 
         function validarEmail(email) {
@@ -320,9 +399,7 @@ document.addEventListener(
 
 
             return regex.test(email);
-
         }
-
 
     }
 );

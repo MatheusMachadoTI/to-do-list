@@ -3,123 +3,147 @@
 // =====================================================
 
 
-// =====================================================
-// ELEMENTOS
-// =====================================================
+/* ================================================= */
+/* PROTEGER PÁGINA */
+/* ================================================= */
 
-const tasksList = document.getElementById("tasksList");
-
-const taskCounter = document.getElementById("taskCounter");
-
-const newTaskBtn = document.getElementById("newTaskBtn");
-
-const taskModal = document.getElementById("taskModal");
-
-const closeModalBtn = document.getElementById("closeModalBtn");
-
-const cancelTaskBtn = document.getElementById("cancelTaskBtn");
-
-const taskForm = document.getElementById("taskForm");
-
-const taskTitle = document.getElementById("taskTitle");
-
-const taskCategory = document.getElementById("taskCategory");
-
-const taskTime = document.getElementById("taskTime");
-
-const filterButtons = document.querySelectorAll(".filter-btn");
+protegerPagina();
 
 
-// =====================================================
-// TAREFAS INICIAIS
-// =====================================================
+/* ================================================= */
+/* ELEMENTOS */
+/* ================================================= */
 
-let tasks = JSON.parse(localStorage.getItem("doneeTasks")) || [
+const tasksList =
+    document.getElementById("tasksList");
 
-    {
-        id: 1,
-        title: "Estudar JavaScript",
-        category: "Estudos",
-        time: "19:00",
-        completed: true
-    },
+const taskCounter =
+    document.getElementById("taskCounter");
 
-    {
-        id: 2,
-        title: "Treino de academia",
-        category: "Saúde",
-        time: "20:30",
-        completed: false
-    },
+const newTaskBtn =
+    document.getElementById("newTaskBtn");
 
-    {
-        id: 3,
-        title: "Ler um capítulo",
-        category: "Leitura",
-        time: "22:00",
-        completed: false
-    }
+const taskModal =
+    document.getElementById("taskModal");
 
-];
+const closeModalBtn =
+    document.getElementById("closeModalBtn");
 
+const cancelTaskBtn =
+    document.getElementById("cancelTaskBtn");
 
-// =====================================================
-// FILTRO ATUAL
-// =====================================================
+const taskForm =
+    document.getElementById("taskForm");
 
-let currentFilter = "all";
+const taskTitle =
+    document.getElementById("taskTitle");
+
+const taskCategory =
+    document.getElementById("taskCategory");
+
+const taskTime =
+    document.getElementById("taskTime");
+
+const filterButtons =
+    document.querySelectorAll(".filter-btn");
 
 
-// =====================================================
-// SALVAR TAREFAS
-// =====================================================
+/* ================================================= */
+/* TAREFAS */
+/* ================================================= */
+
+let tasks =
+    obterTarefasUsuario();
+
+
+/* ================================================= */
+/* FILTRO ATUAL */
+/* ================================================= */
+
+let currentFilter =
+    "all";
+
+
+/* ================================================= */
+/* SALVAR TAREFAS */
+/* ================================================= */
 
 function saveTasks() {
 
-    localStorage.setItem(
-        "doneeTasks",
-        JSON.stringify(tasks)
+    salvarTarefasUsuario(
+        tasks
     );
 
 }
 
 
-// =====================================================
-// RENDERIZAR TAREFAS
-// =====================================================
+/* ================================================= */
+/* RENDERIZAR TAREFAS */
+/* ================================================= */
 
 function renderTasks() {
 
+    if (!tasksList) {
 
-    tasksList.innerHTML = "";
-
-
-    // Filtra as tarefas
-
-    let filteredTasks = tasks;
-
-
-    if (currentFilter === "pending") {
-
-        filteredTasks = tasks.filter(
-            task => !task.completed
-        );
+        return;
 
     }
 
 
-    if (currentFilter === "completed") {
+    tasksList.innerHTML =
+        "";
 
-        filteredTasks = tasks.filter(
-            task => task.completed
-        );
+
+    let filteredTasks =
+        tasks;
+
+
+    /* ================================================= */
+    /* FILTRO PENDENTES */
+    /* ================================================= */
+
+    if (
+        currentFilter ===
+        "pending"
+    ) {
+
+        filteredTasks =
+            tasks.filter(function (task) {
+
+                return !task.completed;
+
+            });
 
     }
 
 
-    // Atualiza contador
+    /* ================================================= */
+    /* FILTRO CONCLUÍDAS */
+    /* ================================================= */
 
-    if (filteredTasks.length === 1) {
+    if (
+        currentFilter ===
+        "completed"
+    ) {
+
+        filteredTasks =
+            tasks.filter(function (task) {
+
+                return task.completed;
+
+            });
+
+    }
+
+
+    /* ================================================= */
+    /* CONTADOR */
+    /* ================================================= */
+
+    if (
+        filteredTasks.length ===
+        1
+    ) {
 
         taskCounter.textContent =
             "1 tarefa encontrada";
@@ -132,9 +156,14 @@ function renderTasks() {
     }
 
 
-    // Nenhuma tarefa
+    /* ================================================= */
+    /* NENHUMA TAREFA */
+    /* ================================================= */
 
-    if (filteredTasks.length === 0) {
+    if (
+        filteredTasks.length ===
+        0
+    ) {
 
         tasksList.innerHTML = `
 
@@ -142,7 +171,9 @@ function renderTasks() {
 
                 <i data-lucide="clipboard-check"></i>
 
-                <h3>Nenhuma tarefa encontrada</h3>
+                <h3>
+                    Nenhuma tarefa encontrada
+                </h3>
 
                 <p>
                     Não há tarefas nesta categoria.
@@ -152,23 +183,34 @@ function renderTasks() {
 
         `;
 
-        lucide.createIcons();
+
+        if (
+            typeof lucide !==
+            "undefined"
+        ) {
+
+            lucide.createIcons();
+
+        }
+
 
         return;
 
     }
 
 
-    // Cria cada tarefa
+    /* ================================================= */
+    /* CRIAR CARDS */
+    /* ================================================= */
 
-    filteredTasks.forEach(task => {
-
+    filteredTasks.forEach(function (task) {
 
         const taskCard =
             document.createElement("div");
 
 
-        taskCard.className = "task-card";
+        taskCard.className =
+            "task-card";
 
 
         taskCard.innerHTML = `
@@ -181,11 +223,11 @@ function renderTasks() {
                 <div class="task-content">
 
                     <h3>
-                        ${task.title}
+                        ${escaparHTML(task.title)}
                     </h3>
 
                     <p>
-                        ${task.category}
+                        ${escaparHTML(task.category)}
                     </p>
 
                 </div>
@@ -201,7 +243,11 @@ function renderTasks() {
 
 
                 <button
-                    class="task-status ${task.completed ? "completed" : ""}"
+                    class="task-status ${
+                        task.completed
+                            ? "completed"
+                            : ""
+                    }"
                     data-id="${task.id}"
                     type="button"
                     aria-label="${
@@ -214,7 +260,7 @@ function renderTasks() {
                     ${
                         task.completed
                             ? '<i data-lucide="check"></i>'
-                            : ''
+                            : ""
                     }
 
                 </button>
@@ -236,45 +282,73 @@ function renderTasks() {
         `;
 
 
-        tasksList.appendChild(taskCard);
-
+        tasksList.appendChild(
+            taskCard
+        );
 
     });
 
 
-    // Ativa os ícones
+    if (
+        typeof lucide !==
+        "undefined"
+    ) {
 
-    lucide.createIcons();
+        lucide.createIcons();
+
+    }
 
 }
 
 
-// =====================================================
-// MARCAR TAREFA COMO CONCLUÍDA
-// =====================================================
+/* ================================================= */
+/* ESCAPAR HTML */
+/* ================================================= */
+
+function escaparHTML(texto) {
+
+    const div =
+        document.createElement("div");
+
+
+    div.textContent =
+        texto;
+
+
+    return div.innerHTML;
+
+}
+
+
+/* ================================================= */
+/* CONCLUIR TAREFA */
+/* ================================================= */
 
 function toggleTask(taskId) {
 
+    tasks =
+        tasks.map(function (task) {
 
-    tasks = tasks.map(task => {
+            if (
+                task.id ===
+                taskId
+            ) {
+
+                return {
+
+                    ...task,
+
+                    completed:
+                        !task.completed
+
+                };
+
+            }
 
 
-        if (task.id === taskId) {
+            return task;
 
-            return {
-
-                ...task,
-
-                completed: !task.completed
-
-            };
-
-        }
-
-
-        return task;
-
-    });
+        });
 
 
     saveTasks();
@@ -284,27 +358,32 @@ function toggleTask(taskId) {
 }
 
 
-// =====================================================
-// EXCLUIR TAREFA
-// =====================================================
+/* ================================================= */
+/* EXCLUIR TAREFA */
+/* ================================================= */
 
 function deleteTask(taskId) {
 
+    const confirmar =
+        confirm(
+            "Deseja realmente excluir esta tarefa?"
+        );
 
-    const confirmDelete =
-        confirm("Deseja realmente excluir esta tarefa?");
 
-
-    if (!confirmDelete) {
+    if (!confirmar) {
 
         return;
 
     }
 
 
-    tasks = tasks.filter(
-        task => task.id !== taskId
-    );
+    tasks =
+        tasks.filter(function (task) {
+
+            return task.id !==
+                taskId;
+
+        });
 
 
     saveTasks();
@@ -314,38 +393,65 @@ function deleteTask(taskId) {
 }
 
 
-// =====================================================
-// ABRIR MODAL
-// =====================================================
+/* ================================================= */
+/* ABRIR MODAL */
+/* ================================================= */
 
 function openModal() {
 
-    taskModal.classList.add("show");
+    if (!taskModal) {
 
-    taskTitle.focus();
+        return;
+
+    }
+
+
+    taskModal.classList.add(
+        "show"
+    );
+
+
+    if (taskTitle) {
+
+        taskTitle.focus();
+
+    }
 
 }
 
 
-// =====================================================
-// FECHAR MODAL
-// =====================================================
+/* ================================================= */
+/* FECHAR MODAL */
+/* ================================================= */
 
 function closeModal() {
 
-    taskModal.classList.remove("show");
+    if (!taskModal) {
 
-    taskForm.reset();
+        return;
+
+    }
+
+
+    taskModal.classList.remove(
+        "show"
+    );
+
+
+    if (taskForm) {
+
+        taskForm.reset();
+
+    }
 
 }
 
 
-// =====================================================
-// CRIAR TAREFA
-// =====================================================
+/* ================================================= */
+/* CRIAR TAREFA */
+/* ================================================= */
 
 function createTask(event) {
-
 
     event.preventDefault();
 
@@ -362,7 +468,11 @@ function createTask(event) {
         taskTime.value;
 
 
-    if (!title || !category || !time) {
+    if (
+        !title ||
+        !category ||
+        !time
+    ) {
 
         return;
 
@@ -384,7 +494,9 @@ function createTask(event) {
     };
 
 
-    tasks.push(newTask);
+    tasks.push(
+        newTask
+    );
 
 
     saveTasks();
@@ -396,136 +508,195 @@ function createTask(event) {
 }
 
 
-// =====================================================
-// EVENTO DA LISTA
-// =====================================================
+/* ================================================= */
+/* EVENTOS DA LISTA */
+/* ================================================= */
 
-tasksList.addEventListener("click", function(event) {
+if (tasksList) {
 
+    tasksList.addEventListener(
+        "click",
+        function (event) {
 
-    const statusButton =
-        event.target.closest(".task-status");
-
-
-    const deleteButton =
-        event.target.closest(".delete-task-btn");
-
-
-    // Concluir tarefa
-
-    if (statusButton) {
-
-        const taskId =
-            Number(statusButton.dataset.id);
-
-        toggleTask(taskId);
-
-    }
+            const statusButton =
+                event.target.closest(
+                    ".task-status"
+                );
 
 
-    // Excluir tarefa
-
-    if (deleteButton) {
-
-        const taskId =
-            Number(deleteButton.dataset.delete);
-
-        deleteTask(taskId);
-
-    }
-
-});
+            const deleteButton =
+                event.target.closest(
+                    ".delete-task-btn"
+                );
 
 
-// =====================================================
-// FILTROS
-// =====================================================
+            if (statusButton) {
 
-filterButtons.forEach(button => {
-
-
-    button.addEventListener("click", function() {
+                const taskId =
+                    Number(
+                        statusButton.dataset.id
+                    );
 
 
-        filterButtons.forEach(btn => {
-
-            btn.classList.remove("active");
-
-        });
+                toggleTask(
+                    taskId
+                );
 
 
-        this.classList.add("active");
+                return;
+
+            }
 
 
-        currentFilter =
-            this.dataset.filter;
+            if (deleteButton) {
+
+                const taskId =
+                    Number(
+                        deleteButton.dataset.delete
+                    );
 
 
-        renderTasks();
+                deleteTask(
+                    taskId
+                );
 
-    });
-
-});
-
-
-// =====================================================
-// BOTÃO NOVA TAREFA
-// =====================================================
-
-newTaskBtn.addEventListener(
-    "click",
-    openModal
-);
-
-
-// =====================================================
-// FECHAR MODAL
-// =====================================================
-
-closeModalBtn.addEventListener(
-    "click",
-    closeModal
-);
-
-
-cancelTaskBtn.addEventListener(
-    "click",
-    closeModal
-);
-
-
-// =====================================================
-// FORMULÁRIO
-// =====================================================
-
-taskForm.addEventListener(
-    "submit",
-    createTask
-);
-
-
-// =====================================================
-// FECHAR CLICANDO FORA
-// =====================================================
-
-taskModal.addEventListener(
-    "click",
-    function(event) {
-
-        if (event.target === taskModal) {
-
-            closeModal();
+            }
 
         }
+    );
+
+}
+
+
+/* ================================================= */
+/* FILTROS */
+/* ================================================= */
+
+filterButtons.forEach(
+    function (button) {
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                filterButtons.forEach(
+                    function (btn) {
+
+                        btn.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
+
+                this.classList.add(
+                    "active"
+                );
+
+
+                currentFilter =
+                    this.dataset.filter;
+
+
+                renderTasks();
+
+            }
+        );
 
     }
 );
 
 
-// =====================================================
-// INICIALIZAÇÃO
-// =====================================================
+/* ================================================= */
+/* NOVA TAREFA */
+/* ================================================= */
+
+if (newTaskBtn) {
+
+    newTaskBtn.addEventListener(
+        "click",
+        openModal
+    );
+
+}
+
+
+/* ================================================= */
+/* FECHAR MODAL */
+/* ================================================= */
+
+if (closeModalBtn) {
+
+    closeModalBtn.addEventListener(
+        "click",
+        closeModal
+    );
+
+}
+
+
+if (cancelTaskBtn) {
+
+    cancelTaskBtn.addEventListener(
+        "click",
+        closeModal
+    );
+
+}
+
+
+/* ================================================= */
+/* FORMULÁRIO */
+/* ================================================= */
+
+if (taskForm) {
+
+    taskForm.addEventListener(
+        "submit",
+        createTask
+    );
+
+}
+
+
+/* ================================================= */
+/* CLICAR FORA DO MODAL */
+/* ================================================= */
+
+if (taskModal) {
+
+    taskModal.addEventListener(
+        "click",
+        function (event) {
+
+            if (
+                event.target ===
+                taskModal
+            ) {
+
+                closeModal();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* ================================================= */
+/* INICIALIZAÇÃO */
+/* ================================================= */
 
 renderTasks();
 
-lucide.createIcons();
+
+if (
+    typeof lucide !==
+    "undefined"
+) {
+
+    lucide.createIcons();
+
+}

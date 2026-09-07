@@ -8,26 +8,100 @@ document.addEventListener(
 
 
         /* ================================================= */
-        /* ELEMENTOS */
+        /* FORMULÁRIO */
         /* ================================================= */
 
-        const loginForm =
+        let loginForm =
             document.getElementById(
                 "loginForm"
             );
 
 
-        const emailInput =
+        /*
+            Compatibilidade com o HTML atual.
+
+            Se não existir id="loginForm",
+            procuramos pelo formulário da página.
+        */
+
+        if (!loginForm) {
+
+            loginForm =
+                document.querySelector(
+                    ".login-form"
+                );
+        }
+
+
+        if (!loginForm) {
+
+            console.error(
+                "Erro: formulário de login não encontrado."
+            );
+
+            return;
+        }
+
+
+        /* ================================================= */
+        /* INPUTS */
+        /* ================================================= */
+
+        let emailInput =
             document.getElementById(
                 "email"
             );
 
 
-        const senhaInput =
+        let senhaInput =
             document.getElementById(
                 "senha"
             );
 
+
+        /*
+            Compatibilidade com o HTML antigo.
+
+            Se os inputs não tiverem IDs,
+            usamos a posição deles.
+        */
+
+        const inputs =
+            loginForm.querySelectorAll(
+                "input"
+            );
+
+
+        if (!emailInput && inputs[0]) {
+
+            emailInput =
+                inputs[0];
+        }
+
+
+        if (!senhaInput && inputs[1]) {
+
+            senhaInput =
+                inputs[1];
+        }
+
+
+        if (
+            !emailInput ||
+            !senhaInput
+        ) {
+
+            console.error(
+                "Erro: campos de login não encontrados."
+            );
+
+            return;
+        }
+
+
+        /* ================================================= */
+        /* MENSAGEM */
+        /* ================================================= */
 
         const mensagem =
             document.getElementById(
@@ -36,44 +110,7 @@ document.addEventListener(
 
 
         /* ================================================= */
-        /* VERIFICA ELEMENTOS */
-        /* ================================================= */
-
-        if (!loginForm) {
-
-            console.error(
-                "Erro: #loginForm não encontrado."
-            );
-
-            return;
-
-        }
-
-
-        if (!emailInput) {
-
-            console.error(
-                "Erro: #email não encontrado."
-            );
-
-            return;
-
-        }
-
-
-        if (!senhaInput) {
-
-            console.error(
-                "Erro: #senha não encontrado."
-            );
-
-            return;
-
-        }
-
-
-        /* ================================================= */
-        /* LOGIN */
+        /* SUBMIT */
         /* ================================================= */
 
         loginForm.addEventListener(
@@ -82,6 +119,10 @@ document.addEventListener(
 
                 event.preventDefault();
 
+
+                /* ========================================= */
+                /* PEGAR VALORES */
+                /* ========================================= */
 
                 const email =
                     emailInput.value.trim();
@@ -92,7 +133,7 @@ document.addEventListener(
 
 
                 /* ========================================= */
-                /* VALIDAÇÃO */
+                /* VALIDAR E-MAIL */
                 /* ========================================= */
 
                 if (email === "") {
@@ -105,7 +146,6 @@ document.addEventListener(
                     emailInput.focus();
 
                     return;
-
                 }
 
 
@@ -119,9 +159,12 @@ document.addEventListener(
                     emailInput.focus();
 
                     return;
-
                 }
 
+
+                /* ========================================= */
+                /* VALIDAR SENHA */
+                /* ========================================= */
 
                 if (senha === "") {
 
@@ -133,12 +176,11 @@ document.addEventListener(
                     senhaInput.focus();
 
                     return;
-
                 }
 
 
                 /* ========================================= */
-                /* LOGIN */
+                /* FAZER LOGIN */
                 /* ========================================= */
 
                 const resultado =
@@ -149,7 +191,7 @@ document.addEventListener(
 
 
                 /* ========================================= */
-                /* ERRO */
+                /* LOGIN INCORRETO */
                 /* ========================================= */
 
                 if (!resultado.sucesso) {
@@ -159,17 +201,19 @@ document.addEventListener(
                         "error"
                     );
 
+
                     senhaInput.value = "";
+
 
                     senhaInput.focus();
 
-                    return;
 
+                    return;
                 }
 
 
                 /* ========================================= */
-                /* SUCESSO */
+                /* LOGIN CORRETO */
                 /* ========================================= */
 
                 mostrarMensagem(
@@ -178,9 +222,11 @@ document.addEventListener(
                 );
 
 
-                /* ========================================= */
-                /* REDIRECIONAMENTO */
-                /* ========================================= */
+                /*
+                    Pequeno atraso apenas para
+                    o usuário conseguir visualizar
+                    a mensagem de sucesso.
+                */
 
                 setTimeout(
                     function () {
@@ -210,7 +256,6 @@ document.addEventListener(
                 alert(texto);
 
                 return;
-
             }
 
 
@@ -224,12 +269,11 @@ document.addEventListener(
 
             mensagem.style.display =
                 "block";
-
         }
 
 
         /* ================================================= */
-        /* VALIDAR EMAIL */
+        /* VALIDAR E-MAIL */
         /* ================================================= */
 
         function validarEmail(email) {
@@ -239,9 +283,7 @@ document.addEventListener(
 
 
             return regex.test(email);
-
         }
-
 
     }
 );

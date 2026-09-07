@@ -3,68 +3,131 @@
 // =====================================================
 
 
-// =====================================================
-// ELEMENTOS
-// =====================================================
+/* ================================================= */
+/* PROTEGER PÁGINA */
+/* ================================================= */
+
+protegerPagina();
+
+
+/* ================================================= */
+/* ELEMENTOS */
+/* ================================================= */
 
 const completedCount =
-    document.getElementById("completedCount");
+    document.getElementById(
+        "completedCount"
+    );
 
 const pendingCount =
-    document.getElementById("pendingCount");
+    document.getElementById(
+        "pendingCount"
+    );
 
 const totalCount =
-    document.getElementById("totalCount");
+    document.getElementById(
+        "totalCount"
+    );
 
 const dashboardTasks =
-    document.getElementById("dashboardTasks");
+    document.getElementById(
+        "dashboardTasks"
+    );
 
 const progressPercentage =
-    document.getElementById("progressPercentage");
+    document.getElementById(
+        "progressPercentage"
+    );
 
 const progressCircleText =
-    document.getElementById("progressCircleText");
+    document.getElementById(
+        "progressCircleText"
+    );
 
 const progressFill =
-    document.getElementById("progressFill");
+    document.getElementById(
+        "progressFill"
+    );
 
 const progressMessage =
-    document.getElementById("progressMessage");
+    document.getElementById(
+        "progressMessage"
+    );
 
 const currentDate =
-    document.getElementById("currentDate");
+    document.getElementById(
+        "currentDate"
+    );
 
 
-// =====================================================
-// PEGAR TAREFAS
-// =====================================================
+/* ================================================= */
+/* USUÁRIO */
+/* ================================================= */
 
-function getTasks() {
+function carregarUsuarioDashboard() {
 
-    const savedTasks =
-        localStorage.getItem("doneeTasks");
+    const usuario =
+        obterUsuarioLogado();
 
 
-    if (!savedTasks) {
+    if (!usuario) {
 
-        return [];
+        return;
 
     }
 
 
-    return JSON.parse(savedTasks);
+    const titulo =
+        document.querySelector(
+            ".dashboard-header h1"
+        );
+
+
+    if (titulo) {
+
+        titulo.textContent =
+            `Olá, ${usuario.nome}!`;
+
+    }
+
+
+    const nomesSidebar =
+        document.querySelectorAll(
+            ".profile-info strong"
+        );
+
+
+    nomesSidebar.forEach(
+        function (elemento) {
+
+            elemento.textContent =
+                usuario.nome;
+
+        }
+    );
 
 }
 
 
-// =====================================================
-// ATUALIZAR ESTATÍSTICAS
-// =====================================================
+/* ================================================= */
+/* PEGAR TAREFAS */
+/* ================================================= */
+
+function getTasks() {
+
+    return obterTarefasUsuario();
+
+}
+
+
+/* ================================================= */
+/* ESTATÍSTICAS */
+/* ================================================= */
 
 function updateStatistics() {
 
-
-    const tasks = getTasks();
+    const tasks =
+        getTasks();
 
 
     const total =
@@ -73,58 +136,100 @@ function updateStatistics() {
 
     const completed =
         tasks.filter(
-            task => task.completed
+            function (task) {
+
+                return task.completed;
+
+            }
         ).length;
 
 
     const pending =
-        total - completed;
-
-
-    // Atualiza números
-
-    totalCount.textContent =
-        total;
-
-
-    completedCount.textContent =
+        total -
         completed;
 
 
-    pendingCount.textContent =
-        pending;
-
-
-    // Calcula porcentagem
-
-    let percentage = 0;
+    let percentage =
+        0;
 
 
     if (total > 0) {
 
         percentage =
             Math.round(
-                (completed / total) * 100
+                (completed / total) *
+                100
             );
 
     }
 
 
-    // Atualiza progresso
+    /* ================================================= */
+    /* NÚMEROS */
+    /* ================================================= */
 
-    progressPercentage.textContent =
-        `${percentage}%`;
+    if (totalCount) {
 
+        totalCount.textContent =
+            total;
 
-    progressCircleText.textContent =
-        `${percentage}%`;
-
-
-    progressFill.style.width =
-        `${percentage}%`;
+    }
 
 
-    // Mensagem
+    if (completedCount) {
+
+        completedCount.textContent =
+            completed;
+
+    }
+
+
+    if (pendingCount) {
+
+        pendingCount.textContent =
+            pending;
+
+    }
+
+
+    /* ================================================= */
+    /* PORCENTAGEM */
+    /* ================================================= */
+
+    if (progressPercentage) {
+
+        progressPercentage.textContent =
+            `${percentage}%`;
+
+    }
+
+
+    if (progressCircleText) {
+
+        progressCircleText.textContent =
+            `${percentage}%`;
+
+    }
+
+
+    if (progressFill) {
+
+        progressFill.style.width =
+            `${percentage}%`;
+
+    }
+
+
+    /* ================================================= */
+    /* MENSAGEM */
+    /* ================================================= */
+
+    if (!progressMessage) {
+
+        return;
+
+    }
+
 
     if (total === 0) {
 
@@ -164,20 +269,26 @@ function updateStatistics() {
 }
 
 
-// =====================================================
-// MOSTRAR TAREFAS
-// =====================================================
+/* ================================================= */
+/* MOSTRAR TAREFAS */
+/* ================================================= */
 
 function renderDashboardTasks() {
 
+    if (!dashboardTasks) {
 
-    const tasks = getTasks();
+        return;
+
+    }
 
 
-    dashboardTasks.innerHTML = "";
+    const tasks =
+        getTasks();
 
 
-    // Se não tiver tarefas
+    dashboardTasks.innerHTML =
+        "";
+
 
     if (tasks.length === 0) {
 
@@ -200,93 +311,131 @@ function renderDashboardTasks() {
         `;
 
 
-        lucide.createIcons();
+        if (
+            typeof lucide !==
+            "undefined"
+        ) {
+
+            lucide.createIcons();
+
+        }
+
 
         return;
 
     }
 
 
-    // Pega no máximo 4 tarefas
-
     const visibleTasks =
         tasks.slice(0, 4);
 
 
-    visibleTasks.forEach(task => {
+    visibleTasks.forEach(
+        function (task) {
+
+            const taskElement =
+                document.createElement(
+                    "div"
+                );
 
 
-        const taskElement =
-            document.createElement("div");
+            taskElement.className =
+                "dashboard-task";
 
 
-        taskElement.className =
-            "dashboard-task";
+            taskElement.innerHTML = `
+
+                <div class="task-main">
+
+                    <div
+                        class="task-status ${
+                            task.completed
+                                ? "completed"
+                                : ""
+                        }"
+                    >
+
+                        ${
+                            task.completed
+                                ? '<i data-lucide="check"></i>'
+                                : ""
+                        }
+
+                    </div>
 
 
-        taskElement.innerHTML = `
+                    <div>
 
-            <div class="task-main">
+                        <h3>
+                            ${escaparHTML(task.title)}
+                        </h3>
 
+                        <span>
+                            ${escaparHTML(task.category)}
+                        </span>
 
-                <div
-                    class="task-status ${
-                        task.completed
-                            ? "completed"
-                            : ""
-                    }"
-                >
-
-                    ${
-                        task.completed
-                            ? '<i data-lucide="check"></i>'
-                            : ""
-                    }
+                    </div>
 
                 </div>
 
 
-                <div>
+                <span class="task-time">
+                    ${task.time}
+                </span>
 
-                    <h3>
-                        ${task.title}
-                    </h3>
-
-                    <span>
-                        ${task.category}
-                    </span>
-
-                </div>
+            `;
 
 
-            </div>
+            dashboardTasks.appendChild(
+                taskElement
+            );
+
+        }
+    );
 
 
-            <span class="task-time">
-                ${task.time}
-            </span>
+    if (
+        typeof lucide !==
+        "undefined"
+    ) {
 
-        `;
+        lucide.createIcons();
 
-
-        dashboardTasks.appendChild(
-            taskElement
-        );
-
-
-    });
-
-
-    lucide.createIcons();
+    }
 
 }
 
 
-// =====================================================
-// DATA ATUAL
-// =====================================================
+/* ================================================= */
+/* ESCAPAR HTML */
+/* ================================================= */
+
+function escaparHTML(texto) {
+
+    const div =
+        document.createElement("div");
+
+
+    div.textContent =
+        texto;
+
+
+    return div.innerHTML;
+
+}
+
+
+/* ================================================= */
+/* DATA ATUAL */
+/* ================================================= */
 
 function updateDate() {
+
+    if (!currentDate) {
+
+        return;
+
+    }
 
 
     const today =
@@ -304,24 +453,22 @@ function updateDate() {
     };
 
 
-    const date =
+    currentDate.textContent =
         today.toLocaleDateString(
             "pt-BR",
             options
         );
 
-
-    currentDate.textContent =
-        date;
-
 }
 
 
-// =====================================================
-// ATUALIZAR DASHBOARD
-// =====================================================
+/* ================================================= */
+/* DASHBOARD */
+/* ================================================= */
 
 function updateDashboard() {
+
+    carregarUsuarioDashboard();
 
     updateStatistics();
 
@@ -332,10 +479,18 @@ function updateDashboard() {
 }
 
 
-// =====================================================
-// INICIALIZAÇÃO
-// =====================================================
+/* ================================================= */
+/* INICIALIZAÇÃO */
+/* ================================================= */
 
 updateDashboard();
 
-lucide.createIcons();
+
+if (
+    typeof lucide !==
+    "undefined"
+) {
+
+    lucide.createIcons();
+
+}

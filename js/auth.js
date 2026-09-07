@@ -4,7 +4,7 @@
 
 
 /* ================================================= */
-/* PEGAR USUÁRIOS */
+/* OBTER USUÁRIOS */
 /* ================================================= */
 
 function obterUsuarios() {
@@ -15,18 +15,14 @@ function obterUsuarios() {
             localStorage.getItem("donee_usuarios");
 
         if (!dados) {
-
             return [];
-
         }
 
         const usuarios =
             JSON.parse(dados);
 
         if (!Array.isArray(usuarios)) {
-
             return [];
-
         }
 
         return usuarios;
@@ -68,24 +64,20 @@ function criarConta(nome, email, senha) {
     const usuarios =
         obterUsuarios();
 
-
     const emailNormalizado =
         email.trim().toLowerCase();
 
 
-    /* Verifica e-mail existente */
-
     const usuarioExistente =
-        usuarios.find(
-            function (usuario) {
+        usuarios.find(function (usuario) {
 
-                return (
-                    usuario.email.toLowerCase() ===
-                    emailNormalizado
-                );
+            return (
+                usuario.email &&
+                usuario.email.toLowerCase() ===
+                emailNormalizado
+            );
 
-            }
-        );
+        });
 
 
     if (usuarioExistente) {
@@ -102,8 +94,6 @@ function criarConta(nome, email, senha) {
     }
 
 
-    /* Novo usuário */
-
     const novoUsuario = {
 
         id: Date.now(),
@@ -113,6 +103,8 @@ function criarConta(nome, email, senha) {
         email: emailNormalizado,
 
         senha: senha,
+
+        telefone: "",
 
         criadoEm:
             new Date().toISOString(),
@@ -126,22 +118,9 @@ function criarConta(nome, email, senha) {
     };
 
 
-    usuarios.push(
-        novoUsuario
-    );
+    usuarios.push(novoUsuario);
 
-
-    salvarUsuarios(
-        usuarios
-    );
-
-
-    /* Login automático */
-
-    localStorage.setItem(
-        "donee_usuario_logado",
-        JSON.stringify(novoUsuario)
-    );
+    salvarUsuarios(usuarios);
 
 
     return {
@@ -164,23 +143,21 @@ function fazerLogin(email, senha) {
     const usuarios =
         obterUsuarios();
 
-
     const emailNormalizado =
         email.trim().toLowerCase();
 
 
     const usuario =
-        usuarios.find(
-            function (usuario) {
+        usuarios.find(function (usuario) {
 
-                return (
-                    usuario.email.toLowerCase() ===
-                    emailNormalizado &&
-                    usuario.senha === senha
-                );
+            return (
+                usuario.email &&
+                usuario.email.toLowerCase() ===
+                emailNormalizado &&
+                usuario.senha === senha
+            );
 
-            }
-        );
+        });
 
 
     if (!usuario) {
@@ -215,7 +192,7 @@ function fazerLogin(email, senha) {
 
 
 /* ================================================= */
-/* USUÁRIO LOGADO */
+/* OBTER USUÁRIO LOGADO */
 /* ================================================= */
 
 function obterUsuarioLogado() {
@@ -252,7 +229,125 @@ function obterUsuarioLogado() {
 
 
 /* ================================================= */
-/* VERIFICAR LOGIN */
+/* ATUALIZAR SESSÃO */
+/* ================================================= */
+
+function atualizarSessao(usuario) {
+
+    localStorage.setItem(
+        "donee_usuario_logado",
+        JSON.stringify(usuario)
+    );
+
+}
+
+
+/* ================================================= */
+/* ATUALIZAR USUÁRIO */
+/* ================================================= */
+
+function atualizarUsuario(usuarioAtualizado) {
+
+    const usuarios =
+        obterUsuarios();
+
+
+    const indice =
+        usuarios.findIndex(function (usuario) {
+
+            return usuario.id === usuarioAtualizado.id;
+
+        });
+
+
+    if (indice === -1) {
+
+        return false;
+
+    }
+
+
+    usuarios[indice] =
+        usuarioAtualizado;
+
+
+    salvarUsuarios(usuarios);
+
+    atualizarSessao(
+        usuarioAtualizado
+    );
+
+
+    return true;
+
+}
+
+
+/* ================================================= */
+/* OBTER TAREFAS DO USUÁRIO */
+/* ================================================= */
+
+function obterTarefasUsuario() {
+
+    const usuario =
+        obterUsuarioLogado();
+
+
+    if (!usuario) {
+
+        return [];
+
+    }
+
+
+    /*
+        Se a conta já possui tarefas,
+        usamos as tarefas da própria conta.
+    */
+
+    if (Array.isArray(usuario.tarefas)) {
+
+        return usuario.tarefas;
+
+    }
+
+
+    return [];
+
+}
+
+
+/* ================================================= */
+/* SALVAR TAREFAS DO USUÁRIO */
+/* ================================================= */
+
+function salvarTarefasUsuario(tarefas) {
+
+    const usuario =
+        obterUsuarioLogado();
+
+
+    if (!usuario) {
+
+        return false;
+
+    }
+
+
+    usuario.tarefas =
+        tarefas;
+
+
+    atualizarUsuario(usuario);
+
+
+    return true;
+
+}
+
+
+/* ================================================= */
+/* USUÁRIO ESTÁ LOGADO? */
 /* ================================================= */
 
 function usuarioEstaLogado() {
@@ -260,23 +355,6 @@ function usuarioEstaLogado() {
     return (
         obterUsuarioLogado() !== null
     );
-
-}
-
-
-/* ================================================= */
-/* LOGOUT */
-/* ================================================= */
-
-function fazerLogout() {
-
-    localStorage.removeItem(
-        "donee_usuario_logado"
-    );
-
-
-    window.location.href =
-        "login.html";
 
 }
 
@@ -309,5 +387,66 @@ function redirecionarSeLogado() {
             "dashboard.html";
 
     }
+
+}
+
+
+/* ================================================= */
+/* LOGOUT */
+/* ================================================= */
+
+function fazerLogout() {
+
+    localStorage.removeItem(
+        "donee_usuario_logado"
+    );
+
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+/* ================================================= */
+/* EXCLUIR CONTA */
+/* ================================================= */
+
+function excluirConta() {
+
+    const usuario =
+        obterUsuarioLogado();
+
+
+    if (!usuario) {
+
+        return false;
+
+    }
+
+
+    const usuarios =
+        obterUsuarios();
+
+
+    const novosUsuarios =
+        usuarios.filter(function (item) {
+
+            return item.id !== usuario.id;
+
+        });
+
+
+    salvarUsuarios(
+        novosUsuarios
+    );
+
+
+    localStorage.removeItem(
+        "donee_usuario_logado"
+    );
+
+
+    return true;
 
 }
