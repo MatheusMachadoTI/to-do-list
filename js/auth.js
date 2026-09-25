@@ -450,3 +450,122 @@ function excluirConta() {
     return true;
 
 }
+
+
+/* ================================================= */
+/* GAMIFICAÇÃO - XP */
+/* ================================================= */
+
+
+/*
+    Retorna a quantidade de XP
+    do usuário atualmente logado.
+*/
+
+function obterXPUsuario() {
+
+    const usuario =
+        obterUsuarioLogado();
+
+
+    if (!usuario) {
+
+        return 0;
+
+    }
+
+
+    return Number(usuario.xp) || 0;
+
+}
+
+
+/*
+    Calcula o nível com base no XP.
+
+    0 até 99 XP   = Nível 1
+    100 até 199   = Nível 2
+    200 até 299   = Nível 3
+    etc.
+*/
+
+function calcularNivel(xp) {
+
+    const experiencia =
+        Math.max(
+            0,
+            Number(xp) || 0
+        );
+
+
+    return (
+        Math.floor(
+            experiencia / 100
+        ) + 1
+    );
+
+}
+
+
+/*
+    Retorna o nível atual
+    do usuário logado.
+*/
+
+function obterNivelUsuario() {
+
+    return calcularNivel(
+        obterXPUsuario()
+    );
+
+}
+
+
+/*
+    Adiciona ou remove XP.
+
+    Exemplo:
+
+    adicionarXP(10)
+    -> adiciona 10 XP
+
+    adicionarXP(-10)
+    -> remove 10 XP
+*/
+
+function adicionarXP(valor) {
+
+    const usuario =
+        obterUsuarioLogado();
+
+
+    if (!usuario) {
+
+        return false;
+
+    }
+
+
+    const xpAtual =
+        Number(usuario.xp) || 0;
+
+
+    usuario.xp =
+        Math.max(
+            0,
+            xpAtual +
+            Number(valor || 0)
+        );
+
+
+    usuario.nivel =
+        calcularNivel(
+            usuario.xp
+        );
+
+
+    return atualizarUsuario(
+        usuario
+    );
+
+}
