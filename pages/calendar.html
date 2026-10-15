@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Calendário | Donee</title>
+
+
+    <!-- ================================================= -->
+    <!-- FONTE -->
+    <!-- ================================================= -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- ================================================= -->
+    <!-- CSS -->
+    <!-- ================================================= -->
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/components.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/dashboard.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/tasks.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/calendar.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="dashboard-layout">
+
+
+    <!-- ================================================= -->
+    <!-- SIDEBAR -->
+    <!-- ================================================= -->
+
+    <aside class="sidebar">
+
+
+        <!-- LOGO -->
+
+        <div class="sidebar-logo">
+
+            <a href="dashboard.html">
+
+                <img
+                    src="../assets/images/logo-Donee.png"
+                    alt="Logo Donee"
+                >
+
+            </a>
+
+        </div>
+
+
+        <!-- MENU -->
+
+        <nav class="sidebar-menu">
+
+
+            <a
+                href="dashboard.html"
+                class="menu-item"
+            >
+
+                <i data-lucide="layout-dashboard"></i>
+
+                <span>Dashboard</span>
+
+            </a>
+
+
+            <a
+                href="tasks.html"
+                class="menu-item"
+            >
+
+                <i data-lucide="list-checks"></i>
+
+                <span>Tarefas</span>
+
+            </a>
+
+
+            <a
+                href="calendar.html"
+                class="menu-item active"
+            >
+
+                <i data-lucide="calendar-days"></i>
+
+                <span>Calendário</span>
+
+            </a>
+
+
+            <a
+                href="profile.html"
+                class="menu-item"
+            >
+
+                <i data-lucide="user"></i>
+
+                <span>Perfil</span>
+
+            </a>
+
+
+            <a
+                href="settings.html"
+                class="menu-item"
+            >
+
+                <i data-lucide="settings"></i>
+
+                <span>Configurações</span>
+
+            </a>
+
+
+        </nav>
+
+
+        <!-- PERFIL -->
+
+        <a
+            href="profile.html"
+            class="sidebar-profile"
+        >
+
+            <div class="profile-avatar">
+
+                <i data-lucide="user"></i>
+
+            </div>
+
+
+            <div class="profile-info">
+
+                <strong id="sidebarUserName">
+                    Usuário
+                </strong>
+
+                <span>
+                    Meu perfil
+                </span>
+
+            </div>
+
+
+            <i
+                data-lucide="chevron-right"
+                class="profile-arrow"
+            ></i>
+
+        </a>
+
+
+    </aside>
+
+
+
+    <!-- ================================================= -->
+    <!-- CONTEÚDO -->
+    <!-- ================================================= -->
+
+    <main class="tasks-content calendar-content">
+
+        <header class="tasks-header">
+            <div>
+                <span class="tasks-label">AGENDA</span>
+                <h1>Calendário</h1>
+                <p>Veja suas tarefas distribuídas por dia e horário.</p>
+            </div>
+
+            <div class="cal-views" id="calViews">
+                <button type="button" class="cal-view-btn" data-view="month">Mês</button>
+                <button type="button" class="cal-view-btn active" data-view="week">Semana</button>
+                <button type="button" class="cal-view-btn" data-view="day">Dia</button>
+            </div>
+        </header>
+
+        <section class="cal-stats" id="calStats"></section>
+
+        <section class="cal-card">
+            <div class="cal-toolbar">
+                <h2 id="calTitle"></h2>
+                <div class="cal-nav">
+                    <button type="button" id="calPrev" aria-label="Anterior"><i data-lucide="chevron-left"></i></button>
+                    <button type="button" id="calToday" class="cal-today">Hoje</button>
+                    <button type="button" id="calNext" aria-label="Próximo"><i data-lucide="chevron-right"></i></button>
+                </div>
+            </div>
+            <div id="calBody"></div>
+        </section>
+
+    </main>
+
+</div>
+
+<div class="cal-modal" id="calModal">
+    <div class="cal-modal-content" id="calModalContent"></div>
+</div>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/calendar.js"></script>
+
+</body>
+
+</html>
