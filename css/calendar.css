@@ -2,7 +2,7 @@
 /* CALENDÁRIO */
 /* ================================================= */
 
-.calendar-content { --g-high: linear-gradient(135deg,#FF7EB3,#FF5C8A); --g-medium: linear-gradient(135deg,#FFD166,#FFA940); --g-low: linear-gradient(135deg,#8FA8FF,#4DABF7); --g-done: linear-gradient(135deg,#B794FF,#7C5CFC); }
+.calendar-content { --g-high: linear-gradient(135deg,#FF7EB3,#FF5C8A); --g-medium: linear-gradient(135deg,#FFD166,#FFA940); --g-low: linear-gradient(135deg,#8FA8FF,#4DABF7); --g-overdue: linear-gradient(135deg,#6296E8,#3977D5); --g-done: linear-gradient(135deg,#B794FF,#7C5CFC); --g-completed: linear-gradient(135deg,#4ADE80,#1EDE48); }
 
 .cal-views { display: flex; gap: 6px; padding: 5px; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; box-shadow: var(--shadow-sm); }
 .cal-view-btn { padding: 8px 20px; border-radius: 999px; font-weight: 600; font-size: .9rem; color: var(--text-secondary); transition: .2s; }
@@ -15,9 +15,9 @@
 .cal-stat strong { display: block; font-size: 1.9rem; line-height: 1.1; }
 .cal-stat span { font-size: .85rem; opacity: .92; }
 .cal-stat.s1 { background: var(--g-done); }
-.cal-stat.s2 { background: linear-gradient(135deg,#4ADE80,#1EDE48); }
-.cal-stat.s3 { background: var(--g-medium); }
-.cal-stat.s4 { background: var(--g-high); }
+.cal-stat.s2 { background: linear-gradient(135deg,#22C55E,#16A34A); }
+.cal-stat.s3 { background: var(--g-high); }
+.cal-stat.s4 { background: var(--g-overdue); }
 
 .cal-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); padding: 24px; }
 .cal-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
@@ -39,7 +39,8 @@
 .cal-day.today .cal-day-num { color: var(--primary); }
 .cal-badge { display: inline-block; font-size: .68rem; font-weight: 600; padding: 2px 8px; border-radius: 999px; color: #fff; width: fit-content; }
 .cal-badge.done { background: linear-gradient(135deg,#4ADE80,#1EDE48); }
-.cal-badge.pend { background: var(--g-medium); }
+.cal-badge.pend { background: var(--g-high); }
+.cal-badge.overdue { background: var(--g-overdue); }
 
 /* Semana / Dia */
 .cal-scroll { overflow-x: auto; }
@@ -57,10 +58,9 @@
 /* Card de tarefa */
 .cal-task { width: 100%; text-align: left; padding: 8px 10px; border-radius: var(--radius-md); color: #fff; box-shadow: var(--shadow-sm); transition: .2s; display: block; }
 .cal-task:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-.cal-task.high { background: var(--g-high); }
-.cal-task.medium { background: var(--g-medium); }
-.cal-task.low { background: var(--g-low); }
-.cal-task.done { background: var(--g-done); }
+.cal-task.pending { background: var(--g-high); }
+.cal-task.overdue { background: var(--g-overdue); }
+.cal-task.done { background: var(--g-completed); }
 .cal-task.done .cal-task-title { text-decoration: line-through; opacity: .85; }
 .cal-task-time { font-size: .68rem; opacity: .9; display: block; }
 .cal-task-title { font-size: .8rem; font-weight: 600; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

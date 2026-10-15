@@ -35,14 +35,31 @@ const hourOf = t => (t ? parseInt(t.split(":")[0], 10) : 0);
 const prioClass = p => (p === "high" || p === "alta" ? "high" : p === "low" || p === "baixa" ? "low" : "medium");
 const prioText = c => ({ high: "Alta", medium: "Média", low: "Baixa" }[c]);
 
+function taskStatus(task, now) {
+    if (task.completed) return "done";
+    if (!task.date) return "pending";
+
+    const [year, month, day] = task.date.split("-").map(Number);
+    const due = new Date(year, month - 1, day);
+    if (task.time) {
+        const [hours, minutes] = task.time.split(":").map(Number);
+        due.setHours(hours, minutes, 0, 0);
+    } else {
+        due.setHours(23, 59, 59, 999);
+    }
+
+    return due < now ? "overdue" : "pending";
+}
+
 function tasksOf(dateStr) {
     return tasks
         .filter(t => t.date === dateStr)
         .sort((a, b) => (a.time || "").localeCompare(b.time || ""));
 }
-function counts(list) {
+function counts(list, now) {
     const done = list.filter(t => t.completed).length;
-    return { done, pend: list.length - done };
+    const overdue = list.filter(t => taskStatus(t, now) === "overdue").length;
+    return { done, pend: list.length - done - overdue, overdue };
 }
 function weekStart(d) { return addDays(d, -d.getDay()); }
 
@@ -60,40 +77,39 @@ function toggleTask(id) {
 }
 
 // ---------- componentes ----------
-function taskCard(t) {
-    const cls = t.completed ? "done" : prioClass(t.priority);
+function taskCard(t, now) {
+    const cls = taskStatus(t, now);
     return `<button type="button" class="cal-task ${cls}" data-open="${t.id}">
         <span class="cal-task-time">${esc(t.time || "")}${t.completed ? " ✓" : ""}</span>
         <span class="cal-task-title">${esc(t.title)}</span></button>`;
 }
 
-function renderStats() {
+function renderStats(now) {
     const total = tasks.length;
-    const { done, pend } = counts(tasks);
-    const hoje = todayISO();
-    const late = tasks.filter(t => !t.completed && t.date && t.date < hoje).length;
+    const { done, pend, overdue } = counts(tasks, now);
     const box = (c, n, l) => `<div class="cal-stat ${c}"><strong>${n}</strong><span>${l}</span></div>`;
     calStats.innerHTML = box("s1", total, "Total de tarefas") + box("s2", done, "Concluídas") +
-        box("s3", pend, "Pendentes") + box("s4", late, "Atrasadas");
+        box("s3", pend, "Pendentes") + box("s4", overdue, "Atrasadas");
 }
 
-function renderMonth() {
+function renderMonth(now) {
     const first = new Date(current.getFullYear(), current.getMonth(), 1);
     const start = addDays(first, -first.getDay());
     calTitle.textContent = current.toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
     let html = `<div class="cal-month">` + DOW.map(d => `<div class="cal-dow">${d}</div>`).join("");
     for (let i = 0; i < 42; i++) {
-        const d = addDays(start, i), s = iso(d), list = tasksOf(s), c = counts(list);
+        const d = addDays(start, i), s = iso(d), list = tasksOf(s), c = counts(list, now);
         html += `<button type="button" class="cal-day ${d.getMonth() !== current.getMonth() ? "other" : ""} ${s === todayISO() ? "today" : ""}" data-day="${s}">
             <span class="cal-day-num">${d.getDate()}</span>
             ${c.done ? `<span class="cal-badge done">${c.done} ${c.done === 1 ? "completa" : "completas"}</span>` : ""}
+            ${c.overdue ? `<span class="cal-badge overdue">${c.overdue} ${c.overdue === 1 ? "atrasada" : "atrasadas"}</span>` : ""}
             ${c.pend ? `<span class="cal-badge pend">${c.pend} ${c.pend === 1 ? "pendente" : "pendentes"}</span>` : ""}
         </button>`;
     }
     calBody.innerHTML = html + `</div>`;
 }
 
-function renderTimeGrid(days) {
+function renderTimeGrid(days, now) {
     const isDay = days.length === 1;
     const a = days[0], b = days[days.length - 1];
     calTitle.textContent = isDay
@@ -102,25 +118,26 @@ function renderTimeGrid(days) {
 
     let html = `<div class="cal-scroll"><div class="cal-grid ${isDay ? "day" : ""}" style="grid-template-columns:56px repeat(${days.length},1fr)"><div></div>`;
     days.forEach(d => {
-        const c = counts(tasksOf(iso(d)));
-        html += `<div class="cal-head ${iso(d) === todayISO() ? "today" : ""}">${DOW[d.getDay()]}<b>${pad(d.getDate())}/${pad(d.getMonth() + 1)}</b><small>${c.done} ✓ · ${c.pend} pend.</small></div>`;
+        const c = counts(tasksOf(iso(d)), now);
+        html += `<div class="cal-head ${iso(d) === todayISO() ? "today" : ""}">${DOW[d.getDay()]}<b>${pad(d.getDate())}/${pad(d.getMonth() + 1)}</b><small>${c.done} ✓ · ${c.pend} pend. · ${c.overdue} atras.</small></div>`;
     });
     HOURS.forEach(h => {
         html += `<div class="cal-hour">${pad(h)}:00</div>`;
         days.forEach(d => {
             const s = iso(d);
             const list = tasksOf(s).filter(t => Math.min(Math.max(hourOf(t.time), 6), 23) === h);
-            html += `<div class="cal-cell ${s === todayISO() ? "today" : ""}">${list.map(taskCard).join("")}</div>`;
+            html += `<div class="cal-cell ${s === todayISO() ? "today" : ""}">${list.map(t => taskCard(t, now)).join("")}</div>`;
         });
     });
     calBody.innerHTML = html + `</div></div>`;
 }
 
 function render() {
-    renderStats();
-    if (view === "month") renderMonth();
-    else if (view === "week") { const s = weekStart(current); renderTimeGrid(Array.from({ length: 7 }, (_, i) => addDays(s, i))); }
-    else renderTimeGrid([current]);
+    const now = new Date();
+    renderStats(now);
+    if (view === "month") renderMonth(now);
+    else if (view === "week") { const s = weekStart(current); renderTimeGrid(Array.from({ length: 7 }, (_, i) => addDays(s, i)), now); }
+    else renderTimeGrid([current], now);
     document.querySelectorAll(".cal-view-btn").forEach(b => b.classList.toggle("active", b.dataset.view === view));
     if (window.lucide) lucide.createIcons();
 }
@@ -129,12 +146,12 @@ function render() {
 let modalDay = null;
 function openDay(dateStr) {
     modalDay = dateStr;
-    const list = tasksOf(dateStr), c = counts(list);
+    const list = tasksOf(dateStr), c = counts(list, new Date());
     const d = parse(dateStr);
     calModalContent.innerHTML = `
         <div class="cal-modal-head">
             <div><h3>${d.toLocaleDateString("pt-BR", { weekday: "long", day: "numeric", month: "long" })}</h3>
-            <p>${c.done} concluída(s) · ${c.pend} pendente(s)</p></div>
+            <p>${c.done} concluída(s) · ${c.pend} pendente(s) · ${c.overdue} atrasada(s)</p></div>
             <button type="button" class="cal-close" data-close aria-label="Fechar">✕</button>
         </div>
         ${list.length ? list.map(t => `
