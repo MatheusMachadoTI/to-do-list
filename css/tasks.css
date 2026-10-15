@@ -1345,6 +1345,412 @@
 }
 
 
+.task-schedule-row {
+
+    gap: 16px;
+
+}
+
+
+.schedule-field {
+
+    min-width: 0;
+
+}
+
+
+.schedule-field > label,
+.repeat-end-field > label {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+}
+
+
+.schedule-input {
+
+    position: relative;
+
+}
+
+
+.schedule-input > svg {
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 13px;
+
+    width: 17px;
+
+    height: 17px;
+
+    color: #7C5CFC;
+
+    transform: translateY(-50%);
+
+    pointer-events: none;
+
+}
+
+
+.form-group .schedule-input input {
+
+    padding-left: 40px;
+
+    border-color: #E7E3F7;
+
+    background: linear-gradient(135deg, #FCFBFF, #F8F9FF);
+
+    color-scheme: light;
+
+    font-weight: 600;
+
+}
+
+
+.form-group .schedule-input input:hover {
+
+    border-color: #CFC6FF;
+
+}
+
+
+.schedule-field > small,
+.repeat-end-field > small {
+
+    color: #85899A;
+
+    font-size: 10px;
+
+}
+
+
+.task-repeat-panel {
+
+    margin: 0 0 18px;
+
+    padding: 14px;
+
+    border: 1px solid #EAE6FA;
+
+    border-radius: 15px;
+
+    background: linear-gradient(135deg, #FCFBFF, #F8FAFF);
+
+}
+
+
+.repeat-toggle {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    cursor: pointer;
+
+}
+
+
+.repeat-toggle > input {
+
+    position: absolute;
+
+    width: 1px;
+
+    height: 1px;
+
+    opacity: 0;
+
+}
+
+
+.repeat-toggle-mark {
+
+    width: 38px;
+
+    height: 38px;
+
+    display: grid;
+
+    place-items: center;
+
+    flex-shrink: 0;
+
+    border-radius: 12px;
+
+    background: #EEEAFE;
+
+    color: #7C5CFC;
+
+    transition: 0.2s ease;
+
+}
+
+
+.repeat-toggle-mark svg {
+
+    width: 18px;
+
+    height: 18px;
+
+}
+
+
+.repeat-toggle > input:checked + .repeat-toggle-mark {
+
+    background: #7C5CFC;
+
+    color: #FFFFFF;
+
+}
+
+
+.repeat-toggle > input:focus-visible + .repeat-toggle-mark {
+
+    outline: 3px solid rgba(124, 92, 252, 0.2);
+
+}
+
+
+.repeat-toggle-copy {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+
+}
+
+
+.repeat-toggle-copy strong {
+
+    color: #39394F;
+
+    font-size: 12px;
+
+}
+
+
+.repeat-toggle-copy small {
+
+    color: #85899A;
+
+    font-size: 10px;
+
+}
+
+
+.repeat-options {
+
+    display: grid;
+
+    gap: 16px;
+
+    margin-top: 16px;
+
+    padding-top: 15px;
+
+    border-top: 1px solid #EAE6FA;
+
+}
+
+
+.repeat-options[hidden] {
+
+    display: none;
+
+}
+
+
+.weekday-fieldset {
+
+    min-width: 0;
+
+    margin: 0;
+
+    padding: 0;
+
+    border: 0;
+
+}
+
+
+.weekday-fieldset legend {
+
+    margin-bottom: 9px;
+
+    color: #44465A;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+}
+
+
+.weekday-picker {
+
+    display: grid;
+
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+
+    gap: 6px;
+
+}
+
+
+.weekday-picker label {
+
+    cursor: pointer;
+
+}
+
+
+.weekday-picker input {
+
+    position: absolute;
+
+    width: 1px;
+
+    height: 1px;
+
+    opacity: 0;
+
+}
+
+
+.weekday-picker span {
+
+    min-height: 36px;
+
+    display: grid;
+
+    place-items: center;
+
+    border: 1px solid #E4E5EC;
+
+    border-radius: 10px;
+
+    background: #FFFFFF;
+
+    color: #737789;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    transition: 0.2s ease;
+
+}
+
+
+.weekday-picker input:checked + span {
+
+    border-color: #7C5CFC;
+
+    background: #7C5CFC;
+
+    color: #FFFFFF;
+
+    box-shadow: 0 4px 10px rgba(124, 92, 252, 0.18);
+
+}
+
+
+.weekday-picker input:focus-visible + span {
+
+    outline: 3px solid rgba(124, 92, 252, 0.2);
+
+}
+
+
+.weekday-picker label:hover span {
+
+    border-color: #B9ACFF;
+
+}
+
+
+.repeat-end-field {
+
+    margin-bottom: 0;
+
+}
+
+
+.repeat-end-date-field {
+
+    display: grid;
+
+    gap: 7px;
+
+    margin-top: 10px;
+
+}
+
+
+.repeat-end-date-field[hidden] {
+
+    display: none;
+
+}
+
+
+.repeat-end-date-field > label {
+
+    color: #44465A;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+}
+
+
+.repeat-end-date-field > small {
+
+    color: #85899A;
+
+    font-size: 10px;
+
+}
+
+
+.task-repeat-label {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 4px;
+
+    color: #7C5CFC;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+}
+
+
+.task-repeat-label svg {
+
+    width: 12px;
+
+    height: 12px;
+
+}
+
+
 /* ================================================= */
 /* BOTÕES DO MODAL */
 /* ================================================= */

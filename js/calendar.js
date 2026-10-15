@@ -52,8 +52,11 @@ function taskStatus(task, now) {
 }
 
 function tasksOf(dateStr) {
-    return tasks
-        .filter(t => t.date === dateStr)
+    const regularTasks = tasks.filter(t => !t.repeatWeekly && t.date === dateStr);
+    const recurringTasks = tasks
+        .filter(t => t.repeatWeekly)
+        .flatMap(t => expandirTarefaSemanal(t, dateStr, dateStr));
+    return [...regularTasks, ...recurringTasks]
         .sort((a, b) => (a.time || "").localeCompare(b.time || ""));
 }
 function counts(list, now) {
@@ -64,9 +67,21 @@ function counts(list, now) {
 function weekStart(d) { return addDays(d, -d.getDay()); }
 
 // ---------- persistência / XP (mesma regra da página de tarefas) ----------
-function toggleTask(id) {
+function toggleTask(id, occurrenceDate) {
     tasks = tasks.map(task => {
         if (Number(task.id) !== Number(id)) return task;
+        if (task.repeatWeekly) {
+            const date = occurrenceDate || task.date;
+            const completedDates = Array.isArray(task.completedDates) ? task.completedDates : [];
+            const alreadyCompleted = completedDates.includes(date);
+            adicionarXP(alreadyCompleted ? -10 : 10);
+            return {
+                ...task,
+                completedDates: alreadyCompleted
+                    ? completedDates.filter(completedDate => completedDate !== date)
+                    : [...completedDates, date]
+            };
+        }
         const concluida = !task.completed;
         if (concluida && !task.xpConcedido) { adicionarXP(10); return { ...task, completed: true, xpConcedido: true }; }
         if (!concluida && task.xpConcedido) { adicionarXP(-10); return { ...task, completed: false, xpConcedido: false }; }
@@ -79,17 +94,19 @@ function toggleTask(id) {
 // ---------- componentes ----------
 function taskCard(t, now) {
     const cls = taskStatus(t, now);
-    return `<button type="button" class="cal-task ${cls}" data-open="${t.id}">
+    return `<button type="button" class="cal-task ${cls}" data-open="${t.id}" data-date="${t.date}">
         <span class="cal-task-time">${esc(t.time || "")}${t.completed ? " ✓" : ""}</span>
         <span class="cal-task-title">${esc(t.title)}</span></button>`;
 }
 
 function renderStats(now) {
     const total = tasks.length;
-    const { done, pend, overdue } = counts(tasks, now);
+    const regularTasks = tasks.filter(t => !t.repeatWeekly);
+    const recurringCount = tasks.length - regularTasks.length;
+    const { done, pend, overdue } = counts(regularTasks, now);
     const box = (c, n, l) => `<div class="cal-stat ${c}"><strong>${n}</strong><span>${l}</span></div>`;
     calStats.innerHTML = box("s1", total, "Total de tarefas") + box("s2", done, "Concluídas") +
-        box("s3", pend, "Pendentes") + box("s4", overdue, "Atrasadas");
+        box("s3", pend + recurringCount, "Pendentes") + box("s4", overdue, "Atrasadas");
 }
 
 function renderMonth(now) {
@@ -159,7 +176,7 @@ function openDay(dateStr) {
                 <span class="cal-dot ${prioClass(t.priority)}"></span>
                 <div class="info"><strong>${esc(t.title)}</strong>
                 <small>${esc(t.time || "--:--")} · ${esc(t.category)} · Prioridade ${prioText(prioClass(t.priority))}</small></div>
-                <button type="button" class="cal-check ${t.completed ? "undo" : ""}" data-toggle="${t.id}">${t.completed ? "Reabrir" : "Concluir"}</button>
+                <button type="button" class="cal-check ${t.completed ? "undo" : ""}" data-toggle="${t.id}" data-date="${t.date}">${t.completed ? "Reabrir" : "Concluir"}</button>
             </div>`).join("") : `<p class="cal-empty">Nenhuma tarefa neste dia.</p>`}
         <a class="cal-go" href="tasks.html">Gerenciar em Tarefas →</a>`;
     calModal.classList.add("show");
@@ -182,14 +199,14 @@ document.getElementById("calToday").onclick = () => { current = new Date(); curr
 
 calBody.addEventListener("click", e => {
     const t = e.target.closest("[data-open]");
-    if (t) { const task = tasks.find(x => Number(x.id) === Number(t.dataset.open)); if (task) openDay(task.date); return; }
+    if (t) { openDay(t.dataset.date); return; }
     const d = e.target.closest("[data-day]");
     if (d) openDay(d.dataset.day);
 });
 calModal.addEventListener("click", e => {
     if (e.target === calModal || e.target.closest("[data-close]")) return closeModal();
     const tg = e.target.closest("[data-toggle]");
-    if (tg) { toggleTask(tg.dataset.toggle); openDay(modalDay); }
+    if (tg) { toggleTask(tg.dataset.toggle, tg.dataset.date); openDay(modalDay); }
 });
 document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
 window.addEventListener("storage", () => { tasks = obterTarefasUsuario(); render(); });

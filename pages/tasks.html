@@ -537,19 +537,20 @@
 
             <!-- DATA -->
 
-            <div class="form-row">
+            <div class="form-row task-schedule-row">
 
 
-                <div class="form-group">
+                <div class="form-group schedule-field">
 
                     <label for="taskDate">
                         Data
                     </label>
 
-                    <input
-                        type="date"
-                        id="taskDate"
-                    >
+                    <div class="schedule-input">
+                        <i data-lucide="calendar-days"></i>
+                        <input type="date" id="taskDate">
+                    </div>
+                    <small>Escolha o dia da tarefa.</small>
 
                 </div>
 
@@ -557,23 +558,64 @@
 
                 <!-- HORÁRIO -->
 
-                <div class="form-group">
+                <div class="form-group schedule-field">
 
                     <label for="taskTime">
                         Horário
                     </label>
 
-                    <input
-                        type="time"
-                        id="taskTime"
-                        required
-                    >
+                    <div class="schedule-input">
+                        <i data-lucide="clock-3"></i>
+                        <input type="time" id="taskTime" required>
+                    </div>
+                    <small>Defina a hora para realizar.</small>
 
                 </div>
 
 
             </div>
 
+            <section class="task-repeat-panel" id="repeatPanel">
+                <label class="repeat-toggle" for="repeatWeekly">
+                    <input type="checkbox" id="repeatWeekly">
+                    <span class="repeat-toggle-mark"><i data-lucide="repeat-2"></i></span>
+                    <span class="repeat-toggle-copy">
+                        <strong>Repetir semanalmente</strong>
+                        <small>Crie uma tarefa para cada dia selecionado.</small>
+                    </span>
+                </label>
+
+                <div class="repeat-options" id="repeatOptions" hidden>
+                    <fieldset class="weekday-fieldset">
+                        <legend>Repetir nestes dias</legend>
+                        <div class="weekday-picker">
+                            <label><input type="checkbox" name="repeatDay" value="1"><span>Seg</span></label>
+                            <label><input type="checkbox" name="repeatDay" value="2"><span>Ter</span></label>
+                            <label><input type="checkbox" name="repeatDay" value="3"><span>Qua</span></label>
+                            <label><input type="checkbox" name="repeatDay" value="4"><span>Qui</span></label>
+                            <label><input type="checkbox" name="repeatDay" value="5"><span>Sex</span></label>
+                            <label><input type="checkbox" name="repeatDay" value="6"><span>Sáb</span></label>
+                            <label><input type="checkbox" name="repeatDay" value="0"><span>Dom</span></label>
+                        </div>
+                    </fieldset>
+
+                    <div class="form-group repeat-end-field">
+                        <label for="repeatEndMode">Fim da repetição</label>
+                        <select id="repeatEndMode">
+                            <option value="date">Até uma data</option>
+                            <option value="forever">Para sempre</option>
+                        </select>
+                        <div class="repeat-end-date-field" id="repeatEndDateField">
+                            <label for="repeatUntil">Repetir até</label>
+                            <div class="schedule-input">
+                                <i data-lucide="calendar-check-2"></i>
+                                <input type="date" id="repeatUntil">
+                            </div>
+                            <small>A última ocorrência pode ser nesta data.</small>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
 
             <!-- PRIORIDADE -->

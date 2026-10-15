@@ -396,8 +396,34 @@ function renderDashboardTasks() {
     }
 
 
+    const today =
+        getTodayString();
+
+
     const tasks =
-        getTasks();
+        getTasks().flatMap(
+            function (task) {
+
+                if (!task.repeatWeekly) {
+
+                    return [task];
+
+                }
+
+
+                const occurrence =
+                    proximaOcorrenciaSemanal(
+                        task,
+                        today
+                    );
+
+
+                return occurrence
+                    ? [occurrence]
+                    : [];
+
+            }
+        );
 
 
     dashboardTasks.innerHTML =
@@ -573,6 +599,12 @@ function renderDashboardTasks() {
                             ${escaparHTML(
                                 task.category
                             )}
+
+                            ${
+                                task.repeatWeekly
+                                    ? " · Repete semanalmente"
+                                    : ""
+                            }
 
                             ${
                                 dataHTML

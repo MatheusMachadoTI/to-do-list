@@ -47,6 +47,24 @@ const taskDate =
 const taskTime =
     document.getElementById("taskTime");
 
+const repeatPanel =
+    document.getElementById("repeatPanel");
+
+const repeatWeekly =
+    document.getElementById("repeatWeekly");
+
+const repeatOptions =
+    document.getElementById("repeatOptions");
+
+const repeatUntil =
+    document.getElementById("repeatUntil");
+
+const repeatEndMode =
+    document.getElementById("repeatEndMode");
+
+const repeatEndDateField =
+    document.getElementById("repeatEndDateField");
+
 const taskPriority =
     document.getElementById("taskPriority");
 
@@ -111,6 +129,9 @@ let currentFilter =
 let editingTaskId =
     null;
 
+let editingRecurringTask =
+    false;
+
 
 // =====================================================
 // INFORMAÇÃO DO USUÁRIO
@@ -164,6 +185,116 @@ function getTodayString() {
 
 
     return `${ano}-${mes}-${dia}`;
+
+}
+
+
+function formatDateInput(date) {
+    return formatarDataTarefa(date);
+
+}
+
+
+function resetRepeatControls() {
+
+    if (repeatPanel) {
+
+        repeatPanel.hidden = false;
+
+    }
+
+    if (repeatWeekly) {
+
+        repeatWeekly.checked = false;
+
+    }
+
+    if (repeatOptions) {
+
+        repeatOptions.hidden = true;
+
+    }
+
+    if (repeatUntil) {
+
+        repeatUntil.value = "";
+        repeatUntil.min = taskDate ? taskDate.value : "";
+
+    }
+
+    if (repeatEndMode) {
+
+        repeatEndMode.value = "date";
+
+    }
+
+    if (repeatEndDateField) {
+
+        repeatEndDateField.hidden = false;
+
+    }
+
+    if (repeatWeekly) {
+
+        repeatWeekly.disabled = false;
+
+    }
+
+    if (repeatEndMode) {
+
+        repeatEndMode.disabled = false;
+
+    }
+
+    document.querySelectorAll(
+        'input[name="repeatDay"]'
+    ).forEach(function (day) {
+
+        day.checked = false;
+
+    });
+
+}
+
+
+function updateRepeatDateRange() {
+
+    if (!taskDate || !repeatUntil) {
+
+        return;
+
+    }
+
+    const startDate =
+        taskDate.value;
+
+    repeatUntil.min =
+        startDate;
+
+    if (
+        startDate &&
+        repeatUntil.value &&
+        repeatUntil.value < startDate
+    ) {
+
+        repeatUntil.value =
+            startDate;
+
+    }
+
+}
+
+
+function updateRepeatEndMode() {
+
+    if (!repeatEndMode || !repeatEndDateField) {
+
+        return;
+
+    }
+
+    repeatEndDateField.hidden =
+        repeatEndMode.value === "forever";
 
 }
 
@@ -589,8 +720,34 @@ function getFilteredTasks() {
             : "";
 
 
+    const hoje =
+        getTodayString();
+
+
     let filtered =
-        [...tasks];
+        tasks.flatMap(
+            function (task) {
+
+                if (!task.repeatWeekly) {
+
+                    return [task];
+
+                }
+
+
+                const occurrence =
+                    proximaOcorrenciaSemanal(
+                        task,
+                        hoje
+                    );
+
+
+                return occurrence
+                    ? [occurrence]
+                    : [];
+
+            }
+        );
 
 
     // -------------------------------------------------
@@ -892,6 +1049,16 @@ function renderTasks() {
                         </span>
                     `;
 
+            const recurrenceHTML =
+                task.repeatWeekly
+                    ? `
+                        <span class="task-repeat-label">
+                            <i data-lucide="repeat-2"></i>
+                            Repetição semanal
+                        </span>
+                    `
+                    : "";
+
 
             const statusHTML =
                 task.completed
@@ -975,6 +1142,8 @@ function renderTasks() {
 
                             ${dataHTML}
 
+                            ${recurrenceHTML}
+
                             ${atrasoHTML}
 
                         </div>
@@ -1013,6 +1182,7 @@ function renderTasks() {
                                 : ""
                         }"
                         data-id="${task.id}"
+                        data-occurrence-date="${task.occurrenceDate || ""}"
                         type="button"
                         aria-label="${
                             task.completed
@@ -1078,7 +1248,7 @@ function ativarIcones() {
 // CONCLUIR / DESCONCLUIR
 // =====================================================
 
-function toggleTask(taskId) {
+function toggleTask(taskId, occurrenceDate) {
 
     tasks =
         tasks.map(
@@ -1088,6 +1258,40 @@ function toggleTask(taskId) {
                     Number(task.id) ===
                     Number(taskId)
                 ) {
+
+                    if (task.repeatWeekly) {
+
+                        const dataOcorrencia =
+                            occurrenceDate || task.date;
+
+                        const concluidas =
+                            Array.isArray(task.completedDates)
+                                ? task.completedDates
+                                : [];
+
+                        const jaConcluida =
+                            concluidas.includes(dataOcorrencia);
+
+                        if (jaConcluida) {
+
+                            adicionarXP(-10);
+
+                        } else {
+
+                            adicionarXP(10);
+
+                        }
+
+                        return {
+                            ...task,
+                            completedDates: jaConcluida
+                                ? concluidas.filter(function (date) {
+                                    return date !== dataOcorrencia;
+                                })
+                                : [...concluidas, dataOcorrencia]
+                        };
+
+                    }
 
                     return {
 
@@ -1162,6 +1366,8 @@ function openNewTaskModal() {
     editingTaskId =
         null;
 
+    editingRecurringTask =
+        false;
 
     if (taskForm) {
 
@@ -1201,6 +1407,15 @@ function openNewTaskModal() {
 
     }
 
+    if (repeatEndMode) {
+
+        repeatEndMode.addEventListener(
+            "change",
+            updateRepeatEndMode
+        );
+
+    }
+
 
     if (taskDate) {
 
@@ -1208,6 +1423,8 @@ function openNewTaskModal() {
             getTodayString();
 
     }
+
+    resetRepeatControls();
 
 
     openModal();
@@ -1279,6 +1496,18 @@ function editTask(taskId) {
 
     }
 
+    resetRepeatControls();
+
+    editingRecurringTask =
+        Boolean(task.repeatWeekly);
+
+    if (repeatPanel) {
+
+        repeatPanel.hidden =
+            !editingRecurringTask;
+
+    }
+
 
     editingTaskId =
         Number(task.id);
@@ -1331,6 +1560,26 @@ function editTask(taskId) {
 
     }
 
+    if (editingRecurringTask) {
+
+        repeatWeekly.checked = true;
+        repeatWeekly.disabled = true;
+        repeatOptions.hidden = false;
+        repeatEndMode.value = "forever";
+        repeatEndMode.disabled = true;
+        updateRepeatEndMode();
+
+        document.querySelectorAll(
+            'input[name="repeatDay"]'
+        ).forEach(function (day) {
+
+            day.checked =
+                (task.repeatDays || []).includes(Number(day.value));
+
+        });
+
+    }
+
 
     if (taskTime) {
 
@@ -1338,6 +1587,8 @@ function editTask(taskId) {
             task.time || "";
 
     }
+
+    updateRepeatDateRange();
 
 
     if (taskPriority) {
@@ -1379,6 +1630,11 @@ function closeModal() {
 
     editingTaskId =
         null;
+
+    editingRecurringTask =
+        false;
+
+    resetRepeatControls();
 
 
     if (taskForm) {
@@ -1442,6 +1698,23 @@ function saveTask(event) {
     const priority =
         taskPriority.value;
 
+    const repeatEnabled =
+        Boolean(repeatWeekly && repeatWeekly.checked);
+
+    const repeatEndDate =
+        repeatUntil ? repeatUntil.value : "";
+
+    const repeatForever =
+        Boolean(repeatEndMode && repeatEndMode.value === "forever");
+
+    const repeatDays = Array.from(
+        document.querySelectorAll('input[name="repeatDay"]:checked')
+    ).map(function (day) {
+
+        return Number(day.value);
+
+    });
+
 
     // -------------------------------------------------
     // VALIDAÇÕES
@@ -1493,6 +1766,100 @@ function saveTask(event) {
 
     }
 
+    let occurrenceDates = [date];
+
+    if (repeatEnabled) {
+
+        if (!date || (!repeatForever && !repeatEndDate)) {
+
+            alert(
+                repeatForever
+                    ? "Escolha a data inicial da repetição."
+                    : "Escolha a data inicial e a data final da repetição."
+            );
+
+            if (!date) {
+
+                taskDate.focus();
+
+            } else {
+
+                repeatUntil.focus();
+
+            }
+
+            return;
+
+        }
+
+        if (!repeatForever && repeatEndDate < date) {
+
+            alert(
+                "A data final da repetição deve ser igual ou posterior à data inicial."
+            );
+
+            repeatUntil.focus();
+
+            return;
+
+        }
+
+        if (repeatDays.length === 0) {
+
+            alert(
+                "Selecione pelo menos um dia da semana para repetir a tarefa."
+            );
+
+            document.querySelector(
+                'input[name="repeatDay"]'
+            ).focus();
+
+            return;
+
+        }
+
+        if (!repeatForever) {
+
+            occurrenceDates = [];
+
+            const [year, month, day] =
+                date.split("-").map(Number);
+
+            const cursor =
+                new Date(year, month - 1, day);
+
+            while (formatDateInput(cursor) <= repeatEndDate) {
+
+                if (repeatDays.includes(cursor.getDay())) {
+
+                    occurrenceDates.push(
+                        formatDateInput(cursor)
+                    );
+
+                }
+
+                cursor.setDate(
+                    cursor.getDate() + 1
+                );
+
+            }
+
+            if (occurrenceDates.length === 0) {
+
+                alert(
+                    "O intervalo escolhido não contém nenhum dos dias da semana selecionados."
+                );
+
+                repeatUntil.focus();
+
+                return;
+
+            }
+
+        }
+
+    }
+
 
     // -------------------------------------------------
     // EDITAR
@@ -1529,7 +1896,15 @@ function saveTask(event) {
                                 time,
 
                             priority:
-                                priority
+                                priority,
+
+                            ...(editingRecurringTask
+                                ? {
+                                    repeatWeekly: true,
+                                    repeatDays: repeatDays,
+                                    repeatUntil: null
+                                }
+                                : {})
 
                         };
 
@@ -1558,39 +1933,89 @@ function saveTask(event) {
 
     }
 
+    if (repeatEnabled && repeatForever) {
+
+        let nextTaskId =
+            Date.now();
+
+        while (tasks.some(function (task) {
+
+            return Number(task.id) === nextTaskId;
+
+        })) {
+
+            nextTaskId++;
+
+        }
+
+        tasks.push({
+            id: nextTaskId,
+            title: title,
+            category: category,
+            date: date,
+            time: time,
+            priority: priority,
+            completed: false,
+            repeatWeekly: true,
+            repeatDays: repeatDays,
+            repeatUntil: null,
+            completedDates: []
+        });
+
+        saveTasks();
+        renderTasks();
+        closeModal();
+
+        mostrarMensagem(
+            "Tarefa semanal criada para repetir para sempre!"
+        );
+
+        return;
+
+    }
+
 
     // -------------------------------------------------
     // NOVA TAREFA
     // -------------------------------------------------
 
-    const newTask = {
-
-        id:
-            Date.now(),
-
-        title:
-            title,
-
-        category:
-            category,
-
-        date:
-            date,
-
-        time:
-            time,
-
-        priority:
-            priority,
-
-        completed:
-            false
-
-    };
-
+    let nextTaskId =
+        Date.now();
 
     tasks.push(
-        newTask
+        ...occurrenceDates.map(function (occurrenceDate) {
+
+            while (tasks.some(function (task) {
+
+                return Number(task.id) === nextTaskId;
+
+            })) {
+
+                nextTaskId++;
+
+            }
+
+            const newTask = {
+
+                id: nextTaskId++,
+
+                title: title,
+
+                category: category,
+
+                date: occurrenceDate,
+
+                time: time,
+
+                priority: priority,
+
+                completed: false
+
+            };
+
+            return newTask;
+
+        })
     );
 
 
@@ -1602,7 +2027,9 @@ function saveTask(event) {
 
 
     mostrarMensagem(
-        "Tarefa criada com sucesso!"
+        occurrenceDates.length > 1
+            ? `Tarefa criada em ${occurrenceDates.length} ocorrências!`
+            : "Tarefa criada com sucesso!"
     );
 
 }
@@ -1719,7 +2146,8 @@ if (tasksList) {
 
 
                 toggleTask(
-                    taskId
+                    taskId,
+                    statusButton.dataset.occurrenceDate
                 );
 
 
@@ -1845,6 +2273,73 @@ if (taskSort) {
 // =====================================================
 // NOVA TAREFA
 // =====================================================
+
+if (repeatWeekly && repeatOptions) {
+
+    repeatWeekly.addEventListener(
+        "change",
+        function () {
+
+            repeatOptions.hidden =
+                !repeatWeekly.checked;
+            updateRepeatEndMode();
+
+            if (repeatWeekly.checked) {
+
+                updateRepeatDateRange();
+
+                if (
+                    taskDate &&
+                    taskDate.value &&
+                    repeatUntil &&
+                    (
+                        !repeatUntil.value ||
+                        repeatUntil.value < taskDate.value
+                    )
+                ) {
+
+                    const [year, month, day] =
+                        taskDate.value.split("-").map(Number);
+
+                    const endDate =
+                        new Date(year, month - 1, day);
+
+                    endDate.setDate(
+                        endDate.getDate() + 28
+                    );
+
+                    repeatUntil.value =
+                        formatDateInput(endDate);
+
+                }
+
+            }
+
+        }
+    );
+
+}
+
+
+if (repeatEndMode) {
+
+    repeatEndMode.addEventListener(
+        "change",
+        updateRepeatEndMode
+    );
+
+}
+
+
+if (taskDate) {
+
+    taskDate.addEventListener(
+        "change",
+        updateRepeatDateRange
+    );
+
+}
+
 
 if (newTaskBtn) {
 

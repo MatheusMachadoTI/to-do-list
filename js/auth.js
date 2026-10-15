@@ -346,6 +346,179 @@ function salvarTarefasUsuario(tarefas) {
 }
 
 
+function formatarDataTarefa(data) {
+
+    const ano =
+        data.getFullYear();
+
+    const mes =
+        String(data.getMonth() + 1).padStart(2, "0");
+
+    const dia =
+        String(data.getDate()).padStart(2, "0");
+
+    return `${ano}-${mes}-${dia}`;
+
+}
+
+
+function expandirTarefaSemanal(tarefa, inicio, fim) {
+
+    if (
+        !tarefa.repeatWeekly ||
+        !Array.isArray(tarefa.repeatDays) ||
+        !tarefa.repeatDays.some(dia => Number.isInteger(dia) && dia >= 0 && dia <= 6) ||
+        !tarefa.date
+    ) {
+
+        return [];
+
+    }
+
+    const [anoTarefa, mesTarefa, diaTarefa] =
+        tarefa.date.split("-").map(Number);
+
+    if (
+        formatarDataTarefa(
+            new Date(anoTarefa, mesTarefa - 1, diaTarefa)
+        ) !== tarefa.date
+    ) {
+
+        return [];
+
+    }
+
+    const dataInicio =
+        inicio > tarefa.date
+            ? inicio
+            : tarefa.date;
+
+    const dataFim =
+        tarefa.repeatUntil && tarefa.repeatUntil < fim
+            ? tarefa.repeatUntil
+            : fim;
+
+    if (dataInicio > dataFim) {
+
+        return [];
+
+    }
+
+    const [ano, mes, dia] =
+        dataInicio.split("-").map(Number);
+
+    const cursor =
+        new Date(ano, mes - 1, dia);
+
+    const concluidas =
+        Array.isArray(tarefa.completedDates)
+            ? tarefa.completedDates
+            : [];
+
+    const ocorrencias = [];
+
+    while (formatarDataTarefa(cursor) <= dataFim) {
+
+        const dataOcorrencia =
+            formatarDataTarefa(cursor);
+
+        if (tarefa.repeatDays.includes(cursor.getDay())) {
+
+            ocorrencias.push({
+                ...tarefa,
+                date: dataOcorrencia,
+                occurrenceDate: dataOcorrencia,
+                completed: concluidas.includes(dataOcorrencia)
+            });
+
+        }
+
+        cursor.setDate(
+            cursor.getDate() + 1
+        );
+
+    }
+
+    return ocorrencias;
+
+}
+
+
+function proximaOcorrenciaSemanal(tarefa, aPartirDe) {
+
+    if (
+        !tarefa.repeatWeekly ||
+        !Array.isArray(tarefa.repeatDays) ||
+        !tarefa.repeatDays.some(dia => Number.isInteger(dia) && dia >= 0 && dia <= 6) ||
+        !tarefa.date
+    ) {
+
+        return null;
+
+    }
+
+    const [anoTarefa, mesTarefa, diaTarefa] =
+        tarefa.date.split("-").map(Number);
+
+    if (
+        formatarDataTarefa(
+            new Date(anoTarefa, mesTarefa - 1, diaTarefa)
+        ) !== tarefa.date
+    ) {
+
+        return null;
+
+    }
+
+    const dataInicio =
+        aPartirDe > tarefa.date
+            ? aPartirDe
+            : tarefa.date;
+
+    const [ano, mes, dia] =
+        dataInicio.split("-").map(Number);
+
+    const cursor =
+        new Date(ano, mes - 1, dia);
+
+    const concluidas =
+        Array.isArray(tarefa.completedDates)
+            ? tarefa.completedDates
+            : [];
+
+    while (
+        !tarefa.repeatUntil ||
+        formatarDataTarefa(cursor) <= tarefa.repeatUntil
+    ) {
+
+        const dataOcorrencia =
+            formatarDataTarefa(cursor);
+
+        if (
+            tarefa.repeatDays.includes(cursor.getDay()) &&
+            !concluidas.includes(dataOcorrencia)
+        ) {
+
+            return {
+                ...tarefa,
+                date: dataOcorrencia,
+                occurrenceDate: dataOcorrencia,
+                completed: false
+            };
+
+        }
+
+        cursor.setDate(
+            cursor.getDate() + 1
+        );
+
+    }
+
+    return null;
+
+}
+
+
 /* ================================================= */
 /* USUÁRIO ESTÁ LOGADO? */
 /* ================================================= */
