@@ -1,25 +1,49 @@
-/* ================================================= */
-/* RESPONSIVE */
-/* ================================================= */
-
-@media (max-width: 768px){
-
-    .container{
-
-        width:92%;
-
-    }
-
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
-@media (max-width: 1100px) {
+html,
+body {
+    max-width: 100%;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+@media (min-width: 768px) and (max-width: 1100px) {
+    .sidebar {
+        width: 220px;
+        min-width: 220px;
+    }
+
+    .sidebar-logo {
+        height: 160px;
+        padding: 24px;
+    }
+
+    .sidebar-logo img {
+        width: 105px;
+    }
+
+    .sidebar-menu {
+        padding-left: 12px;
+    }
+
+    .menu-item {
+        gap: 12px;
+        padding: 0 16px;
+    }
+
     .dashboard-content,
     .tasks-content,
     .profile-content,
     .settings-content {
         width: calc(100% - 220px);
         margin-left: 220px;
-        min-width: 0;
+        padding: 34px 28px;
     }
 
     .stats-grid {
@@ -35,46 +59,72 @@
     }
 
     .hero-content h1 {
-        font-size: clamp(42px, 5vw, 58px);
+        font-size: clamp(38px, 5vw, 52px);
     }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 767px) {
     .sidebar {
-        width: 80px;
-        min-width: 80px;
-        height: 100vh;
-        padding: 0;
-        border-radius: 0;
-    }
-
-    .sidebar-logo {
-        width: auto;
-        height: 130px;
-        margin: 0;
-        padding: 20px 10px;
-        background: transparent;
-        border-radius: 0;
-    }
-
-    .sidebar-logo img {
-        width: 55px;
+        position: fixed;
+        z-index: 1200;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        min-width: 0;
         height: auto;
+        min-height: 70px;
+        padding: 6px 6px max(6px, env(safe-area-inset-bottom));
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        overflow: visible;
+        border-radius: 18px 18px 0 0;
+        box-shadow: 0 -8px 28px rgba(40, 30, 95, 0.14);
+    }
+
+    .sidebar-logo,
+    .sidebar-profile {
+        display: none;
     }
 
     .sidebar-menu {
-        width: auto;
-        padding-left: 10px;
+        width: 100%;
+        flex: 1;
+        flex-direction: row;
+        align-items: stretch;
+        justify-content: space-around;
+        gap: 2px;
+        padding: 0;
     }
 
     .menu-item,
     .menu-item.active {
-        width: 100%;
+        width: auto;
         min-width: 0;
-        margin-right: 0;
+        height: 58px;
+        flex: 1 1 0;
+        flex-direction: column;
         justify-content: center;
-        padding: 0;
-        border-radius: 14px 0 0 14px;
+        gap: 4px;
+        margin: 0;
+        padding: 5px 1px;
+        border-radius: 12px;
+        font-size: clamp(8px, 2.4vw, 10px);
+        line-height: 1.05;
+        text-align: center;
+    }
+
+    .menu-item span {
+        display: block;
+        max-width: 100%;
+        overflow-wrap: anywhere;
+    }
+
+    .menu-item svg {
+        width: 19px;
+        height: 19px;
     }
 
     .menu-item.active::before,
@@ -86,16 +136,12 @@
     .tasks-content,
     .profile-content,
     .settings-content {
-        width: calc(100% - 80px);
-        margin-left: 80px;
-        padding: 30px 20px;
-    }
-
-    .stats-grid,
-    .profile-info-grid,
-    .account-info,
-    .benefits-grid {
-        grid-template-columns: minmax(0, 1fr);
+        width: 100%;
+        min-width: 0;
+        min-height: 100vh;
+        min-height: 100svh;
+        margin: 0;
+        padding: 30px 22px calc(92px + env(safe-area-inset-bottom));
     }
 
     .dashboard-header,
@@ -103,6 +149,70 @@
     .profile-header {
         align-items: flex-start;
         flex-direction: column;
+        gap: 18px;
+    }
+
+    .dashboard-header,
+    .tasks-header {
+        margin-bottom: 24px;
+    }
+
+    .dashboard-header h1,
+    .tasks-header h1,
+    .page-header h1,
+    .settings-header h1 {
+        font-size: clamp(25px, 6vw, 32px);
+        line-height: 1.2;
+        overflow-wrap: anywhere;
+    }
+
+    .dashboard-header p,
+    .tasks-header p,
+    .page-header p,
+    .settings-header p {
+        max-width: 60ch;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+    }
+
+    .stat-card {
+        min-width: 0;
+        min-height: 112px;
+        gap: 12px;
+        padding: 17px;
+    }
+
+    .stat-icon {
+        width: 42px;
+        height: 42px;
+    }
+
+    .stat-info span {
+        font-size: 12px;
+        line-height: 1.35;
+    }
+
+    .stat-info strong {
+        font-size: 25px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 18px;
+    }
+
+    .dashboard-card,
+    .tasks-card,
+    .profile-card,
+    .profile-section,
+    .security-card,
+    .settings-card {
+        min-width: 0;
+        padding: 22px;
+        border-radius: 20px;
     }
 
     .header-date,
@@ -111,154 +221,171 @@
         width: 100%;
     }
 
-    .hero {
-        padding: 70px 0;
-    }
-
-    .hero-container {
-        flex-direction: column;
+    .tasks-tools {
         align-items: stretch;
-    }
-
-    .hero-content h1 {
-        font-size: clamp(36px, 8vw, 48px);
-    }
-
-    .hero-image img {
-        max-width: 560px;
-        margin: 0 auto;
-    }
-
-    .steps,
-    .footer-container {
         flex-direction: column;
-        align-items: stretch;
+        gap: 12px;
     }
 
-    footer nav {
-        flex-wrap: wrap;
-        gap: 16px;
-    }
-}
-
-@media (max-width: 576px) {
-    .sidebar {
-        position: fixed;
-        left: 0;
+    .task-search {
         width: 100%;
+        max-width: none;
+    }
+
+    .task-sort {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .task-sort select {
         min-width: 0;
-        height: 68px;
-        top: auto;
-        bottom: 0;
-        flex-direction: row;
-        align-items: center;
-        padding: 0 8px;
-    }
-
-    .sidebar-logo {
-        width: 52px;
-        height: 52px;
-        margin: 0;
-        padding: 5px;
-        background: transparent;
-        border-radius: 0;
-        flex-shrink: 0;
-    }
-
-    .sidebar-logo img {
-        width: 42px;
-    }
-
-    .sidebar-menu {
         flex: 1;
-        width: auto;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-        gap: 2px;
-        padding: 0;
     }
 
-    .menu-item {
-        width: 52px;
-        min-width: 0;
-        height: 52px;
-        margin-right: 0;
-        justify-content: center;
-        padding: 0;
-        border-radius: 14px;
+    .tasks-filters {
+        max-width: 100%;
+        padding-bottom: 4px;
+        overscroll-behavior-inline: contain;
     }
 
-    .menu-item span,
-    .sidebar-profile {
-        display: none;
-    }
-
-    .menu-item.active::before,
-    .menu-item.active::after {
-        display: none;
-    }
-
-    .dashboard-content,
-    .tasks-content,
-    .profile-content,
-    .settings-content {
-        width: 100%;
-        margin-left: 0;
-        min-height: calc(100vh - 68px);
-        padding: 24px 16px 92px;
-    }
-
-    .dashboard-header h1,
-    .tasks-header h1,
-    .profile-header h1,
-    .settings-header h1,
-    .login-header h1,
-    .section-header h2,
-    .cta h2 {
-        overflow-wrap: anywhere;
-    }
-
-    .dashboard-card,
-    .tasks-card,
-    .profile-card,
-    .settings-card {
-        padding: 20px;
+    .filter-btn {
+        min-height: 44px;
+        flex: 0 0 auto;
     }
 
     .task-card {
-        align-items: flex-start;
+        align-items: center;
         gap: 12px;
-        min-width: 0;
+        padding: 15px 12px 15px 18px;
     }
 
     .task-left,
-    .task-main,
     .task-content {
         min-width: 0;
+    }
+
+    .task-left {
+        align-self: center;
+    }
+
+    .task-title-row {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 6px;
     }
 
     .task-content h3,
     .task-content p,
     .dashboard-task h3 {
+        max-width: 100%;
         overflow-wrap: anywhere;
+        white-space: normal;
     }
 
     .task-right {
-        gap: 10px;
+        gap: 4px;
+        margin-left: 0;
     }
 
     .task-time {
         display: none;
     }
 
-    .profile-card-top,
-    .setting-row,
-    .settings-card-header {
+    .task-status,
+    .edit-task-btn,
+    .delete-task-btn {
+        width: 36px;
+        height: 36px;
+        flex: 0 0 36px;
+    }
+
+    .task-card .task-status {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+    }
+
+    .dashboard-task .task-status {
+        width: 22px;
+        height: 22px;
+        flex: 0 0 22px;
+        border-radius: 50%;
+    }
+
+    .task-modal {
         align-items: flex-start;
+        padding: max(12px, env(safe-area-inset-top)) 12px max(12px, env(safe-area-inset-bottom));
+        overflow-y: auto;
+    }
+
+    .task-modal-content {
+        width: 100%;
+        max-width: 520px;
+        max-height: calc(100vh - 24px);
+        max-height: calc(100dvh - 24px);
+        margin: auto;
+        padding: 22px;
+        border-radius: 20px;
+        overscroll-behavior: contain;
+    }
+
+    .task-modal-header {
+        margin-bottom: 18px;
+    }
+
+    .form-row {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0;
+    }
+
+    .modal-buttons {
+        flex-direction: column-reverse;
+        gap: 10px;
+    }
+
+    .cancel-btn,
+    .save-task-btn {
+        width: 100%;
+        min-height: 46px;
+    }
+
+    .task-toast {
+        right: 16px;
+        bottom: 84px;
+        left: 16px;
+        justify-content: center;
+        max-width: calc(100vw - 32px);
+    }
+
+    .profile-header {
+        gap: 16px;
+    }
+
+    .profile-main-info {
+        min-width: 0;
+        width: 100%;
+        overflow-wrap: anywhere;
+    }
+
+    .profile-form {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .cancel-btn,
+    .save-btn,
+    .security-btn,
+    .settings-action,
+    .delete-btn {
+        min-height: 44px;
     }
 
     .setting-row {
+        align-items: flex-start;
         flex-wrap: wrap;
         gap: 12px;
     }
@@ -268,136 +395,454 @@
         max-width: none;
     }
 
+    .settings-select {
+        width: 100%;
+        min-width: 0;
+        min-height: 44px;
+    }
+
+    .cal-views {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .cal-view-btn {
+        min-width: 0;
+        min-height: 42px;
+        flex: 1;
+        padding: 8px 10px;
+    }
+
+    .cal-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .cal-stat {
+        min-width: 0;
+        padding: 14px;
+    }
+
+    .cal-stat strong {
+        font-size: 1.6rem;
+    }
+
+    .cal-stat span {
+        font-size: 0.75rem;
+    }
+
+    .cal-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .cal-nav {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .cal-month {
+        gap: 3px;
+    }
+
+    .cal-day {
+        min-width: 0;
+        min-height: 78px;
+        gap: 3px;
+        padding: 4px 3px;
+        border-radius: 8px;
+    }
+
+    .cal-day-num {
+        font-size: 0.8rem;
+    }
+
+    .cal-badge {
+        max-width: 100%;
+        padding: 1px 3px;
+        font-size: 0.52rem;
+        line-height: 1.15;
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+
+    .cal-modal {
+        align-items: center;
+        padding: 12px 10px calc(92px + env(safe-area-inset-bottom));
+    }
+
+    .cal-modal-content {
+        width: 100%;
+        max-height: calc(100vh - 104px);
+        max-height: calc(100dvh - 104px - env(safe-area-inset-bottom));
+        padding: 20px;
+        border-radius: 20px;
+    }
+
     .login {
-        padding: 16px;
+        min-height: 100vh;
+        min-height: 100svh;
+        align-items: flex-start;
+        padding: 20px 16px;
     }
 
     .login-container {
-        padding: 30px 20px;
-        border-radius: 18px;
+        max-width: 480px;
+        margin: auto;
+        padding: clamp(24px, 7vw, 36px);
+        border-radius: 20px;
     }
 
     .login-header {
-        margin-bottom: 28px;
+        margin-bottom: 26px;
+    }
+
+    .login-header h1 {
+        font-size: clamp(26px, 7vw, 32px);
+        line-height: 1.2;
+        overflow-wrap: anywhere;
+    }
+
+    .login-form {
+        gap: 16px;
+    }
+
+    .login-form .input,
+    .login-form .btn-primary {
+        min-height: 48px;
+    }
+
+    .container {
+        width: min(100% - 36px, 1200px);
     }
 
     .navbar {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: 8px 14px;
         height: auto;
-        min-height: 76px;
-        flex-wrap: wrap;
-        gap: 12px;
-        padding: 10px 0;
+        min-height: 0;
+        padding: 8px 0 12px;
     }
 
     .header .logo {
-        flex-shrink: 0;
+        grid-row: 1;
+        grid-column: 1;
+        margin: 0;
     }
 
     .header .logo img {
         width: auto;
-        height: 68px;
-    }
-
-    .nav-menu {
-        order: 3;
-        width: 100%;
-        justify-content: space-between;
-        gap: 12px;
-        overflow-x: auto;
+        height: 58px;
     }
 
     .nav-buttons {
-        flex: 1;
+        grid-row: 1;
+        grid-column: 2;
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 8px;
+        gap: 7px;
     }
 
     .nav-buttons .btn-primary,
-    .nav-buttons .btn-secondary,
-    .hero-buttons .btn-primary,
-    .hero-buttons .btn-secondary {
+    .nav-buttons .btn-secondary {
         width: 100%;
         min-width: 0;
-        padding: 10px 8px;
+        min-height: 42px;
+        padding: 8px 6px;
+        border-radius: 12px;
+        font-size: clamp(10px, 2.8vw, 13px);
+        text-align: center;
+    }
+
+    .nav-menu {
+        grid-row: 2;
+        grid-column: 1 / -1;
+        display: flex;
+        justify-content: center;
+        gap: clamp(12px, 4vw, 24px);
+        width: 100%;
+        padding: 6px 0 2px;
+        overflow-x: auto;
+        white-space: nowrap;
+        scrollbar-width: none;
+    }
+
+    .nav-menu::-webkit-scrollbar {
+        display: none;
+    }
+
+    .nav-menu a {
+        font-size: 13px;
+    }
+
+    .hero {
+        padding: 54px 0 42px;
+    }
+
+    .hero-container {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 28px;
+    }
+
+    .hero-content h1 {
+        margin-bottom: 16px;
+        font-size: clamp(34px, 9vw, 48px);
+        line-height: 1.08;
+        overflow-wrap: anywhere;
+    }
+
+    .hero-content p {
+        margin-bottom: 24px;
+        font-size: 16px;
+        line-height: 1.65;
+    }
+
+    .hero-badge {
+        max-width: 100%;
+        padding: 7px 12px;
         font-size: 12px;
     }
 
     .hero-buttons {
         flex-direction: column;
+        gap: 10px;
+    }
+
+    .hero-buttons .btn-primary,
+    .hero-buttons .btn-secondary {
+        width: 100%;
+        min-height: 48px;
+    }
+
+    .hero-image img {
+        width: 100%;
+        max-width: 560px;
+        margin: 0 auto;
     }
 
     .benefits,
     .how-it-works,
     .preview,
     .cta {
-        padding: 72px 0;
+        padding: 64px 0;
     }
 
     .section-header {
-        margin-bottom: 42px;
+        margin-bottom: 36px;
     }
 
     .section-header h2,
     .cta h2 {
-        font-size: 32px;
+        font-size: clamp(28px, 7vw, 36px);
+        line-height: 1.2;
+        overflow-wrap: anywhere;
+    }
+
+    .section-header p,
+    .cta p {
+        font-size: 15px;
+    }
+
+    .benefits-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+    }
+
+    .benefit-card {
+        padding: 24px;
+    }
+
+    .steps,
+    .footer-container {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 28px;
+        margin-top: 40px;
+    }
+
+    footer nav {
+        flex-wrap: wrap;
+        gap: 14px 22px;
     }
 }
 
-@media (max-width: 400px) {
-    .navbar {
-        gap: 6px;
-    }
-
-    .nav-buttons {
-        gap: 4px;
-    }
-
-    .nav-buttons .btn-primary,
-    .nav-buttons .btn-secondary {
-        padding: 8px 4px;
-        font-size: 11px;
-    }
-
-    .menu-item {
-        width: 46px;
-        height: 50px;
+@media (max-width: 480px) {
+    .menu-item:last-child span {
+        font-size: clamp(7px, 2vw, 8.5px);
+        letter-spacing: -0.25px;
     }
 
     .dashboard-content,
     .tasks-content,
     .profile-content,
     .settings-content {
-        padding: 20px 12px 88px;
+        padding: 26px 16px calc(92px + env(safe-area-inset-bottom));
+    }
+
+    .stats-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .stat-card {
+        min-height: 96px;
+        padding: 16px;
     }
 
     .dashboard-card,
     .tasks-card,
     .profile-card,
+    .profile-section,
+    .security-card,
     .settings-card {
-        padding: 16px;
-        border-radius: 16px;
+        padding: 18px;
+        border-radius: 18px;
     }
 
     .task-card {
+        align-items: center;
+        gap: 8px;
+        padding: 13px 8px 13px 14px;
+    }
+
+    .task-right {
+        gap: 2px;
+    }
+
+    .task-status,
+    .edit-task-btn,
+    .delete-task-btn {
+        width: 34px;
+        height: 36px;
+        flex-basis: 34px;
+    }
+
+    .task-card .task-status {
+        width: 34px;
+        height: 34px;
+        flex-basis: 34px;
+    }
+
+    .dashboard-task .task-status {
+        width: 22px;
+        height: 22px;
+        flex-basis: 22px;
+    }
+
+    .cal-card {
         padding: 12px;
     }
 
-    .task-border {
-        width: 4px;
+    .cal-day {
+        min-height: 70px;
+    }
+
+    .cal-badge {
+        font-size: 0.48rem;
+    }
+
+    .cal-modal-content {
+        padding: 16px;
+    }
+
+    .login {
+        padding: 14px 12px;
     }
 
     .login-container {
-        padding: 24px 16px;
+        padding: 26px 20px;
+        border-radius: 18px;
+    }
+
+    .login .logo {
+        margin-bottom: 22px;
+    }
+
+    .login-footer {
+        line-height: 1.6;
+    }
+
+    .container {
+        width: min(100% - 28px, 1200px);
+    }
+
+    .navbar {
+        gap: 6px 10px;
     }
 
     .header .logo img {
-        height: 58px;
+        height: 52px;
+    }
+
+    .nav-buttons {
+        gap: 5px;
+    }
+
+    .nav-menu {
+        justify-content: flex-start;
+    }
+
+    .hero {
+        padding: 42px 0 34px;
+    }
+
+    .benefits,
+    .how-it-works,
+    .preview,
+    .cta {
+        padding: 50px 0;
+    }
+
+    .benefit-card {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 360px) {
+    .dashboard-content,
+    .tasks-content,
+    .profile-content,
+    .settings-content {
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+
+    .stat-card {
+        gap: 10px;
+    }
+
+    .task-right {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .task-status,
+    .edit-task-btn,
+    .delete-task-btn {
+        width: 36px;
+        height: 36px;
+        flex-basis: 36px;
     }
 
     .nav-buttons .btn-primary,
     .nav-buttons .btn-secondary {
-        padding: 9px 6px;
-        font-size: 11px;
+        font-size: 10px;
+    }
+
+    .nav-menu {
+        gap: 14px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }

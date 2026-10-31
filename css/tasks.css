@@ -1021,11 +1021,11 @@
 
     align-items: center;
 
-    gap: 15px;
+    gap: 18px;
 
-    margin-top: 22px;
+    margin-top: 25px;
 
-    padding: 20px 24px;
+    padding: 22px 25px;
 
     background:
         linear-gradient(
@@ -1036,16 +1036,16 @@
 
     border: 1px solid #E9E4FF;
 
-    border-radius: 18px;
+    border-radius: 20px;
 
 }
 
 
 .task-tip-icon {
 
-    width: 42px;
+    width: 45px;
 
-    height: 42px;
+    height: 45px;
 
     display: flex;
 
@@ -1055,9 +1055,9 @@
 
     flex-shrink: 0;
 
-    border-radius: 13px;
+    border-radius: 14px;
 
-    background: #E9E2FF;
+    background: #E8E1FF;
 
     color: #7C5CFC;
 
@@ -1066,9 +1066,9 @@
 
 .task-tip-icon svg {
 
-    width: 20px;
+    width: 21px;
 
-    height: 20px;
+    height: 21px;
 
 }
 
@@ -1079,7 +1079,7 @@
 
     color: #303147;
 
-    font-size: 14px;
+    font-size: 15px;
 
 }
 

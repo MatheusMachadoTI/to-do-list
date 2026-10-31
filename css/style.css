@@ -123,6 +123,403 @@ ul {
     --transition: .25s ease;
 }
 
+body.dark-mode {
+    color-scheme: dark;
+    --background: #11131A;
+    --surface: #1B1F2A;
+    --text-primary: #F1F3F8;
+    --text-secondary: #B2B8C5;
+    --border: #343A49;
+    background: var(--background);
+    color: var(--text-primary);
+}
+
+body.dark-mode .dashboard-layout,
+body.dark-mode .dashboard-content,
+body.dark-mode .tasks-content,
+body.dark-mode .profile-content,
+body.dark-mode .settings-content,
+body.dark-mode .login,
+body.dark-mode .ui-playground {
+    background-color: var(--background);
+    color: var(--text-primary);
+}
+
+body.dark-mode .header,
+body.dark-mode .navbar,
+body.dark-mode .dashboard-card,
+body.dark-mode .stat-card,
+body.dark-mode .tasks-card,
+body.dark-mode .task-card,
+body.dark-mode .profile-card,
+body.dark-mode .profile-section,
+body.dark-mode .security-card,
+body.dark-mode .settings-card,
+body.dark-mode .cal-card,
+body.dark-mode .cal-day,
+body.dark-mode .cal-modal-content,
+body.dark-mode .login-container,
+body.dark-mode .benefit-card {
+    border-color: #343A49;
+    background-color: #1B1F2A;
+    color: #F1F3F8;
+    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.18);
+}
+
+body.dark-mode .menu-item.active,
+body.dark-mode .menu-item.active::before,
+body.dark-mode .menu-item.active::after {
+    background-color: #11131A;
+    color: #C0B2FF;
+}
+
+body.dark-mode .menu-item.active::before {
+    box-shadow: 7px 7px 0 7px #11131A;
+}
+
+body.dark-mode .menu-item.active::after {
+    box-shadow: 7px -7px 0 7px #11131A;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode .dashboard-header h1,
+body.dark-mode .tasks-header h1,
+body.dark-mode .page-header h1,
+body.dark-mode .settings-header h1,
+body.dark-mode .dashboard-card h2,
+body.dark-mode .card-header h2,
+body.dark-mode .dashboard-task h3,
+body.dark-mode .task-content h3,
+body.dark-mode .profile-main-info h2,
+body.dark-mode .settings-card-header h2,
+body.dark-mode .setting-info h3,
+body.dark-mode .stat-info strong,
+body.dark-mode .empty-tasks h3,
+body.dark-mode .empty-dashboard-tasks h3,
+body.dark-mode .task-tip h3,
+body.dark-mode .cal-head b,
+body.dark-mode .cal-day-num {
+    color: #F1F3F8;
+}
+
+body.dark-mode .section-label,
+body.dark-mode .welcome-label,
+body.dark-mode .tasks-label,
+body.dark-mode .page-label,
+body.dark-mode .settings-label,
+body.dark-mode .section-title span {
+    color: #B7A7FF;
+}
+
+body.dark-mode .header-date {
+    border-color: #6948F5;
+    background-color: #6948F5;
+}
+
+body.dark-mode .header-date span,
+body.dark-mode .header-date strong,
+body.dark-mode .header-date > svg {
+    color: #FFFFFF;
+}
+
+body.dark-mode p,
+body.dark-mode .dashboard-header p,
+body.dark-mode .tasks-header p,
+body.dark-mode .page-header p,
+body.dark-mode .settings-header p,
+body.dark-mode .dashboard-task span,
+body.dark-mode .dashboard-task .task-time,
+body.dark-mode .stat-info span,
+body.dark-mode .stat-info small,
+body.dark-mode .setting-info p,
+body.dark-mode .settings-card-header p,
+body.dark-mode .profile-main-info p,
+body.dark-mode .profile-main-info span,
+body.dark-mode .form-group label,
+body.dark-mode .task-category,
+body.dark-mode .task-date,
+body.dark-mode .task-sort label,
+body.dark-mode .tasks-card > p,
+body.dark-mode .cal-head small,
+body.dark-mode .cal-item small,
+body.dark-mode .cal-empty,
+body.dark-mode .empty-tasks p,
+body.dark-mode .empty-dashboard-tasks p,
+body.dark-mode .task-tip p,
+body.dark-mode .security-content p,
+body.dark-mode .cal-head,
+body.dark-mode .cal-dow {
+    color: #B2B8C5;
+}
+
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select,
+body.dark-mode .task-search input,
+body.dark-mode .task-sort select,
+body.dark-mode .settings-select,
+body.dark-mode .form-group input {
+    border-color: #41485A;
+    background-color: #151821;
+    color: #F1F3F8;
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+    color: #9299A8;
+}
+
+body.dark-mode .profile-form input[readonly] {
+    background: #252A36;
+    color: #B2B8C5;
+}
+
+body.dark-mode .profile-avatar.has-profile-photo {
+    background: transparent;
+}
+
+.profile-avatar-image {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    object-fit: cover;
+}
+
+body.dark-mode .profile-main-avatar {
+    border-color: #1B1F2A;
+    background-color: #29233F;
+    color: #C0B2FF;
+    box-shadow: 0 0 0 1px #494064, 0 5px 16px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .btn-secondary,
+body.dark-mode .filter-btn:not(.active),
+body.dark-mode .task-status:not(.completed),
+body.dark-mode .cancel-btn,
+body.dark-mode .save-btn,
+body.dark-mode .security-btn,
+body.dark-mode .cal-nav button,
+body.dark-mode .cal-close,
+body.dark-mode .cal-check.undo,
+body.dark-mode .filter-chip,
+body.dark-mode .settings-action {
+    border-color: #8B75F5;
+    background-color: #6948F5;
+    color: #FFFFFF;
+}
+
+body.dark-mode .filter-btn.active {
+    border-color: #8B75F5;
+    background-color: #6948F5;
+    color: #FFFFFF;
+}
+
+body.dark-mode .btn-secondary:hover,
+body.dark-mode .filter-btn:not(.active):hover,
+body.dark-mode .task-status:not(.completed):hover,
+body.dark-mode .cancel-btn:hover,
+body.dark-mode .security-btn:hover,
+body.dark-mode .cal-nav button:hover,
+body.dark-mode .cal-close:hover,
+body.dark-mode .settings-action:hover {
+    border-color: #A895FF;
+    background-color: #5B3AD8;
+    color: #FFFFFF;
+}
+
+body.dark-mode .task-status,
+body.dark-mode .edit-task-btn,
+body.dark-mode .delete-task-btn,
+body.dark-mode .close-modal-btn {
+    border-color: #41485A;
+    background-color: #252A36;
+    color: #D7D1FF;
+}
+
+body.dark-mode .task-status.completed,
+body.dark-mode .dashboard-task .task-status.completed {
+    border-color: #20C968;
+    background-color: #20C968;
+    color: #FFFFFF;
+}
+
+body.dark-mode .btn-secondary,
+body.dark-mode .filter-btn:not(.active),
+body.dark-mode .task-status:not(.completed),
+body.dark-mode .cancel-btn,
+body.dark-mode .save-btn,
+body.dark-mode .security-btn,
+body.dark-mode .cal-nav button,
+body.dark-mode .cal-close,
+body.dark-mode .cal-check.undo,
+body.dark-mode .filter-chip,
+body.dark-mode .settings-action,
+body.dark-mode .edit-profile-btn,
+body.dark-mode .security-btn,
+body.dark-mode .save-task-btn {
+    color: #FFFFFF;
+}
+
+body.dark-mode .priority-low {
+    background: #173526;
+    color: #8FF0AC;
+}
+
+body.dark-mode .priority-medium {
+    background: #3B2E18;
+    color: #FFD27A;
+}
+
+body.dark-mode .priority-high {
+    background: #3A2024;
+    color: #FFA2A2;
+}
+
+body.dark-mode .task-date.no-date {
+    color: #B2B8C5;
+}
+
+body.dark-mode .task-modal-content,
+body.dark-mode .cal-modal-content {
+    border: 1px solid #343A49;
+    background-color: #1B1F2A;
+    color: #F1F3F8;
+}
+
+body.dark-mode .cal-cell,
+body.dark-mode .cal-hour,
+body.dark-mode .cal-head,
+body.dark-mode .dashboard-task {
+    border-color: #343A49;
+}
+
+body.dark-mode .dashboard-task {
+    background-color: #202430;
+}
+
+body.dark-mode .progress-number strong,
+body.dark-mode .progress-circle span,
+body.dark-mode .login-header h1 {
+    color: #F1F3F8;
+}
+
+body.dark-mode .progress-number span,
+body.dark-mode .progress-message,
+body.dark-mode .motivation-card p {
+    color: #B2B8C5;
+}
+
+body.dark-mode .dashboard-task .task-time {
+    color: #B2B8C5 !important;
+}
+
+body.dark-mode .task-time {
+    color: #B2B8C5 !important;
+}
+
+body.dark-mode .progress-circle {
+    background: conic-gradient(#9B83FF 67%, #343A49 67%);
+}
+
+body.dark-mode .progress-circle::before {
+    background: #1B1F2A;
+}
+
+body.dark-mode .progress-bar {
+    background: #343A49;
+}
+
+body.dark-mode .motivation-card {
+    border-color: #494064;
+    background: linear-gradient(135deg, #242035, #1B1F2A);
+}
+
+body.dark-mode .task-tip {
+    border-color: #494064;
+    background: linear-gradient(135deg, #242035, #1B1F2A);
+}
+
+body.dark-mode .motivation-icon,
+body.dark-mode .task-tip-icon {
+    background: #332B4F;
+    color: #C0B2FF;
+}
+
+body.dark-mode .motivation-card h2 {
+    color: #F1F3F8;
+}
+
+body.dark-mode .task-tip h3 {
+    color: #F1F3F8;
+}
+
+body.dark-mode .task-tip p {
+    color: #B2B8C5;
+}
+
+body.dark-mode .cal-day.today,
+body.dark-mode .cal-cell.today,
+body.dark-mode .cal-head.today {
+    background-color: rgba(124, 92, 252, 0.15);
+}
+
+body.dark-mode .cal-item {
+    border-color: #41485A;
+    background-color: #202430;
+    color: #F1F3F8;
+}
+
+body.dark-mode .hero {
+    background: linear-gradient(180deg, #151821 0%, #1B1A2A 100%);
+}
+
+body.dark-mode .how-it-works,
+body.dark-mode footer {
+    border-color: #343A49;
+    background-color: #151821;
+}
+
+body.dark-mode .hero-content h1,
+body.dark-mode .section-header h2,
+body.dark-mode .cta h2,
+body.dark-mode .step h3 {
+    color: #F1F3F8;
+}
+
+body.dark-mode .hero-content p,
+body.dark-mode .section-header p,
+body.dark-mode .step p,
+body.dark-mode .cta p,
+body.dark-mode footer a {
+    color: #B2B8C5;
+}
+
+body.dark-mode .hero-badge {
+    background: #29233F;
+    color: #C0B2FF;
+}
+
+body.dark-mode .settings-divider {
+    background: #343A49;
+}
+
+body.dark-mode .toggle-slider {
+    background: #50586A;
+}
+
+body.dark-mode .danger-card {
+    border-color: #633A43;
+}
+
+body.dark-mode .delete-btn {
+    border-color: #75414A;
+    background: #352329;
+    color: #FF9A9A;
+}
+
 
 /* ================================================= */
 /* TYPOGRAPHY */

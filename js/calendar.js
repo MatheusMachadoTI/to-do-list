@@ -25,6 +25,9 @@ const HOURS = Array.from({ length: 18 }, (_, i) => i + 6); // 06h - 23h
 const DOW = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
 // ---------- utilidades ----------
+const calendarLocale = () => window.doneeLocale
+    ? window.doneeLocale()
+    : ({ en: "en-US", es: "es-ES" }[localStorage.getItem("donee_language")] || "pt-BR");
 const pad = n => String(n).padStart(2, "0");
 const iso = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
 const parse = s => { const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d); };
@@ -112,7 +115,7 @@ function renderStats(now) {
 function renderMonth(now) {
     const first = new Date(current.getFullYear(), current.getMonth(), 1);
     const start = addDays(first, -first.getDay());
-    calTitle.textContent = current.toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
+    calTitle.textContent = current.toLocaleDateString(calendarLocale(), { month: "long", year: "numeric" });
     let html = `<div class="cal-month">` + DOW.map(d => `<div class="cal-dow">${d}</div>`).join("");
     for (let i = 0; i < 42; i++) {
         const d = addDays(start, i), s = iso(d), list = tasksOf(s), c = counts(list, now);
@@ -130,8 +133,8 @@ function renderTimeGrid(days, now) {
     const isDay = days.length === 1;
     const a = days[0], b = days[days.length - 1];
     calTitle.textContent = isDay
-        ? a.toLocaleDateString("pt-BR", { weekday: "long", day: "numeric", month: "long", year: "numeric" })
-        : `${a.toLocaleDateString("pt-BR", { day: "numeric", month: "short" })} – ${b.toLocaleDateString("pt-BR", { day: "numeric", month: "short", year: "numeric" })}`;
+        ? a.toLocaleDateString(calendarLocale(), { weekday: "long", day: "numeric", month: "long", year: "numeric" })
+        : `${a.toLocaleDateString(calendarLocale(), { day: "numeric", month: "short" })} – ${b.toLocaleDateString(calendarLocale(), { day: "numeric", month: "short", year: "numeric" })}`;
 
     let html = `<div class="cal-scroll"><div class="cal-grid ${isDay ? "day" : ""}" style="grid-template-columns:56px repeat(${days.length},1fr)"><div></div>`;
     days.forEach(d => {
@@ -167,7 +170,7 @@ function openDay(dateStr) {
     const d = parse(dateStr);
     calModalContent.innerHTML = `
         <div class="cal-modal-head">
-            <div><h3>${d.toLocaleDateString("pt-BR", { weekday: "long", day: "numeric", month: "long" })}</h3>
+            <div><h3>${d.toLocaleDateString(calendarLocale(), { weekday: "long", day: "numeric", month: "long" })}</h3>
             <p>${c.done} concluída(s) · ${c.pend} pendente(s) · ${c.overdue} atrasada(s)</p></div>
             <button type="button" class="cal-close" data-close aria-label="Fechar">✕</button>
         </div>

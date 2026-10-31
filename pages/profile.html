@@ -38,6 +38,8 @@
 
     <link rel="stylesheet" href="../css/responsive.css">
 
+    <script src="../js/preferences.js" defer></script>
+
     <script src="https://unpkg.com/lucide@latest"></script>
 
 </head>
@@ -226,10 +228,23 @@
 
                 <!-- AVATAR -->
 
-                <div class="profile-main-avatar">
+                <div class="profile-photo-wrap">
 
-                    <i data-lucide="user"></i>
+                    <div class="profile-main-avatar" id="profileAvatar">
+                        <i data-lucide="user"></i>
+                    </div>
 
+                    <label class="profile-photo-button" for="profilePhotoInput">
+                        <i data-lucide="camera"></i>
+                        <span>Alterar foto</span>
+                    </label>
+
+                    <input
+                        type="file"
+                        id="profilePhotoInput"
+                        accept="image/*"
+                        hidden
+                    >
                 </div>
 
 
@@ -341,6 +356,7 @@
                         id="email"
                         name="email"
                         value="matheus@email.com"
+                        readonly
                     >
 
                 </div>

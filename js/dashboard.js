@@ -712,7 +712,7 @@ function updateDate() {
 
     currentDate.textContent =
         today.toLocaleDateString(
-            "pt-BR",
+            ({ en: "en-US", es: "es-ES" }[localStorage.getItem("donee_language")] || "pt-BR"),
             options
         );
 

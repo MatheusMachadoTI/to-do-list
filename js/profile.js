@@ -68,6 +68,11 @@ document.addEventListener(
                 "telefone"
             );
 
+        const profilePhotoInput =
+            document.getElementById(
+                "profilePhotoInput"
+            );
+
         const profileName =
             document.querySelector(
                 ".profile-main-info h2"
@@ -100,6 +105,9 @@ document.addEventListener(
 
             emailInput.value =
                 usuario.email || "";
+
+            emailInput.readOnly =
+                true;
 
         }
 
@@ -136,6 +144,12 @@ document.addEventListener(
 
             }
         );
+
+        if (typeof window.atualizarFotoPerfil === "function") {
+
+            window.atualizarFotoPerfil(usuario.fotoPerfil || "");
+
+        }
 
 
         /* ================================================= */
@@ -237,9 +251,6 @@ document.addEventListener(
                     nameInput.value =
                         dadosOriginais.nome;
 
-                    emailInput.value =
-                        dadosOriginais.email;
-
                     phoneInput.value =
                         dadosOriginais.telefone;
 
@@ -266,9 +277,6 @@ document.addEventListener(
                     const nome =
                         nameInput.value.trim();
 
-                    const email =
-                        emailInput.value.trim();
-
                     const telefone =
                         phoneInput.value.trim();
 
@@ -287,68 +295,12 @@ document.addEventListener(
                     }
 
 
-                    if (!validarEmail(email)) {
-
-                        mostrarMensagem(
-                            "Digite um e-mail válido.",
-                            "erro"
-                        );
-
-                        emailInput.focus();
-
-                        return;
-
-                    }
-
-
-                    /* ================================================= */
-                    /* VERIFICAR EMAIL */
-                    /* ================================================= */
-
-                    const usuarios =
-                        obterUsuarios();
-
-
-                    const emailEmUso =
-                        usuarios.some(
-                            function (item) {
-
-                                return (
-                                    item.id !==
-                                    usuario.id &&
-
-                                    item.email
-                                        .toLowerCase() ===
-                                    email.toLowerCase()
-                                );
-
-                            }
-                        );
-
-
-                    if (emailEmUso) {
-
-                        mostrarMensagem(
-                            "Este e-mail já está sendo usado por outra conta.",
-                            "erro"
-                        );
-
-                        emailInput.focus();
-
-                        return;
-
-                    }
-
-
                     /* ================================================= */
                     /* ATUALIZAR USUÁRIO */
                     /* ================================================= */
 
                     usuario.nome =
                         nome;
-
-                    usuario.email =
-                        email.toLowerCase();
 
                     usuario.telefone =
                         telefone;
@@ -380,14 +332,6 @@ document.addEventListener(
 
                         profileName.textContent =
                             usuario.nome;
-
-                    }
-
-
-                    if (profileEmail) {
-
-                        profileEmail.textContent =
-                            usuario.email;
 
                     }
 
@@ -489,6 +433,181 @@ document.addEventListener(
 
         }
 
+        if (profilePhotoInput) {
+
+            profilePhotoInput.addEventListener(
+                "change",
+                function () {
+
+                    const file =
+                        profilePhotoInput.files &&
+                        profilePhotoInput.files[0];
+
+                    if (!file) {
+
+                        return;
+
+                    }
+
+                    if (!file.type.startsWith("image/")) {
+
+                        mostrarMensagem(
+                            "Selecione um arquivo de imagem.",
+                            "erro"
+                        );
+
+                        profilePhotoInput.value = "";
+
+                        return;
+
+                    }
+
+                    if (file.size > 8 * 1024 * 1024) {
+
+                        mostrarMensagem(
+                            "A imagem deve ter no máximo 8 MB.",
+                            "erro"
+                        );
+
+                        profilePhotoInput.value = "";
+
+                        return;
+
+                    }
+
+                    const reader =
+                        new FileReader();
+
+                    reader.addEventListener(
+                        "load",
+                        function () {
+
+                            const image =
+                                new Image();
+
+                            image.addEventListener(
+                                "load",
+                                function () {
+
+                                    const maxDimension = 512;
+                                    const scale = Math.min(
+                                        1,
+                                        maxDimension / Math.max(image.width, image.height)
+                                    );
+                                    const canvas =
+                                        document.createElement("canvas");
+
+                                    canvas.width =
+                                        Math.max(1, Math.round(image.width * scale));
+
+                                    canvas.height =
+                                        Math.max(1, Math.round(image.height * scale));
+
+                                    const context =
+                                        canvas.getContext("2d");
+
+                                    if (!context) {
+
+                                        mostrarMensagem(
+                                            "Não foi possível processar a imagem.",
+                                            "erro"
+                                        );
+
+                                        return;
+
+                                    }
+
+                                    context.drawImage(
+                                        image,
+                                        0,
+                                        0,
+                                        canvas.width,
+                                        canvas.height
+                                    );
+
+                                    try {
+
+                                        usuario.fotoPerfil =
+                                            canvas.toDataURL("image/jpeg", 0.82);
+
+                                        if (!atualizarUsuario(usuario)) {
+
+                                            mostrarMensagem(
+                                                "Não foi possível salvar a foto do perfil.",
+                                                "erro"
+                                            );
+
+                                            return;
+
+                                        }
+
+                                    } catch (erro) {
+
+                                        console.error(
+                                            "Erro ao salvar a foto do perfil:",
+                                            erro
+                                        );
+
+                                        mostrarMensagem(
+                                            "Não foi possível salvar a foto do perfil.",
+                                            "erro"
+                                        );
+
+                                        return;
+
+                                    }
+
+                                    if (typeof window.atualizarFotoPerfil === "function") {
+
+                                        window.atualizarFotoPerfil(usuario.fotoPerfil);
+
+                                    }
+
+                                    mostrarMensagem(
+                                        "Foto de perfil atualizada.",
+                                        "sucesso"
+                                    );
+
+                                }
+                            );
+
+                            image.addEventListener(
+                                "error",
+                                function () {
+
+                                    mostrarMensagem(
+                                        "Não foi possível abrir esta imagem.",
+                                        "erro"
+                                    );
+
+                                }
+                            );
+
+                            image.src =
+                                reader.result;
+
+                        }
+                    );
+
+                    reader.addEventListener(
+                        "error",
+                        function () {
+
+                            mostrarMensagem(
+                                "Não foi possível carregar esta imagem.",
+                                "erro"
+                            );
+
+                        }
+                    );
+
+                    reader.readAsDataURL(file);
+
+                }
+            );
+
+        }
+
 
         /* ================================================= */
         /* ALTERAR SENHA */
@@ -513,7 +632,7 @@ document.addEventListener(
             nameInput.disabled =
                 true;
 
-            emailInput.disabled =
+            emailInput.readOnly =
                 true;
 
             phoneInput.disabled =
@@ -531,8 +650,8 @@ document.addEventListener(
             nameInput.disabled =
                 false;
 
-            emailInput.disabled =
-                false;
+            emailInput.readOnly =
+                true;
 
             phoneInput.disabled =
                 false;
@@ -568,18 +687,6 @@ document.addEventListener(
                     "none";
 
             }
-
-        }
-
-
-        /* ================================================= */
-        /* VALIDAR EMAIL */
-        /* ================================================= */
-
-        function validarEmail(email) {
-
-            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-                .test(email);
 
         }
 

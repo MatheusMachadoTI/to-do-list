@@ -454,8 +454,8 @@ body {
 
 .profile-main-avatar {
 
-    width: 68px;
-    height: 68px;
+    width: 82px;
+    height: 82px;
 
     flex-shrink: 0;
 
@@ -463,12 +463,60 @@ body {
     align-items: center;
     justify-content: center;
 
-    border-radius: 20px;
+    overflow: hidden;
+    border: 3px solid #FFFFFF;
+    border-radius: 50%;
 
     background: #eeeaff;
 
     color: #7652f5;
 
+    box-shadow: 0 0 0 1px #E8E3FF, 0 5px 16px rgba(49, 38, 105, 0.1);
+
+}
+
+.profile-photo-wrap {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.profile-photo-button {
+    position: absolute;
+    right: -9px;
+    bottom: -7px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    min-height: 30px;
+    padding: 0 9px;
+    border: 2px solid #FFFFFF;
+    border-radius: 999px;
+    background: #7C5CFC;
+    color: #FFFFFF;
+    font-size: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(49, 38, 105, 0.18);
+}
+
+.profile-photo-button svg {
+    width: 13px;
+    height: 13px;
+}
+
+.profile-main-avatar img,
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+}
+
+.profile-form input[readonly] {
+    background: #F1F2F6;
+    color: #74798B;
+    cursor: not-allowed;
 }
 
 
@@ -1128,10 +1176,10 @@ body {
 
     .profile-main-avatar {
 
-        width: 58px;
-        height: 58px;
+        width: 68px;
+        height: 68px;
 
-        border-radius: 17px;
+        border-radius: 50%;
 
     }
 

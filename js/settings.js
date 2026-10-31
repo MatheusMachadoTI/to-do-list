@@ -81,6 +81,11 @@ document.addEventListener(
                         this.value
                     );
 
+                    if (typeof window.aplicarIdioma === "function") {
+
+                        window.aplicarIdioma(this.value);
+
+                    }
 
                     mostrarMensagem(
                         "Idioma atualizado!"
