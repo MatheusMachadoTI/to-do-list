@@ -53,6 +53,11 @@ document.addEventListener(
                 "changePasswordButton"
             );
 
+        const logoutButton =
+            document.getElementById(
+                "logoutButton"
+            );
+
         const deleteAccountButton =
             document.getElementById(
                 "deleteAccountButton"
@@ -149,9 +154,7 @@ document.addEventListener(
 
 
                     mostrarMensagem(
-                        this.checked
-                            ? "Notificações ativadas!"
-                            : "Notificações desativadas!"
+                        "Preferência salva neste navegador."
                     );
 
                 }
@@ -177,9 +180,7 @@ document.addEventListener(
 
 
                     mostrarMensagem(
-                        this.checked
-                            ? "Lembretes ativados!"
-                            : "Lembretes desativados!"
+                        "Preferência salva neste navegador."
                     );
 
                 }
@@ -205,9 +206,7 @@ document.addEventListener(
 
 
                     mostrarMensagem(
-                        this.checked
-                            ? "Notificações de conquistas ativadas!"
-                            : "Notificações de conquistas desativadas!"
+                        "Preferência salva neste navegador."
                     );
 
                 }
@@ -244,6 +243,15 @@ document.addEventListener(
             changePasswordButton.addEventListener(
                 "click",
                 abrirAlteracaoSenha
+            );
+
+        }
+
+        if (logoutButton) {
+
+            logoutButton.addEventListener(
+                "click",
+                fazerLogout
             );
 
         }

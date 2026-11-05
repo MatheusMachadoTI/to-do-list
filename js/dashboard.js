@@ -54,6 +54,12 @@ const progressMessage =
         "progressMessage"
     );
 
+const userLevel =
+    document.getElementById("userLevel");
+
+const userExperience =
+    document.getElementById("userExperience");
+
 const currentDate =
     document.getElementById(
         "currentDate"
@@ -241,20 +247,56 @@ function updateStatistics() {
     const tasks =
         getTasks();
 
+    const today =
+        getTodayString();
+
+    const statistics =
+        tasks.reduce(
+            function (totals, task) {
+
+                if (!task.repeatWeekly) {
+
+                    totals.total++;
+
+                    if (task.completed) {
+                        totals.completed++;
+                    }
+
+                    return totals;
+
+                }
+
+                const completedDates =
+                    Array.isArray(task.completedDates)
+                        ? new Set(task.completedDates)
+                        : new Set();
+
+                totals.completed += completedDates.size;
+                totals.total += completedDates.size;
+
+                if (proximaOcorrenciaSemanal(task, today)) {
+                    totals.total++;
+                }
+
+                return totals;
+
+            },
+            { total: 0, completed: 0 }
+        );
 
     const total =
-        tasks.length;
-
+        statistics.total;
 
     const completed =
-        tasks.filter(
-            function (task) {
+        statistics.completed;
 
-                return task.completed;
+    if (userLevel) {
+        userLevel.textContent = obterNivelUsuario();
+    }
 
-            }
-        ).length;
-
+    if (userExperience) {
+        userExperience.textContent = obterXPUsuario();
+    }
 
     const pending =
         total -
@@ -743,3 +785,16 @@ function updateDashboard() {
 updateDashboard();
 
 ativarIcones();
+
+window.addEventListener("storage", function (event) {
+
+    if (
+        event.key === "donee_usuario_logado" ||
+        event.key === "donee_usuarios"
+    ) {
+
+        updateDashboard();
+
+    }
+
+});

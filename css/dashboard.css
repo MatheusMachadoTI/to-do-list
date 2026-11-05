@@ -25,7 +25,12 @@
     display: flex;
     flex-direction: column;
 
-    background: #7C5CFC;
+    background: linear-gradient(
+        180deg,
+        var(--primary) 0%,
+        var(--primary-hover) 58%,
+        #5638D8 100%
+    );
 
     z-index: 10;
 
@@ -59,7 +64,7 @@
 
     z-index: 1;
 
-    width: 120px;
+    width: 140px;
     height: auto;
 
     display: block;
@@ -76,7 +81,7 @@
 
     gap: 6px;
 
-    padding: 0 0 0 18px;
+    padding: 0 18px 0 18px;
 }
 
 
@@ -103,7 +108,7 @@
     font-size: 14px;
     font-weight: 500;
 
-    border-radius: 18px 0 0 18px;
+    border-radius: 16px;
 
     transition: 0.25s ease;
 
@@ -137,16 +142,20 @@
 /* ================================================= */
 
 .menu-item.active {
-    background: #F8FAFC;
+    background: linear-gradient(110deg, #5B3AD8 0%, #4829C5 100%);
 
-    color: #7C5CFC;
+    color: #FFFFFF;
 
     font-weight: 600;
+
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.16),
+        0 6px 16px rgba(45, 24, 125, 0.2);
 }
 
 
 .menu-item.active svg {
-    color: #7C5CFC;
+    color: #FFFFFF;
 }
 
 
@@ -156,23 +165,7 @@
 
 .menu-item.active::before {
 
-    content: "";
-
-    position: absolute;
-
-    right: 0;
-    top: -22px;
-
-    width: 22px;
-    height: 22px;
-
-    background: transparent;
-
-    border-bottom-right-radius: 22px;
-
-    box-shadow: 7px 7px 0 7px #F8FAFC;
-
-    pointer-events: none;
+    display: none;
 }
 
 
@@ -182,23 +175,7 @@
 
 .menu-item.active::after {
 
-    content: "";
-
-    position: absolute;
-
-    right: 0;
-    bottom: -22px;
-
-    width: 22px;
-    height: 22px;
-
-    background: transparent;
-
-    border-top-right-radius: 22px;
-
-    box-shadow: 7px -7px 0 7px #F8FAFC;
-
-    pointer-events: none;
+    display: none;
 }
 
 
@@ -818,6 +795,50 @@
     margin: 15px 0 25px;
 }
 
+.xp-summary {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin: -10px 0 18px;
+
+}
+
+.xp-summary > span {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    padding: 6px 10px;
+
+    border: 1px solid #E8E1FF;
+
+    border-radius: 999px;
+
+    background: #F4F1FF;
+
+    color: #6948F5;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+}
+
+.xp-summary strong {
+
+    color: inherit;
+
+    font-size: inherit;
+
+}
+
 
 .progress-number {
 
@@ -1069,7 +1090,7 @@
 }
 
 
-@media (max-width: 800px) {
+@media (max-width: 767px) {
 
     .sidebar {
 
@@ -1098,7 +1119,7 @@
 
     .sidebar-menu {
 
-        padding-left: 10px;
+        padding: 0 10px;
 
     }
 
@@ -1109,7 +1130,7 @@
 
         padding: 0;
 
-        border-radius: 14px 0 0 14px;
+        border-radius: 14px;
 
     }
 

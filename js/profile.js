@@ -135,6 +135,9 @@ document.addEventListener(
 
         }
 
+        emailInput.value =
+            usuario.email;
+
 
         sidebarNames.forEach(
             function (elemento) {
@@ -251,6 +254,9 @@ document.addEventListener(
                     nameInput.value =
                         dadosOriginais.nome;
 
+                    emailInput.value =
+                        dadosOriginais.email;
+
                     phoneInput.value =
                         dadosOriginais.telefone;
 
@@ -277,6 +283,9 @@ document.addEventListener(
                     const nome =
                         nameInput.value.trim();
 
+                    const email =
+                        emailInput.value.trim().toLowerCase();
+
                     const telefone =
                         phoneInput.value.trim();
 
@@ -294,6 +303,44 @@ document.addEventListener(
 
                     }
 
+                    if (!emailInput.checkValidity()) {
+
+                        mostrarMensagem(
+                            "Digite um e-mail válido.",
+                            "erro"
+                        );
+
+                        emailInput.focus();
+
+                        return;
+
+                    }
+
+                    const emailExistente =
+                        obterUsuarios().some(function (outroUsuario) {
+
+                            return (
+                                outroUsuario &&
+                                String(outroUsuario.id) !== String(usuario.id) &&
+                                typeof outroUsuario.email === "string" &&
+                                outroUsuario.email.toLowerCase() === email
+                            );
+
+                        });
+
+                    if (emailExistente) {
+
+                        mostrarMensagem(
+                            "Este e-mail já está cadastrado.",
+                            "erro"
+                        );
+
+                        emailInput.focus();
+
+                        return;
+
+                    }
+
 
                     /* ================================================= */
                     /* ATUALIZAR USUÁRIO */
@@ -301,6 +348,9 @@ document.addEventListener(
 
                     usuario.nome =
                         nome;
+
+                    usuario.email =
+                        email;
 
                     usuario.telefone =
                         telefone;
@@ -344,6 +394,16 @@ document.addEventListener(
 
                         }
                     );
+
+                    if (profileEmail) {
+
+                        profileEmail.textContent =
+                            usuario.email;
+
+                    }
+
+                    emailInput.value =
+                        usuario.email;
 
 
                     dadosOriginais = {
@@ -651,7 +711,7 @@ document.addEventListener(
                 false;
 
             emailInput.readOnly =
-                true;
+                false;
 
             phoneInput.disabled =
                 false;

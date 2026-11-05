@@ -25,7 +25,7 @@ body {
     }
 
     .sidebar-logo img {
-        width: 105px;
+        width: 120px;
     }
 
     .sidebar-menu {
@@ -574,6 +574,13 @@ body {
 
     .nav-menu a {
         font-size: 13px;
+    }
+
+    .container.section .nav-links {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 8px 12px;
+        min-width: 0;
     }
 
     .hero {

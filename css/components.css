@@ -636,7 +636,7 @@
 
     box-shadow:var(--shadow-md);
 
-    width:350px;
+    width:min(350px, 100%);
 
 }
 
@@ -646,7 +646,7 @@
 
 .modal{
 
-    width:420px;
+    width:min(420px, 100%);
 
     background:var(--surface);
 

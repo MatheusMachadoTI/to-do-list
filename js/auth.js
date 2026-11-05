@@ -525,9 +525,28 @@ function proximaOcorrenciaSemanal(tarefa, aPartirDe) {
 
 function usuarioEstaLogado() {
 
-    return (
-        obterUsuarioLogado() !== null
-    );
+    const sessao = obterUsuarioLogado();
+
+    if (
+        !sessao ||
+        sessao.id === undefined ||
+        typeof sessao.email !== "string"
+    ) {
+
+        return false;
+
+    }
+
+    return obterUsuarios().some(function (usuario) {
+
+        return (
+            usuario &&
+            String(usuario.id) === String(sessao.id) &&
+            typeof usuario.email === "string" &&
+            usuario.email.toLowerCase() === sessao.email.toLowerCase()
+        );
+
+    });
 
 }
 

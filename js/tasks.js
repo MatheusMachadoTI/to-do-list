@@ -734,6 +734,26 @@ function getFilteredTasks() {
 
                 }
 
+                if (currentFilter === "completed") {
+
+                    const completedDates =
+                        Array.isArray(task.completedDates)
+                            ? [...new Set(task.completedDates)]
+                            : [];
+
+                    return completedDates.map(function (date) {
+
+                        return {
+                            ...task,
+                            date: date,
+                            occurrenceDate: date,
+                            completed: true
+                        };
+
+                    });
+
+                }
+
 
                 const occurrence =
                     proximaOcorrenciaSemanal(
@@ -1293,13 +1313,36 @@ function toggleTask(taskId, occurrenceDate) {
 
                     }
 
+                    const completed =
+                        !task.completed;
+
+                    if (completed && !task.xpConcedido) {
+
+                        adicionarXP(10);
+
+                        return {
+                            ...task,
+                            completed: true,
+                            xpConcedido: true
+                        };
+
+                    }
+
+                    if (!completed && task.xpConcedido) {
+
+                        adicionarXP(-10);
+
+                        return {
+                            ...task,
+                            completed: false,
+                            xpConcedido: false
+                        };
+
+                    }
+
                     return {
-
                         ...task,
-
-                        completed:
-                            !task.completed
-
+                        completed: completed
                     };
 
                 }
@@ -1333,6 +1376,34 @@ function deleteTask(taskId) {
     if (!confirmar) {
 
         return;
+
+    }
+
+    const taskToDelete =
+        tasks.find(function (task) {
+
+            return Number(task.id) === Number(taskId);
+
+        });
+
+    if (taskToDelete) {
+
+        const xpToRemove =
+            taskToDelete.repeatWeekly
+                ? new Set(
+                    Array.isArray(taskToDelete.completedDates)
+                        ? taskToDelete.completedDates
+                        : []
+                ).size * 10
+                : taskToDelete.completed && taskToDelete.xpConcedido
+                    ? 10
+                    : 0;
+
+        if (xpToRemove > 0) {
+
+            adicionarXP(-xpToRemove);
+
+        }
 
     }
 
@@ -1722,8 +1793,7 @@ function saveTask(event) {
 
     if (
         title === "" ||
-        category === "" ||
-        time === ""
+        category === ""
     ) {
 
         alert(

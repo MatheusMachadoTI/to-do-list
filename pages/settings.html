@@ -383,7 +383,7 @@
                     </h2>
 
                     <p>
-                        Escolha quais notificações deseja receber.
+                        As opções abaixo são salvas neste navegador; o app não envia notificações.
                     </p>
 
                 </div>
@@ -400,12 +400,12 @@
 
                 <div class="setting-info">
 
-                    <h3>
+                    <h3 id="notificationsTitle">
                         Notificações
                     </h3>
 
                     <p>
-                        Receba avisos importantes sobre suas tarefas.
+                        Esta opção é apenas uma preferência local; nenhum aviso será enviado.
                     </p>
 
                 </div>
@@ -416,7 +416,7 @@
                     <input
                         type="checkbox"
                         id="notificationsToggle"
-                        checked
+                        aria-labelledby="notificationsTitle"
                     >
 
                     <span class="toggle-slider"></span>
@@ -432,12 +432,12 @@
 
                 <div class="setting-info">
 
-                    <h3>
+                    <h3 id="remindersTitle">
                         Lembretes de tarefas
                     </h3>
 
                     <p>
-                        Receba lembretes quando uma tarefa estiver próxima.
+                        Esta opção é apenas uma preferência local; nenhum aviso será enviado.
                     </p>
 
                 </div>
@@ -448,7 +448,7 @@
                     <input
                         type="checkbox"
                         id="remindersToggle"
-                        checked
+                        aria-labelledby="remindersTitle"
                     >
 
                     <span class="toggle-slider"></span>
@@ -464,12 +464,12 @@
 
                 <div class="setting-info">
 
-                    <h3>
+                    <h3 id="achievementsTitle">
                         Conquistas
                     </h3>
 
                     <p>
-                        Receba notificações quando desbloquear uma conquista.
+                        Esta opção é apenas uma preferência local; nenhum aviso será enviado.
                     </p>
 
                 </div>
@@ -480,7 +480,7 @@
                     <input
                         type="checkbox"
                         id="achievementsToggle"
-                        checked
+                        aria-labelledby="achievementsTitle"
                     >
 
                     <span class="toggle-slider"></span>
@@ -539,7 +539,7 @@
                     </h3>
 
                     <p>
-                        Altere seu nome, telefone e outras informações pessoais.
+                        Altere seu nome, e-mail, telefone e outras informações pessoais.
                     </p>
 
                 </div>
@@ -569,7 +569,7 @@
                     </h3>
 
                     <p>
-                        Altere sua senha para manter sua conta segura.
+                        Altere a senha usada para entrar neste navegador.
                     </p>
 
                 </div>
@@ -582,6 +582,33 @@
                 >
 
                     Alterar senha
+
+                </button>
+
+            </div>
+
+            <div class="setting-row">
+
+                <div class="setting-info">
+
+                    <h3>
+                        Sair da conta
+                    </h3>
+
+                    <p>
+                        Encerre sua sessão neste navegador.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="settings-action"
+                    id="logoutButton"
+                >
+
+                    Sair
 
                 </button>
 
