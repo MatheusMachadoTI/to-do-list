@@ -519,6 +519,142 @@ function proximaOcorrenciaSemanal(tarefa, aPartirDe) {
 }
 
 
+function calcularEstatisticasTarefas(tarefas, agora = new Date()) {
+
+    const hoje =
+        formatarDataTarefa(agora);
+
+    const estatisticas = {
+        total: 0,
+        completed: 0,
+        pending: 0,
+        overdue: 0
+    };
+
+    function adicionarOcorrencia(tarefa, ocorrencia) {
+
+        estatisticas.total++;
+
+        if (ocorrencia.completed) {
+
+            estatisticas.completed++;
+
+            return;
+
+        }
+
+        estatisticas.pending++;
+
+        if (!ocorrencia.date) {
+
+            return;
+
+        }
+
+        const [ano, mes, dia] =
+            ocorrencia.date.split("-").map(Number);
+
+        const vencimento =
+            new Date(ano, mes - 1, dia);
+
+        if (formatarDataTarefa(vencimento) !== ocorrencia.date) {
+
+            return;
+
+        }
+
+        if (tarefa.time) {
+
+            const [hora, minuto] =
+                tarefa.time.split(":").map(Number);
+
+            vencimento.setHours(hora, minuto, 0, 0);
+
+        } else {
+
+            vencimento.setHours(23, 59, 59, 999);
+
+        }
+
+        if (vencimento < agora) {
+
+            estatisticas.overdue++;
+
+        }
+
+    }
+
+    tarefas.forEach(function (tarefa) {
+
+        if (!tarefa.repeatWeekly) {
+
+            adicionarOcorrencia(tarefa, tarefa);
+
+            return;
+
+        }
+
+        const datasConcluidas =
+            Array.isArray(tarefa.completedDates)
+                ? [...new Set(tarefa.completedDates)]
+                : [];
+
+        let dataFim =
+            tarefa.repeatUntil || hoje;
+
+        if (!tarefa.repeatUntil) {
+
+            datasConcluidas.forEach(function (data) {
+
+                if (
+                    data > dataFim &&
+                    expandirTarefaSemanal(tarefa, data, data).length > 0
+                ) {
+
+                    dataFim = data;
+
+                }
+
+            });
+
+        }
+
+        const totalAntesDaSerie =
+            estatisticas.total;
+
+        expandirTarefaSemanal(
+            tarefa,
+            tarefa.date,
+            dataFim
+        ).forEach(function (ocorrencia) {
+
+            adicionarOcorrencia(tarefa, ocorrencia);
+
+        });
+
+        if (
+            !tarefa.repeatUntil &&
+            estatisticas.total === totalAntesDaSerie
+        ) {
+
+            const proxima =
+                proximaOcorrenciaSemanal(tarefa, hoje);
+
+            if (proxima) {
+
+                adicionarOcorrencia(tarefa, proxima);
+
+            }
+
+        }
+
+    });
+
+    return estatisticas;
+
+}
+
+
 /* ================================================= */
 /* USUÁRIO ESTÁ LOGADO? */
 /* ================================================= */

@@ -236,6 +236,16 @@
 
 .settings-action {
 
+    width: 140px;
+
+    min-width: 140px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
     padding: 9px 17px;
 
     border: 1px solid #E5E1FF;
@@ -251,6 +261,12 @@
     font-size: 12px;
 
     font-weight: 600;
+
+    text-align: center;
+
+    white-space: nowrap;
+
+    flex-shrink: 0;
 
     cursor: pointer;
 

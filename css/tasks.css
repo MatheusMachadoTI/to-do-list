@@ -317,6 +317,28 @@
 
     border-color: #CFC6FF;
 
+    box-shadow: 0 0 0 3px rgba(124, 92, 252, 0.1);
+
+}
+
+
+.task-sort select option,
+.form-group select option {
+
+    background: #FFFFFF;
+
+    color: #292A3D;
+
+}
+
+
+.task-sort select option:checked,
+.form-group select option:checked {
+
+    background: #7C5CFC;
+
+    color: #FFFFFF;
+
 }
 
 
@@ -350,9 +372,9 @@
 
 .filter-btn {
 
-    height: 42px;
+    height: 36px;
 
-    padding: 0 20px;
+    padding: 0 14px;
 
     border: 1px solid #EDEEF4;
 
@@ -364,7 +386,7 @@
 
     font-family: inherit;
 
-    font-size: 13px;
+    font-size: 12px;
 
     white-space: nowrap;
 
@@ -1367,6 +1389,14 @@
 }
 
 
+.task-sort select,
+.form-group select {
+
+    accent-color: #7C5CFC;
+
+}
+
+
 .task-schedule-row {
 
     gap: 16px;
@@ -1431,7 +1461,54 @@
 
     color-scheme: light;
 
+    accent-color: #7C5CFC;
+
     font-weight: 600;
+
+}
+
+
+.form-group .schedule-input input[type="date"],
+.form-group .schedule-input input[type="time"] {
+
+    font-variant-numeric: tabular-nums;
+
+}
+
+
+.form-group .schedule-input input::-webkit-datetime-edit {
+
+    padding: 0;
+
+    color: #292A3D;
+
+    font-family: inherit;
+
+}
+
+
+.form-group .schedule-input input::-webkit-calendar-picker-indicator {
+
+    margin-right: 2px;
+
+    padding: 5px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    opacity: 0.75;
+
+    transition: 0.2s ease;
+
+}
+
+
+.form-group .schedule-input input::-webkit-calendar-picker-indicator:hover {
+
+    background: rgba(124, 92, 252, 0.12);
+
+    opacity: 1;
 
 }
 
@@ -1743,6 +1820,101 @@
     color: #85899A;
 
     font-size: 10px;
+
+}
+
+
+body.dark-mode .form-group .schedule-input input {
+
+    border-color: #3A3B50;
+
+    background: #14151F;
+
+    color: #F1F2FA;
+
+    color-scheme: dark;
+
+    accent-color: #9B82FF;
+
+}
+
+
+body.dark-mode .form-group .schedule-input input::-webkit-datetime-edit {
+
+    color: #F1F2FA;
+
+}
+
+
+body.dark-mode .task-sort select option,
+body.dark-mode .form-group select option {
+
+    background: #14151F;
+
+    color: #F1F2FA;
+
+}
+
+
+body.dark-mode .task-sort select option:checked,
+body.dark-mode .form-group select option:checked {
+
+    background: #7C5CFC;
+
+    color: #FFFFFF;
+
+}
+
+
+body.dark-mode .task-repeat-panel {
+
+    border-color: #2D2E40;
+
+    background: #181824;
+
+}
+
+
+body.dark-mode .repeat-options {
+
+    border-color: #2D2E40;
+
+}
+
+
+body.dark-mode .repeat-toggle-copy strong {
+
+    color: #F1F2FA;
+
+}
+
+
+body.dark-mode .weekday-fieldset legend,
+body.dark-mode .repeat-end-date-field > label {
+
+    color: #B7B8CA;
+
+}
+
+
+body.dark-mode .weekday-picker span {
+
+    border-color: #3A3B50;
+
+    background: #14151F;
+
+    color: #B7B8CA;
+
+}
+
+
+body.dark-mode .weekday-picker input:checked + span {
+
+    border-color: #7C5CFC;
+
+    background: #7C5CFC;
+
+    color: #FFFFFF;
 
 }
 

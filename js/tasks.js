@@ -754,6 +754,40 @@ function getFilteredTasks() {
 
                 }
 
+                if (currentFilter === "all") {
+
+                    const completedOccurrence =
+                        (Array.isArray(task.completedDates)
+                            ? [...new Set(task.completedDates)]
+                            : []
+                        )
+                            .filter(function (date) {
+
+                                return (
+                                    date >= hoje &&
+                                    expandirTarefaSemanal(
+                                        task,
+                                        date,
+                                        date
+                                    ).length > 0
+                                );
+
+                            })
+                            .sort()[0];
+
+                    if (completedOccurrence) {
+
+                        return [{
+                            ...task,
+                            date: completedOccurrence,
+                            occurrenceDate: completedOccurrence,
+                            completed: true
+                        }];
+
+                    }
+
+                }
+
 
                 const occurrence =
                     proximaOcorrenciaSemanal(

@@ -103,13 +103,12 @@ function taskCard(t, now) {
 }
 
 function renderStats(now) {
-    const total = tasks.length;
-    const regularTasks = tasks.filter(t => !t.repeatWeekly);
-    const recurringCount = tasks.length - regularTasks.length;
-    const { done, pend, overdue } = counts(regularTasks, now);
+    const { total, completed, pending, overdue } =
+        calcularEstatisticasTarefas(tasks, now);
+
     const box = (c, n, l) => `<div class="cal-stat ${c}"><strong>${n}</strong><span>${l}</span></div>`;
-    calStats.innerHTML = box("s1", total, "Total de tarefas") + box("s2", done, "Concluídas") +
-        box("s3", pend + recurringCount, "Pendentes") + box("s4", overdue, "Atrasadas");
+    calStats.innerHTML = box("s1", total, "Total de tarefas") + box("s2", completed, "Concluídas") +
+        box("s3", pending - overdue, "Pendentes") + box("s4", overdue, "Atrasadas");
 }
 
 function renderMonth(now) {
@@ -136,16 +135,24 @@ function renderTimeGrid(days, now) {
         ? a.toLocaleDateString(calendarLocale(), { weekday: "long", day: "numeric", month: "long", year: "numeric" })
         : `${a.toLocaleDateString(calendarLocale(), { day: "numeric", month: "short" })} – ${b.toLocaleDateString(calendarLocale(), { day: "numeric", month: "short", year: "numeric" })}`;
 
+    const tasksByDay =
+        days.map(d => tasksOf(iso(d)));
+
+    const visibleHours =
+        HOURS.filter(h => tasksByDay.some(list =>
+            list.some(t => Math.min(Math.max(hourOf(t.time), 6), 23) === h)
+        ));
+
     let html = `<div class="cal-scroll"><div class="cal-grid ${isDay ? "day" : ""}" style="grid-template-columns:56px repeat(${days.length},1fr)"><div></div>`;
-    days.forEach(d => {
-        const c = counts(tasksOf(iso(d)), now);
+    days.forEach((d, index) => {
+        const c = counts(tasksByDay[index], now);
         html += `<div class="cal-head ${iso(d) === todayISO() ? "today" : ""}">${DOW[d.getDay()]}<b>${pad(d.getDate())}/${pad(d.getMonth() + 1)}</b><small>${c.done} ✓ · ${c.pend} pend. · ${c.overdue} atras.</small></div>`;
     });
-    HOURS.forEach(h => {
+    visibleHours.forEach(h => {
         html += `<div class="cal-hour">${pad(h)}:00</div>`;
-        days.forEach(d => {
+        days.forEach((d, index) => {
             const s = iso(d);
-            const list = tasksOf(s).filter(t => Math.min(Math.max(hourOf(t.time), 6), 23) === h);
+            const list = tasksByDay[index].filter(t => Math.min(Math.max(hourOf(t.time), 6), 23) === h);
             html += `<div class="cal-cell ${s === todayISO() ? "today" : ""}">${list.map(t => taskCard(t, now)).join("")}</div>`;
         });
     });

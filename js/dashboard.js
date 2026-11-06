@@ -247,41 +247,9 @@ function updateStatistics() {
     const tasks =
         getTasks();
 
-    const today =
-        getTodayString();
-
     const statistics =
-        tasks.reduce(
-            function (totals, task) {
-
-                if (!task.repeatWeekly) {
-
-                    totals.total++;
-
-                    if (task.completed) {
-                        totals.completed++;
-                    }
-
-                    return totals;
-
-                }
-
-                const completedDates =
-                    Array.isArray(task.completedDates)
-                        ? new Set(task.completedDates)
-                        : new Set();
-
-                totals.completed += completedDates.size;
-                totals.total += completedDates.size;
-
-                if (proximaOcorrenciaSemanal(task, today)) {
-                    totals.total++;
-                }
-
-                return totals;
-
-            },
-            { total: 0, completed: 0 }
+        calcularEstatisticasTarefas(
+            tasks
         );
 
     const total =
@@ -299,8 +267,7 @@ function updateStatistics() {
     }
 
     const pending =
-        total -
-        completed;
+        statistics.pending;
 
 
     let percentage =
@@ -452,6 +419,36 @@ function renderDashboardTasks() {
 
                 }
 
+                const completedOccurrence =
+                    (Array.isArray(task.completedDates)
+                        ? [...new Set(task.completedDates)]
+                        : []
+                    )
+                        .filter(function (date) {
+
+                            return (
+                                date >= today &&
+                                expandirTarefaSemanal(
+                                    task,
+                                    date,
+                                    date
+                                ).length > 0
+                            );
+
+                        })
+                        .sort()[0];
+
+                if (completedOccurrence) {
+
+                    return [{
+                        ...task,
+                        date: completedOccurrence,
+                        occurrenceDate: completedOccurrence,
+                        completed: true
+                    }];
+
+                }
+
 
                 const occurrence =
                     proximaOcorrenciaSemanal(
@@ -588,6 +585,15 @@ function renderDashboardTasks() {
 
                 taskElement.classList.add(
                     "dashboard-task-overdue"
+
+                );
+
+            }
+
+            if (task.completed) {
+
+                taskElement.classList.add(
+                    "task-completed"
                 );
 
             }
@@ -610,11 +616,19 @@ function renderDashboardTasks() {
                 <div class="task-main">
 
 
-                    <div
+                    <button
+                        type="button"
                         class="task-status ${
                             task.completed
                                 ? "completed"
                                 : ""
+                        }"
+                        data-id="${task.id}"
+                        data-occurrence-date="${task.occurrenceDate || ""}"
+                        aria-label="${
+                            task.completed
+                                ? "Desmarcar tarefa"
+                                : "Marcar tarefa como concluída"
                         }"
                     >
 
@@ -624,7 +638,7 @@ function renderDashboardTasks() {
                                 : ""
                         }
 
-                    </div>
+                    </button>
 
 
                     <div>
@@ -678,6 +692,105 @@ function renderDashboardTasks() {
 
 
     ativarIcones();
+
+}
+
+
+if (dashboardTasks) {
+
+    dashboardTasks.addEventListener(
+        "click",
+        function (event) {
+
+            const statusButton =
+                event.target.closest(".task-status");
+
+            if (!statusButton) {
+
+                return;
+
+            }
+
+            const taskId =
+                Number(statusButton.dataset.id);
+
+            const occurrenceDate =
+                statusButton.dataset.occurrenceDate;
+
+            const tasks =
+                getTasks();
+
+            const updatedTasks =
+                tasks.map(function (task) {
+
+                    if (Number(task.id) !== taskId) {
+
+                        return task;
+
+                    }
+
+                    if (task.repeatWeekly) {
+
+                        const completedDates =
+                            Array.isArray(task.completedDates)
+                                ? task.completedDates
+                                : [];
+
+                        const alreadyCompleted =
+                            completedDates.includes(occurrenceDate);
+
+                        adicionarXP(alreadyCompleted ? -10 : 10);
+
+                        return {
+                            ...task,
+                            completedDates: alreadyCompleted
+                                ? completedDates.filter(function (date) {
+                                    return date !== occurrenceDate;
+                                })
+                                : [...completedDates, occurrenceDate]
+                        };
+
+                    }
+
+                    const completed =
+                        !task.completed;
+
+                    if (completed && !task.xpConcedido) {
+
+                        adicionarXP(10);
+
+                        return {
+                            ...task,
+                            completed: true,
+                            xpConcedido: true
+                        };
+
+                    }
+
+                    if (!completed && task.xpConcedido) {
+
+                        adicionarXP(-10);
+
+                        return {
+                            ...task,
+                            completed: false,
+                            xpConcedido: false
+                        };
+
+                    }
+
+                    return {
+                        ...task,
+                        completed
+                    };
+
+                });
+
+            salvarTarefasUsuario(updatedTasks);
+            updateDashboard();
+
+        }
+    );
 
 }
 
